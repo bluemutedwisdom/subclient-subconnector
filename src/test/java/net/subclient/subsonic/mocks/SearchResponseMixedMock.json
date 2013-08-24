@@ -1,0 +1,37 @@
+{
+    status: "ok",
+    searchResult2: {
+        song: {
+            albumId: 371,
+            album: "Sesiones",
+            track: 116,
+            parent: 11422,
+            contentType: "audio/mpeg",
+            isDir: false,
+            type: "music",
+            suffix: "mp3",
+            isVideo: false,
+            size: 114399607,
+            id: 11528,
+            title: "Paul Oakenfold - Number 116",
+            duration: 7166,
+            artistId: 12,
+            created: "2012-02-25T00:00:30",
+            path: "Paul Oakenfold/Paul Oakenfold - Sesiones/Paul Oakenfold - Number 116.mp3",
+            artist: "Paul Oakenfold",
+            bitRate: 128,
+            coverArt: 11422
+        },
+        artist: [
+            {
+                id: 97,
+                name: "Paul Oakenfold"
+            },
+            {
+                id: 77,
+                name: "Paul Van Dyk"
+            }
+        ]
+    },
+    version: "1.8.0"
+}

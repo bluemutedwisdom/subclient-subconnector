@@ -1,0 +1,8 @@
+{
+    status: "ok",
+    directory: {
+        id: 22,
+        name: "AC.DC"
+    },
+    version: "1.8.0"
+}

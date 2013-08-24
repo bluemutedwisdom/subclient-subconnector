@@ -1,0 +1,13 @@
+{
+    status: "ok",
+    playlist: {
+        id: 18,
+        duration: 0,
+        songCount: 0,
+        created: "2013-04-05T11:37:17",
+        name: "Empty",
+        owner: "alejandro",
+        public: false
+    },
+    version: "1.8.0"
+}

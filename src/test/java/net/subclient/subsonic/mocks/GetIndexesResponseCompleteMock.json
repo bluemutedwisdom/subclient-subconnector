@@ -1,0 +1,405 @@
+{
+ "status": "ok",
+ "indexes": {
+  "index": [
+   {
+    "name": "A",
+    "artist": [
+     {
+      "id": 44,
+      "name": "AC.DC"
+     },
+     {
+      "id": 46,
+      "name": "Adam Young"
+     },
+     {
+      "id": 36,
+      "name": "Alanis Morissette"
+     },
+     {
+      "id": 62,
+      "name": "Amaral"
+     },
+     {
+      "id": 86,
+      "name": "Apollo 440"
+     },
+     {
+      "id": 57,
+      "name": "Armin Van Buuren"
+     },
+     {
+      "id": 18,
+      "name": "Avril Lavigne"
+     }
+    ]
+   },
+   {
+    "name": "B",
+    "artist": [
+     {
+      "id": 12243,
+      "name": "BDRip - HDDVDRip - HDTVRip"
+     },
+     {
+      "id": 37,
+      "name": "Black Eyed Peas"
+     },
+     {
+      "id": 68,
+      "name": "Boom Boom Satellites"
+     },
+     {
+      "id": 53,
+      "name": "Breaking Benjamin"
+     },
+     {
+      "id": 58,
+      "name": "Britney Spears"
+     }
+    ]
+   },
+   {
+    "name": "C",
+    "artist": [
+     {
+      "id": 20,
+      "name": "Calvin Harris"
+     },
+     {
+      "id": 93,
+      "name": "Clawfinger"
+     },
+     {
+      "id": 75,
+      "name": "Coldplay"
+     },
+     {
+      "id": 94,
+      "name": "Cycle"
+     }
+    ]
+   },
+   {
+    "name": "D",
+    "artist": [
+     {
+      "id": 35,
+      "name": "Daft Punk"
+     },
+     {
+      "id": 54,
+      "name": "Dead by Sunrise"
+     },
+     {
+      "id": 64,
+      "name": "Deadmau5"
+     },
+     {
+      "id": 81,
+      "name": "DJ Ti&#235;sto"
+     }
+    ]
+   },
+   {
+    "name": "E",
+    "artist": [
+     {
+      "id": 49,
+      "name": "Evanescence"
+     },
+     {
+      "id": 13902,
+      "name": "Excision"
+     }
+    ]
+   },
+   {
+    "name": "F",
+    "artist": [
+     {
+      "id": 74,
+      "name": "Fatboy Slim"
+     },
+     {
+      "id": 12498,
+      "name": "Flux Pavilion"
+     },
+     {
+      "id": 25,
+      "name": "Flyleaf"
+     },
+     {
+      "id": 40,
+      "name": "Foo Fighters"
+     }
+    ]
+   },
+   {
+    "name": "G",
+    "artist": {
+     "id": 48,
+     "name": "Green Day"
+    }
+   },
+   {
+    "name": "H",
+    "artist": [
+     {
+      "id": 72,
+      "name": "Hadouken!"
+     },
+     {
+      "id": 12247,
+      "name": "HDRip - DVDRip"
+     },
+     {
+      "id": 15,
+      "name": "High and Mighty Color"
+     },
+     {
+      "id": 43,
+      "name": "Hoobastank"
+     },
+     {
+      "id": 13,
+      "name": "Hybrid"
+     }
+    ]
+   },
+   {
+    "name": "I",
+    "artist": {
+     "id": 34,
+     "name": "Infected Mushroom"
+    }
+   },
+   {
+    "name": "J",
+    "artist": [
+     {
+      "id": 41,
+      "name": "John O'Callaghan"
+     },
+     {
+      "id": 7,
+      "name": "Junkie XL"
+     },
+     {
+      "id": 55,
+      "name": "Juno Reactor"
+     }
+    ]
+   },
+   {
+    "name": "K",
+    "artist": [
+     {
+      "id": 70,
+      "name": "Katy Perry"
+     },
+     {
+      "id": 69,
+      "name": "Kesha"
+     }
+    ]
+   },
+   {
+    "name": "L",
+    "artist": [
+     {
+      "id": 12463,
+      "name": "Lindsey Stirling"
+     },
+     {
+      "id": 102,
+      "name": "Linkin Park"
+     },
+     {
+      "id": 12245,
+      "name": "lost+found"
+     },
+     {
+      "id": 28,
+      "name": "Lostprophets"
+     },
+     {
+      "id": 17,
+      "name": "Lunar"
+     }
+    ]
+   },
+   {
+    "name": "M",
+    "artist": [
+     {
+      "id": 32,
+      "name": "Machinae Supremacy"
+     },
+     {
+      "id": 14,
+      "name": "Madcore"
+     },
+     {
+      "id": 23,
+      "name": "Marilyn Manson"
+     },
+     {
+      "id": 29,
+      "name": "Metallica"
+     },
+     {
+      "id": 95,
+      "name": "Mike Oldfield"
+     },
+     {
+      "id": 85,
+      "name": "Mister Hyde"
+     },
+     {
+      "id": 42,
+      "name": "Moby"
+     }
+    ]
+   },
+   {
+    "name": "N",
+    "artist": [
+     {
+      "id": 26,
+      "name": "Nero"
+     },
+     {
+      "id": 5,
+      "name": "Nickelback"
+     },
+     {
+      "id": 89,
+      "name": "Nightwish"
+     }
+    ]
+   },
+   {
+    "name": "O",
+    "artist": [
+     {
+      "id": 67,
+      "name": "OST Juegos"
+     },
+     {
+      "id": 99,
+      "name": "OST Pel&#237;culas"
+     },
+     {
+      "id": 90,
+      "name": "Overseer"
+     }
+    ]
+   },
+   {
+    "name": "P",
+    "artist": [
+     {
+      "id": 97,
+      "name": "Paul Oakenfold"
+     },
+     {
+      "id": 77,
+      "name": "Paul Van Dyk"
+     },
+     {
+      "id": 65,
+      "name": "Podcasts"
+     }
+    ]
+   },
+   {
+    "name": "R",
+    "artist": [
+     {
+      "id": 51,
+      "name": "Rage Against The Machine"
+     },
+     {
+      "id": 9,
+      "name": "Recopilatorios"
+     },
+     {
+      "id": 59,
+      "name": "Rob Zombie"
+     }
+    ]
+   },
+   {
+    "name": "S",
+    "artist": [
+     {
+      "id": 12246,
+      "name": "Series"
+     },
+     {
+      "id": 39,
+      "name": "Skrillex"
+     }
+    ]
+   },
+   {
+    "name": "T",
+    "artist": [
+     {
+      "id": 2,
+      "name": "Tatu"
+     },
+     {
+      "id": 88,
+      "name": "The Chemical Brothers"
+     },
+     {
+      "id": 31,
+      "name": "The Crystal Method"
+     },
+     {
+      "id": 11,
+      "name": "The Prodigy"
+     },
+     {
+      "id": 61,
+      "name": "The Ting Tings"
+     },
+     {
+      "id": 83,
+      "name": "The Used"
+     },
+     {
+      "id": 13639,
+      "name": "The White Stripes"
+     }
+    ]
+   },
+   {
+    "name": "U",
+    "artist": {
+     "id": 100,
+     "name": "Unkle"
+    }
+   },
+   {
+    "name": "W",
+    "artist": {
+     "id": 101,
+     "name": "Within Temptation"
+    }
+   },
+   {
+    "name": "X-Z",
+    "artist": {
+     "id": 79,
+     "name": "Yoko Kanno"
+    }
+   }
+  ],
+  "lastModified": 1363553853000
+ },
+ "version": "1.8.0"
+}

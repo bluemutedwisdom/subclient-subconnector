@@ -1,0 +1,18 @@
+{
+    status: "ok",
+    directory: {
+        child: {
+            id: 46,
+            title: "Alanis Morissette - (1994) Jagged Little Pill",
+            created: "2012-04-13T15:37:40",
+            album: "Jagged Little Pill",
+            parent: 19,
+            isDir: true,
+            artist: "Alanis Morissette",
+            coverArt: 46
+        },
+        id: 19,
+        name: "Alanis Morissette"
+    },
+    version: "1.8.0"
+}

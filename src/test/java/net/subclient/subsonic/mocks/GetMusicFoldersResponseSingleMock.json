@@ -1,0 +1,10 @@
+{
+	"status": "ok",
+	"musicFolders": {
+        "musicFolder": {
+            "id": 0,
+            "name": "Music"
+        }
+    },
+ 	"version": "1.8.0"
+}

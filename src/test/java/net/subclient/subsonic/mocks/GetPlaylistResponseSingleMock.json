@@ -1,0 +1,36 @@
+{
+    status: "ok",
+    playlist: {
+        id: 19,
+        duration: 188,
+        songCount: 1,
+        created: "2013-04-05T11:39:22",
+        entry: {
+            genre: "Metal",
+            albumId: 532,
+            album: "The Nexus",
+            track: 5,
+            parent: 14127,
+            contentType: "audio/mpeg",
+            isDir: false,
+            type: "music",
+            suffix: "mp3",
+            isVideo: false,
+            size: 6210133,
+            id: 14143,
+            title: "Stardust",
+            duration: 188,
+            artistId: 252,
+            created: "2013-03-28T17:58:37",
+            path: "Amaranthe/Amaranthe - (2013) The Nexus/Amaranthe - 05 Stardust.mp3",
+            year: 2013,
+            artist: "Amaranthe",
+            bitRate: 259,
+            coverArt: 14127
+        },
+        name: "Single",
+        owner: "alejandro",
+        public: false
+    },
+    version: "1.8.0"
+}

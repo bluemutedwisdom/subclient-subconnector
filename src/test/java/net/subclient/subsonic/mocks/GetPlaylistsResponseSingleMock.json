@@ -1,0 +1,15 @@
+{
+    status: "ok",
+    playlists: {
+        playlist: {
+            id: 16,
+            duration: 7175,
+            songCount: 33,
+            created: "2013-04-05T10:56:38",
+            name: "another",
+            owner: "alejandro",
+            public: false
+        }
+    },
+    version: "1.8.0"
+}

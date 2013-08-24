@@ -1,0 +1,54 @@
+{
+    channel: {
+        id: 0,
+        title: "A State of Trance Official Podcast",
+        episode: [
+            {
+                status: "completed",
+                album: "A State of Trance Official Podcast",
+                parent: 82,
+                isDir: false,
+                contentType: "audio/mp4",
+                type: "podcast",
+                suffix: "m4a",
+                isVideo: false,
+                size: 23433942,
+                transcodedSuffix: "mp3",
+                id: 0,
+                transcodedContentType: "audio/mpeg",
+                streamId: 83,
+                title: "A State of Trance Official Podcast Episode 263",
+                created: "2013-04-05T13:28:56",
+                description: "",
+                artist: "Podcast",
+                publishDate: "2013-03-29 13:00:00.0"
+            },
+            {
+                id: 1,
+                title: "A State of Trance Official Podcast Episode 262",
+                status: "skipped",
+                description: "",
+                publishDate: "2013-03-22 13:00:00.0"
+            },
+            {
+                id: 2,
+                title: "A State of Trance Official Podcast Episode 261",
+                status: "skipped",
+                description: "",
+                publishDate: "2013-03-15 13:00:00.0"
+            },
+            {
+                id: 3,
+                title: "A State of Trance Official Podcast Episode 260",
+                status: "skipped",
+                description: "",
+                publishDate: "2013-03-08 13:00:00.0"
+            }
+        ],
+        status: "completed",
+        description: "Every week, Armin selects his favourite tunes of the A State of Trance radio show and puts them into his official Podcast. Expect a blend of the hottest in trance and progressive. Enjoy!",
+        url: "http://podcast.armadamusic.com/asot/podcast.xml"
+    },
+    status: "ok",
+    version: "1.8.0"
+}

@@ -1,0 +1,7 @@
+{
+    status: "ok",
+    license: {
+        valid: false
+    },
+    version: "1.8.0"
+}

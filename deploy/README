@@ -1,0 +1,17 @@
+Subconnector 1.2.0
+    Included new dependency. Apache commons lang3
+    Solved bug on HTML entity decodification using Apache commons lang3
+
+Subconnector 1.1.1
+    Created independent test cases for each kind of response
+    
+Subconnector 1.1.0
+	Included unit tests
+	Bugfixes
+
+Subconnector 1.0.1
+	Recovered Subsonic 4.6 and earlier support
+	Minnor bugfixes
+
+Subconnector 1.0.0
+	First release

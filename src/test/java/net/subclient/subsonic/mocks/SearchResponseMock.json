@@ -1,0 +1,164 @@
+{
+    status: "ok",
+    searchResult2: {
+        song: [
+            {
+                albumId: 371,
+                album: "Sesiones",
+                track: 116,
+                parent: 11422,
+                contentType: "audio/mpeg",
+                isDir: false,
+                type: "music",
+                suffix: "mp3",
+                isVideo: false,
+                size: 114399607,
+                id: 11528,
+                title: "Paul Oakenfold - Number 116",
+                duration: 7166,
+                artistId: 12,
+                created: "2012-02-25T00:00:30",
+                path: "Paul Oakenfold/Paul Oakenfold - Sesiones/Paul Oakenfold - Number 116.mp3",
+                artist: "Paul Oakenfold",
+                bitRate: 128,
+                coverArt: 11422
+            },
+            {
+                albumId: 371,
+                album: "Sesiones",
+                parent: 11422,
+                isDir: false,
+                contentType: "audio/mpeg",
+                type: "music",
+                suffix: "mp3",
+                isVideo: false,
+                size: 117415182,
+                id: 11529,
+                title: "Paul Oakenfold - Essential Mix In China",
+                duration: 7355,
+                artistId: 12,
+                created: "2012-02-25T00:00:32",
+                path: "Paul Oakenfold/Paul Oakenfold - Sesiones/Paul Oakenfold - Essential Mix In China.mp3",
+                artist: "Paul Oakenfold",
+                bitRate: 128,
+                coverArt: 11422
+            },
+            {
+                albumId: 471,
+                album: "Dear Esther",
+                track: 6,
+                parent: 12625,
+                contentType: "audio/mpeg",
+                isDir: false,
+                type: "music",
+                suffix: "mp3",
+                isVideo: false,
+                size: 1748408,
+                id: 12672,
+                title: "Remember (Paul)",
+                duration: 37,
+                artistId: 218,
+                created: "2012-11-13T00:27:31",
+                path: "OST Juegos/Game Music Bundle/Game Music Bundle - (2012) Vol IV/Dear Esther (2012)/06 - Remember (Paul).mp3",
+                artist: "Jessica Curry",
+                bitRate: 64,
+                coverArt: 12625
+            },
+            {
+                albumId: 19,
+                album: "VARIOS",
+                track: 4,
+                parent: 291,
+                contentType: "audio/mpeg",
+                isDir: false,
+                type: "music",
+                suffix: "mp3",
+                isVideo: false,
+                size: 4750523,
+                id: 313,
+                title: "Natasha Bedingfield - If You're Gonna Jump (Paul Oakenfold",
+                duration: 297,
+                artistId: 12,
+                created: "2012-02-25T00:00:11",
+                path: "Recopilatorios/VARIOS/04 - Natasha Bedingfield - If You're Gonna Jump (Paul Oakenfold.mp3",
+                artist: "Paul Oakenfold",
+                bitRate: 128,
+                coverArt: 291
+            },
+            {
+                albumId: 371,
+                album: "Sesiones",
+                track: 1,
+                parent: 11422,
+                contentType: "audio/mpeg",
+                isDir: false,
+                type: "music",
+                suffix: "mp3",
+                isVideo: false,
+                size: 70587453,
+                id: 11521,
+                title: "Paul Oakenfold - Global Underground - New York - CD1",
+                duration: 4421,
+                artistId: 12,
+                created: "2012-02-25T00:00:26",
+                path: "Paul Oakenfold/Paul Oakenfold - Sesiones/Paul Oakenfold - Global Underground - New York - CD1.mp3",
+                artist: "Paul Oakenfold",
+                bitRate: 128,
+                coverArt: 11422
+            }
+        ],
+        album: [
+            {
+                id: 8717,
+                title: "Perfecto Podcast- featuring Paul Oakenfold",
+                created: "2012-10-29T15:08:05",
+                album: "Perfecto Podcast- featuring Paul Oakenfold",
+                parent: 65,
+                isDir: true,
+                artist: "Podcasts",
+                coverArt: 8717
+            },
+            {
+                id: 8720,
+                title: "Paul van Dyk's VONYC Sessions Podcast",
+                created: "2012-10-29T15:07:40",
+                album: "Paul van Dyk's VONYC Sessions Podcast",
+                parent: 65,
+                isDir: true,
+                artist: "Podcasts",
+                coverArt: 8720
+            },
+            {
+                id: 10738,
+                title: "Paul Van Dyk - (2011) Vonyc Sessions 2011",
+                created: "2012-04-28T00:09:59",
+                album: "Vonyc Sessions 2011 (Presented By Paul Van Dyk)",
+                parent: 77,
+                isDir: true,
+                artist: "Reverse",
+                coverArt: 10738
+            },
+            {
+                id: 11423,
+                title: "Paul Oakenfold - (2012) We are Planet Perfecto Vol 02",
+                created: "2012-08-15T13:29:40",
+                album: "We Are Planet Perfecto Vol 2 Mixed By Paul Oakenfold CD1",
+                parent: 97,
+                isDir: true,
+                artist: "Michael S (H)",
+                coverArt: 11423
+            }
+        ],
+        artist: [
+            {
+                id: 97,
+                name: "Paul Oakenfold"
+            },
+            {
+                id: 77,
+                name: "Paul Van Dyk"
+            }
+        ]
+    },
+    version: "1.8.0"
+}

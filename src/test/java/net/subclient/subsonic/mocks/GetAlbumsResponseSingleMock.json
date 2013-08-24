@@ -1,0 +1,16 @@
+{
+    status: "ok",
+    albumList: {
+        album: {
+            id: 7636,
+            title: "Foo Fighters - (2011) Wasting Light",
+            created: "2012-02-24T23:59:07",
+            album: "Wasting Light",
+            parent: 40,
+            isDir: true,
+            artist: "Foo Fighters",
+            coverArt: 7636
+        }
+    },
+    version: "1.8.0"
+}

@@ -1,0 +1,29 @@
+{
+    status: "ok",
+    randomSongs: {
+        song: {
+            genre: "Big Beat",
+            albumId: 22,
+            album: "How To Wear A Good Pair Of Pants",
+            track: 8,
+            parent: 6667,
+            contentType: "audio/mpeg",
+            isDir: false,
+            type: "music",
+            suffix: "mp3",
+            isVideo: false,
+            size: 4587648,
+            id: 6675,
+            title: "Sarah",
+            duration: 284,
+            artistId: 15,
+            created: "2012-02-24T23:58:51",
+            path: "Madcore/Madcore - (2005) How To Wear A Good Pair Of Pants/08 - Sarah.mp3",
+            year: 2005,
+            artist: "Madcore",
+            bitRate: 128,
+            coverArt: 6667
+        }
+    },
+    version: "1.8.0"
+}

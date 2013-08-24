@@ -1,0 +1,29 @@
+{
+    status: "ok",
+    directory: {
+        child: {
+            genre: "Adult Alternative Rock",
+            album: "Jagged Little Pill",
+            track: 1,
+            parent: 19,
+            contentType: "audio/mpeg",
+            isDir: false,
+            type: "music",
+            suffix: "mp3",
+            discNumber: 1,
+            isVideo: false,
+            size: 9145054,
+            id: 81,
+            title: "All I Really Want",
+            duration: 285,
+            created: "2012-02-25T00:02:31",
+            path: "Alanis Morissette/01 All I Really Want.mp3",
+            year: 1995,
+            artist: "Alanis Morissette",
+            bitRate: 256
+        },
+        id: 19,
+        name: "Alanis Morissette"
+    },
+    version: "1.8.0"
+}

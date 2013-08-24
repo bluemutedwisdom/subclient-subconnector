@@ -1,0 +1,26 @@
+{
+    status: "ok",
+    playlists: {
+        playlist: [
+            {
+                id: 4,
+                duration: 7236,
+                songCount: 31,
+                created: "2012-11-16T03:00:09",
+                name: "Katy Perra",
+                owner: "admin",
+                public: true
+            },
+            {
+                id: 16,
+                duration: 7175,
+                songCount: 33,
+                created: "2013-04-05T10:56:38",
+                name: "another",
+                owner: "alejandro",
+                public: false
+            }
+        ]
+    },
+    version: "1.8.0"
+}

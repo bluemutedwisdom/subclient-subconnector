@@ -1,0 +1,108 @@
+{
+    status: "ok",
+    albumList: {
+        album: [
+            {
+                id: 12638,
+                title: "Retro City Rampage (2012)",
+                created: "2012-11-13T20:37:17",
+                album: "Retro City Rampage",
+                parent: 9015,
+                isDir: true,
+                artist: "virt, Freaky DNA and Norrin Radd",
+                coverArt: 12638
+            },
+            {
+                id: 12842,
+                title: "Horn (2012)",
+                created: "2012-09-09T18:22:09",
+                album: "Horn",
+                parent: 12623,
+                isDir: true,
+                artist: "Austin Wintory",
+                coverArt: 12842
+            },
+            {
+                id: 11425,
+                title: "Paul Oakenfold - (2005) Perfecto Presents... The Club",
+                created: "2012-02-25T00:00:33",
+                album: "Perfecto Presents... The Club",
+                parent: 97,
+                isDir: true,
+                artist: "Paul Oakenfold",
+                coverArt: 11425
+            },
+            {
+                id: 8739,
+                title: "Need For Speed Underground (2003)",
+                created: "2012-04-14T21:58:10",
+                album: "Need For Speed Underground Soundtrack Disc 1",
+                parent: 67,
+                isDir: true,
+                artist: "Various Artists",
+                coverArt: 8739
+            },
+            {
+                id: 7719,
+                title: "Moby - (2005) Hotel",
+                created: "2012-02-25T00:03:57",
+                album: "Hotel",
+                parent: 42,
+                isDir: true,
+                artist: "Moby",
+                coverArt: 7719
+            },
+            {
+                id: 8414,
+                title: "Rob Zombie - (1999) The American Made Music to Strip By",
+                created: "2012-04-14T22:04:59",
+                album: "American Made Music to Strip By",
+                parent: 59,
+                isDir: true,
+                artist: "Rob Zombie",
+                coverArt: 8414
+            },
+            {
+                id: 6802,
+                title: "Calvin Harris - (2007) I Created Disco",
+                created: "2012-04-13T15:41:31",
+                album: "I Created Disco",
+                parent: 20,
+                isDir: true,
+                artist: "Calvin Carris",
+                coverArt: 6802
+            },
+            {
+                id: 10737,
+                title: "Paul Van Dyk - (2012) Evolution",
+                created: "2012-04-28T09:47:40",
+                album: "Evolution",
+                parent: 77,
+                isDir: true,
+                artist: "Paul Van Dyk",
+                coverArt: 10737
+            },
+            {
+                id: 8572,
+                title: "Deadmau5 - (2009) It Sounds Like",
+                created: "2012-04-14T21:26:04",
+                album: "It Sounds Like",
+                parent: 64,
+                isDir: true,
+                artist: "Deadmau5",
+                coverArt: 8572
+            },
+            {
+                id: 104,
+                title: "Tatu - (2002) 200 KMH In The Wrong Lane",
+                created: "2012-04-14T22:05:48",
+                album: "200 KmH in the Wrong Lane",
+                parent: 2,
+                isDir: true,
+                artist: "Tatu",
+                coverArt: 104
+            }
+        ]
+    },
+    version: "1.8.0"
+}

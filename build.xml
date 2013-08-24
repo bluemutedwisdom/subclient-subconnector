@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project basedir="." default="build" name="Subconnector">
+	
+	<!-- PROPERTIES -->
+	<property environment="env"/> 
+	<property name="version" value="1.2.0"/>
+	
+    <property name="junit.output.dir" value="junit"/>
+    <property name="jabadoc.private.output.dir" value="docs/private_javadoc"/>
+    <property name="jabadoc.public.output.dir" value="docs/public_javadoc"/>
+	<property name="main.source.dir" value="src/main/java"/>
+	<property name="test.source.dir" value="src/test/java"/>
+	
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+	
+    <property name="sftp.host" value="frs.sourceforge.net"/>
+    <property name="sftp.output.dir" value="/home/frs/project/subconnector/"/>
+	
+	<!-- CLASSPATH -->
+	<path id="Subconnector.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="resources/gson-2.2.2.jar"/>
+        <pathelement location="resources/commons-lang3-3.1.jar"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+    </path>
+	<!-- JUNIT PATH -->
+	<path id="JUnit 4.libraryclasspath">
+        <pathelement location="resources/building/junit.jar"/>
+        <pathelement location="resources/building/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+    </path>
+	
+	<!-- Build and deploy target -->
+	<target name="build-and-deploy" depends="build, deploy" />
+	<!-- Main build target -->
+	<target name="build" depends="clean, init, compile, javadocs, jars, packetize, tests" />
+	<!-- Test target -->
+	<target name="tests" depends="init-tests, compile-tests, net.subclient.subsonic.responses-test, net.subclient.subsonic.util-test, junitreport" />
+	
+	<!-- Delete the old bin directory -->
+	<target name="clean">
+        <delete dir="bin"/>
+		<delete>
+		    <fileset dir="deploy">
+		    	<exclude name="license.txt"/>
+		    	<exclude name="README"/>
+		    </fileset>
+		</delete>
+    </target>
+	<!-- Copy all non-source files to the bin directory -->
+	<target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="${main.source.dir}">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+	<!-- Compile sources -->
+	<target name="compile">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}" encoding="UTF-8">
+            <src path="${main.source.dir}"/>
+            <classpath refid="Subconnector.classpath"/>
+        </javac>
+    </target>
+	
+	<!-- Create application javadocs -->
+	<target name="javadocs">
+		<mkdir dir="${jabadoc.private.output.dir}"/>
+		<javadoc sourcepath="${main.source.dir}" destdir="${jabadoc.private.output.dir}" access="private" charset="UTF-8" encoding="UTF-8">
+			<classpath refid="Subconnector.classpath"/>
+		</javadoc>
+        <mkdir dir="${jabadoc.public.output.dir}"/>
+        <javadoc sourcepath="${main.source.dir}" destdir="${jabadoc.public.output.dir}" access="public" charset="UTF-8" encoding="UTF-8">
+        	  <classpath refid="Subconnector.classpath"/>
+		</javadoc>
+	</target>
+	
+	<!-- Create jars  -->
+	<target name="jars">
+		<mkdir dir="deploy"/>
+		<jar destfile="deploy/subclient-subconnector-${version}.jar" basedir="bin" compress="true" />
+		<jar destfile="deploy/subclient-subconnector-${version}-sources.jar" basedir="src" compress="true" />
+		<jar destfile="deploy/subclient-subconnector-${version}-javadoc.jar" basedir="${jabadoc.public.output.dir}" compress="true" />
+	</target>
+	
+	<!-- Create deployment zip -->
+	<target name="packetize">
+		<mkdir dir="deploy/temp/subclient-subconnector-${version}"/>
+		<copy todir="deploy/temp/subclient-subconnector-${version}">
+			<fileset dir="deploy" includes="subclient-subconnector-${version}.jar,subclient-subconnector-${version}-sources.jar,subclient-subconnector-${version}-javadoc.jar,license.txt,README" />
+		</copy>
+		<zip destfile="deploy/subclient-subconnector-${version}.zip" basedir="deploy/temp"/>
+		<delete dir="deploy/temp" />
+	</target>
+	
+	<!-- Copy non-source files from unit tests to bin directory -->
+	<target name="init-tests">
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="${test.source.dir}">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+	<!-- Compile unit tests -->
+	<target name="compile-tests">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}" encoding="UTF-8">
+            <src path="${test.source.dir}"/>
+            <classpath refid="Subconnector.classpath"/>
+        </javac>
+    </target>
+	
+	<!-- Run unit tests -->
+	<target name="net.subclient.subsonic.responses-test">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.subclient.subsonic.responses.GetAlbumsResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetIndexesResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetLicenseResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetMusicDirectoryResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetMusicFoldersResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetPlaylistResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetPlaylistsResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetPodcastResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetPodcastsResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetRandomSongsResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.SearchResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.SubsonicResponseTest" todir="${junit.output.dir}"/>
+            <classpath refid="Subconnector.classpath"/>
+        </junit>
+    </target>
+    <target name="net.subclient.subsonic.util-test">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.subclient.subsonic.util.AlbumRatingTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.util.VersionTest" todir="${junit.output.dir}"/>
+            <classpath refid="Subconnector.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+	
+	<!-- Upload to sourceforge last package and README -->
+	<target name="deploy" depends="compile-tests, net.subclient.subsonic.responses-test, net.subclient.subsonic.util-test, junitreport">
+	    <scp sftp="true" todir="${sftp.user}:${sftp.pass}@${sftp.host}:${sftp.output.dir}" file="deploy/subclient-subconnector-${version}.zip" trust="true">
+	    	<fileset dir="deploy" includes="subclient-subconnector-${version}.zip,README" />
+	    </scp>
+	</target>
+	
+</project>
