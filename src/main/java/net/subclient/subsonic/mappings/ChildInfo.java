@@ -27,6 +27,9 @@ package net.subclient.subsonic.mappings;
  */
 public class ChildInfo implements Cloneable {
 	
+	/** Sets if this child is being played. Not in Subsonic API */
+	private boolean playing;
+	
 	/** ID of this child */
 	private String id;
 	/** Title of this child */
@@ -78,6 +81,7 @@ public class ChildInfo implements Cloneable {
 	 * Constructs a new ChildInfo object with default values
 	 * <pre>
 	 * 		{
+	 * 			playing : false,
 	 * 			id : "-1",
 	 * 			title : " - ",
 	 * 			album : " - ",
@@ -105,6 +109,7 @@ public class ChildInfo implements Cloneable {
 	 * </pre>
 	 */
 	public ChildInfo() {
+		this.playing		= false;
 		this.id 			= "-1";
 		this.title 			= " - ";
 		this.album 			= " - ";
@@ -130,6 +135,9 @@ public class ChildInfo implements Cloneable {
 		this.userRating		= 0;
 	}
 	
+	public boolean isPlaying() {
+		return this.playing;
+	}
 	/**
 	 * Returns this child ID
 	 * @return This child ID
@@ -292,6 +300,10 @@ public class ChildInfo implements Cloneable {
 		return this.userRating;
 	}
 	
+	public ChildInfo setPlaying(boolean playing) {
+		this.playing = playing;
+		return this;
+	}
 	/**
 	 * Sets this child ID
 	 * @param id New ID
