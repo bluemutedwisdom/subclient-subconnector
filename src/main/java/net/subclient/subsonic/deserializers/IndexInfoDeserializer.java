@@ -23,6 +23,7 @@ package net.subclient.subsonic.deserializers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.subclient.subsonic.mappings.FolderInfo;
 import net.subclient.subsonic.mappings.IndexInfo;
@@ -77,12 +78,12 @@ public class IndexInfoDeserializer implements JsonDeserializer<IndexInfo> {
 	@Override
 	public IndexInfo deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		IndexInfo indexInfo 			= null;
-		ArrayList<FolderInfo> artists	= null;
+		List<FolderInfo> artists	= null;
 		String name 					= json.getAsJsonObject().get("name").getAsString();
 		JsonElement artistsElement		= json.getAsJsonObject().get("artist");
 		
 		if(artistsElement.isJsonArray()) 
-			artists = gson.fromJson(artistsElement, new TypeToken<ArrayList<FolderInfo>>(){}.getType());			
+			artists = gson.fromJson(artistsElement, new TypeToken<List<FolderInfo>>(){}.getType());			
 		else {
 			artists = new ArrayList<FolderInfo>();
 			FolderInfo folderInfo = gson.fromJson(artistsElement, FolderInfo.class);

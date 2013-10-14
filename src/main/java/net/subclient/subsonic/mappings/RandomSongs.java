@@ -22,6 +22,7 @@
 package net.subclient.subsonic.mappings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -33,7 +34,7 @@ public class RandomSongs {
 	
 	/** Songs array of this RandomSongs object */
 	@SerializedName("song")
-	private ArrayList<ChildInfo> songsArray;
+	private List<ChildInfo> songsArray;
 	
 	/**
 	 * Constructs a new RandomSongs object with an empty songs array
@@ -42,11 +43,11 @@ public class RandomSongs {
 		this.songsArray = new ArrayList<ChildInfo>();
 	}
 	
-	public ArrayList<ChildInfo> getRandomSongsArray() {
+	public List<ChildInfo> getRandomSongsArray() {
 		return this.songsArray;
 	}
 	
-	public RandomSongs setRandomSongsArray(ArrayList<ChildInfo> songsArray) {
+	public RandomSongs setRandomSongsArray(List<ChildInfo> songsArray) {
 		this.songsArray = songsArray;
 		return this;
 	}

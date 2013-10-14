@@ -23,6 +23,7 @@ package net.subclient.subsonic.deserializers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.subclient.subsonic.mappings.FolderInfo;
 import net.subclient.subsonic.mappings.MusicFolders;
@@ -77,11 +78,11 @@ public class MusicFoldersDeserializer implements JsonDeserializer<MusicFolders> 
 	@Override
 	public MusicFolders deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		MusicFolders musicFolders 		= null;
-		ArrayList<FolderInfo> folders	= null;
+		List<FolderInfo> folders	= null;
 		JsonElement foldersElement		= json.getAsJsonObject().get("musicFolder");
 		
 		if(foldersElement.isJsonArray()) 
-			folders = gson.fromJson(foldersElement, new TypeToken<ArrayList<FolderInfo>>(){}.getType());			
+			folders = gson.fromJson(foldersElement, new TypeToken<List<FolderInfo>>(){}.getType());			
 		else {
 			folders = new ArrayList<FolderInfo>();
 			FolderInfo childInfo = gson.fromJson(foldersElement, FolderInfo.class);

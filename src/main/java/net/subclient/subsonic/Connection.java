@@ -25,6 +25,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.ws.http.HTTPException;
 
@@ -202,7 +203,7 @@ public interface Connection {
 	 * @throws CompatibilityException
 	 * @throws HTTPException
 	 */
-	public SubsonicResponse createPlaylist(ArrayList<String> songsList, String name) 
+	public SubsonicResponse createPlaylist(List<String> songsList, String name) 
 	    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	 
 	/**

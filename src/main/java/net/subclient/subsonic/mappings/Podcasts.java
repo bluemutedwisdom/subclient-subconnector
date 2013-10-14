@@ -22,6 +22,7 @@
 package net.subclient.subsonic.mappings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -33,7 +34,7 @@ public class Podcasts {
 	
 	/** Array of channels of this Podcasts object */
 	@SerializedName("channel")
-	private ArrayList<ChannelInfo> channelsArray;
+	private List<ChannelInfo> channelsArray;
 	
 	/**
 	 * Constructs a new Podcasts mapping with an empty channels array
@@ -42,11 +43,11 @@ public class Podcasts {
 		this.channelsArray = new ArrayList<ChannelInfo>();
 	}
 	
-	public ArrayList<ChannelInfo> getChannelsArray() {
+	public List<ChannelInfo> getChannelsArray() {
 		return this.channelsArray;
 	}
 	
-	public Podcasts setChannelsArray(ArrayList<ChannelInfo> channelsArray) {
+	public Podcasts setChannelsArray(List<ChannelInfo> channelsArray) {
 		this.channelsArray = channelsArray;
 		return this;
 	}

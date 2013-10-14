@@ -23,6 +23,7 @@ package net.subclient.subsonic.deserializers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.subclient.subsonic.mappings.ChildInfo;
 import net.subclient.subsonic.mappings.PlaylistInfo;
@@ -77,7 +78,7 @@ public class PlaylistInfoDeserializer implements JsonDeserializer<PlaylistInfo> 
 	@Override
 	public PlaylistInfo deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		PlaylistInfo playlistInfo 		= null;
-		ArrayList<ChildInfo> entries	= null;
+		List<ChildInfo> entries	= null;
 		JsonElement entriesElement		= json.getAsJsonObject().get("entry"),
 					commentElement		= json.getAsJsonObject().get("comment");
 		int	duration 					= json.getAsJsonObject().get("duration").getAsInt(),
@@ -92,7 +93,7 @@ public class PlaylistInfoDeserializer implements JsonDeserializer<PlaylistInfo> 
 		if(entriesElement == null)
 			entries = new ArrayList<ChildInfo>();
 		else if(entriesElement.isJsonArray()) 
-			entries = gson.fromJson(entriesElement, new TypeToken<ArrayList<ChildInfo>>(){}.getType());			
+			entries = gson.fromJson(entriesElement, new TypeToken<List<ChildInfo>>(){}.getType());			
 		else {
 			entries 				= new ArrayList<ChildInfo>();
 			ChildInfo folderInfo	= gson.fromJson(entriesElement, ChildInfo.class);

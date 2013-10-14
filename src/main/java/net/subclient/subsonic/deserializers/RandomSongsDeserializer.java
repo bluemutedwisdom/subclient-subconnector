@@ -23,6 +23,7 @@ package net.subclient.subsonic.deserializers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.subclient.subsonic.mappings.Albums;
 import net.subclient.subsonic.mappings.ChildInfo;
@@ -81,11 +82,11 @@ public class RandomSongsDeserializer implements JsonDeserializer<RandomSongs> {
 	@Override
 	public RandomSongs deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		RandomSongs randomSongs 				= null;
-		ArrayList<ChildInfo> randomSongsArray	= null;
+		List<ChildInfo> randomSongsArray	= null;
 		JsonElement randomSongsElement			= json.getAsJsonObject().get("song");
 		
 		if(randomSongsElement.isJsonArray()) 
-			randomSongsArray = gson.fromJson(randomSongsElement, new TypeToken<ArrayList<ChildInfo>>(){}.getType());			
+			randomSongsArray = gson.fromJson(randomSongsElement, new TypeToken<List<ChildInfo>>(){}.getType());			
 		else {
 			randomSongsArray = new ArrayList<ChildInfo>();
 			ChildInfo childInfo = gson.fromJson(randomSongsElement, ChildInfo.class);

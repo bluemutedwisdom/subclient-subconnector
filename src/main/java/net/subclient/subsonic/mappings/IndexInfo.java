@@ -22,6 +22,7 @@
 package net.subclient.subsonic.mappings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -35,7 +36,7 @@ public class IndexInfo {
 	private String name;
 	/** Artists array of this IndexInfo */
 	@SerializedName("artist")
-	private ArrayList<FolderInfo> artistsArray;
+	private List<FolderInfo> artistsArray;
 	
 	/**
 	 * Constructs a new IndexInfo object with default values:
@@ -54,7 +55,7 @@ public class IndexInfo {
 	public String getName() {
 		return this.name;
 	}
-	public ArrayList<FolderInfo> getArtistsArray() {
+	public List<FolderInfo> getArtistsArray() {
 		return this.artistsArray;
 	}
 	
@@ -62,7 +63,7 @@ public class IndexInfo {
 		this.name = name;
 		return this;
 	}
-	public IndexInfo setArtistsArray(ArrayList<FolderInfo> artistsArray) {
+	public IndexInfo setArtistsArray(List<FolderInfo> artistsArray) {
 		this.artistsArray = artistsArray;
 		return this;
 	}

@@ -22,6 +22,7 @@
 package net.subclient.subsonic.mappings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -33,13 +34,13 @@ public class SearchResult {
 	
 	/** Songs of this SearchResult */
 	@SerializedName("song")
-	private ArrayList<ChildInfo> songsArray;
+	private List<ChildInfo> songsArray;
 	/** Albums of this SearchResult */
 	@SerializedName("album")
-	private ArrayList<ChildInfo> albumsArray;
+	private List<ChildInfo> albumsArray;
 	/** Artists of this SearchResult */
 	@SerializedName("artist")
-	private ArrayList<FolderInfo> artistsArray;
+	private List<FolderInfo> artistsArray;
 	
 	/**
 	 * Sonstructs a new SearchResult object with default values:
@@ -57,17 +58,17 @@ public class SearchResult {
 		this.artistsArray	= new ArrayList<FolderInfo>();
 	}
 	
-	public ArrayList<ChildInfo> getSongsArray() {
+	public List<ChildInfo> getSongsArray() {
 		return this.songsArray;
 	}
-	public ArrayList<ChildInfo> getAlbumsArray() {
+	public List<ChildInfo> getAlbumsArray() {
 		return this.albumsArray;
 	}
-	public ArrayList<FolderInfo> getArtistsArray() {
+	public List<FolderInfo> getArtistsArray() {
 		return this.artistsArray;
 	}
 	
-	public SearchResult setSongsArray(ArrayList<ChildInfo> songsArray) {
+	public SearchResult setSongsArray(List<ChildInfo> songsArray) {
 		this.songsArray = songsArray;
 		return this;
 	}
@@ -75,7 +76,7 @@ public class SearchResult {
 		this.songsArray.add(song);
 		return this;
 	}
-	public SearchResult setAlbumsArray(ArrayList<ChildInfo> albumsArray) {
+	public SearchResult setAlbumsArray(List<ChildInfo> albumsArray) {
 		this.albumsArray = albumsArray;
 		return this;
 	}
@@ -83,7 +84,7 @@ public class SearchResult {
 		this.albumsArray.add(album);
 		return this;
 	}
-	public SearchResult setArtistsArray(ArrayList<FolderInfo> artistsArray) {
+	public SearchResult setArtistsArray(List<FolderInfo> artistsArray) {
 		this.artistsArray = artistsArray;
 		return this;
 	}

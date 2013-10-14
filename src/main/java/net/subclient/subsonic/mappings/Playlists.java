@@ -22,6 +22,7 @@
 package net.subclient.subsonic.mappings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -33,7 +34,7 @@ public class Playlists {
 	
 	/** Playlists array of this Playlists object */
 	@SerializedName("playlist")
-	private ArrayList<PlaylistInfo> playlistsArray;
+	private List<PlaylistInfo> playlistsArray;
 	
 	/**
 	 * Constructs a new Playlists object with default values
@@ -47,11 +48,11 @@ public class Playlists {
 		this.playlistsArray = new ArrayList<PlaylistInfo>();
 	}
 	
-	public ArrayList<PlaylistInfo> getPlaylistsArray() {
+	public List<PlaylistInfo> getPlaylistsArray() {
 		return this.playlistsArray;
 	}
 	
-	public Playlists setPlaylistsArray(ArrayList<PlaylistInfo> playlistsArray) {
+	public Playlists setPlaylistsArray(List<PlaylistInfo> playlistsArray) {
 		this.playlistsArray = playlistsArray;
 		return this;
 	}

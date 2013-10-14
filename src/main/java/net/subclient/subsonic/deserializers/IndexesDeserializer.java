@@ -23,6 +23,7 @@ package net.subclient.subsonic.deserializers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.subclient.subsonic.mappings.IndexInfo;
 import net.subclient.subsonic.mappings.Indexes;
@@ -85,14 +86,14 @@ public class IndexesDeserializer implements JsonDeserializer<Indexes> {
 	@Override
 	public Indexes deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		Indexes indexes 					= null;
-		ArrayList<IndexInfo> indexesArray	= null;
+		List<IndexInfo> indexesArray	= null;
 		JsonElement indexElement			= json.getAsJsonObject().get("index");
 		long lastModified 					= json.getAsJsonObject().get("lastModified").getAsLong();
 		
 		if(indexElement == null)
 			indexesArray = new ArrayList<IndexInfo>();
 		else if(indexElement.isJsonArray()) 
-			indexesArray = gson.fromJson(indexElement, new TypeToken<ArrayList<IndexInfo>>(){}.getType());			
+			indexesArray = gson.fromJson(indexElement, new TypeToken<List<IndexInfo>>(){}.getType());			
 		else {
 			indexesArray = new ArrayList<IndexInfo>();
 			IndexInfo indexInfo = gson.fromJson(indexElement, IndexInfo.class);

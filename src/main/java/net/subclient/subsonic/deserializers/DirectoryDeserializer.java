@@ -23,6 +23,7 @@ package net.subclient.subsonic.deserializers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.subclient.subsonic.mappings.ChildInfo;
 import net.subclient.subsonic.mappings.Directory;
@@ -80,7 +81,7 @@ public class DirectoryDeserializer implements JsonDeserializer<Directory> {
 	@Override
 	public Directory deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		Directory directory 				= null;
-		ArrayList<ChildInfo> childsArray	= null;
+		List<ChildInfo> childsArray	= null;
 		JsonElement childsElement			= json.getAsJsonObject().get("child");
 		String name 						= json.getAsJsonObject().get("name").getAsString();
 		String id							= json.getAsJsonObject().get("id").getAsString();
@@ -88,7 +89,7 @@ public class DirectoryDeserializer implements JsonDeserializer<Directory> {
 		if(childsElement == null)
 			childsArray = new ArrayList<ChildInfo>();
 		else if(childsElement.isJsonArray()) 
-			childsArray = gson.fromJson(childsElement, new TypeToken<ArrayList<ChildInfo>>(){}.getType());			
+			childsArray = gson.fromJson(childsElement, new TypeToken<List<ChildInfo>>(){}.getType());			
 		else {
 			childsArray = new ArrayList<ChildInfo>();
 			ChildInfo childInfo = gson.fromJson(childsElement, ChildInfo.class);

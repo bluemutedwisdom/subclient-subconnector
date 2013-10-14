@@ -25,6 +25,7 @@ import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.subclient.subsonic.mappings.ChannelInfo;
 import net.subclient.subsonic.mappings.PodcastInfo;
@@ -82,7 +83,7 @@ public class ChannelInfoDeserializer implements JsonDeserializer<ChannelInfo> {
 	@Override
 	public ChannelInfo deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		ChannelInfo channelInfo 				= null;
-		ArrayList<PodcastInfo> episodesArray	= null;
+		List<PodcastInfo> episodesArray	= null;
 		JsonElement episodesElement				= json.getAsJsonObject().get("episode");
 		String title 							= json.getAsJsonObject().get("title").getAsString(),
 			   status							= json.getAsJsonObject().get("status").getAsString(),
@@ -93,7 +94,7 @@ public class ChannelInfoDeserializer implements JsonDeserializer<ChannelInfo> {
 		if(episodesElement == null)
 			episodesArray = new ArrayList<PodcastInfo>();
 		else if(episodesElement.isJsonArray()) 
-			episodesArray = gson.fromJson(episodesElement, new TypeToken<ArrayList<PodcastInfo>>(){}.getType());			
+			episodesArray = gson.fromJson(episodesElement, new TypeToken<List<PodcastInfo>>(){}.getType());			
 		else {
 			episodesArray 			= new ArrayList<PodcastInfo>();
 			PodcastInfo folderInfo	= gson.fromJson(episodesElement, PodcastInfo.class);

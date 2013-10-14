@@ -22,6 +22,7 @@
 package net.subclient.subsonic.mappings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -50,7 +51,7 @@ public class PlaylistInfo implements Cloneable {
 	private boolean isPublic;
 	/** Songs array of this PlaylistInfo */
 	@SerializedName("entry")
-	private ArrayList<ChildInfo> entriesArray;
+	private List<ChildInfo> entriesArray;
 	
 	/**
 	 * Constructs a new PlaylistInfo object with default values
@@ -104,7 +105,7 @@ public class PlaylistInfo implements Cloneable {
 	public boolean isPublic() {
 		return this.isPublic;
 	}
-	public ArrayList<ChildInfo> getEntriesArray() {
+	public List<ChildInfo> getEntriesArray() {
 		return this.entriesArray;
 	}
 	
@@ -140,7 +141,7 @@ public class PlaylistInfo implements Cloneable {
 		this.isPublic = isPublic;
 		return this;
 	}
-	public PlaylistInfo setEntriesArray(ArrayList<ChildInfo> entriesArray) {
+	public PlaylistInfo setEntriesArray(List<ChildInfo> entriesArray) {
 		this.entriesArray = entriesArray;
 		return this;
 	}

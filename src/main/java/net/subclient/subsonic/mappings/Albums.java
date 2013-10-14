@@ -22,6 +22,7 @@
 package net.subclient.subsonic.mappings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -33,7 +34,7 @@ public class Albums {
 	
 	/** Array of childs in the album object */
 	@SerializedName("album")
-	private ArrayList<ChildInfo> albumsArray;
+	private List<ChildInfo> albumsArray;
 	
 	/**
 	 * Constructs a new Albums mapping with an empty albums array
@@ -46,7 +47,7 @@ public class Albums {
 	 * Returns this albums array
 	 * @return this albums array
 	 */
-	public ArrayList<ChildInfo> getAlbumsArray() {
+	public List<ChildInfo> getAlbumsArray() {
 		return this.albumsArray;
 	}
 	
@@ -55,7 +56,7 @@ public class Albums {
 	 * @param albumsArray New albums array
 	 * @return this
 	 */
-	public Albums setAlbumsArray(ArrayList<ChildInfo> albumsArray) {
+	public Albums setAlbumsArray(List<ChildInfo> albumsArray) {
 		this.albumsArray = albumsArray;
 		return this;
 	}

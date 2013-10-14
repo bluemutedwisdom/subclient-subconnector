@@ -22,6 +22,7 @@
 package net.subclient.subsonic.mappings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -33,7 +34,7 @@ public class Indexes {
 	
 	/** Array of indexes of this object */
 	@SerializedName("index")
-	private ArrayList<IndexInfo> indexesArray;
+	private List<IndexInfo> indexesArray;
 	/** Last time in milliseconds the indexes were modified */
 	private long lastModified;
 	
@@ -51,14 +52,14 @@ public class Indexes {
 		this.lastModified	= 0;
 	}
 	
-	public ArrayList<IndexInfo> getIndexesArray() {
+	public List<IndexInfo> getIndexesArray() {
 		return this.indexesArray;
 	}
 	public long getLastModified() {
 		return this.lastModified;
 	}
 	
-	public Indexes setIndexesArray(ArrayList<IndexInfo> indexes) {
+	public Indexes setIndexesArray(List<IndexInfo> indexes) {
 		this.indexesArray = indexes;
 		return this;
 	}

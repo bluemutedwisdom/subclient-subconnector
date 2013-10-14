@@ -1,3 +1,9 @@
+Subconnector 1.3.0
+    Replaced ArrayLists in returning values and params by Lists to avoid program to a concrete implementation
+
+Subconnector 1.2.1
+    Added boolean property playing to ChildInfo. It is not part of Subsonic API, but it can be useful
+
 Subconnector 1.2.0
     Included new dependency. Apache commons lang3
     Solved bug on HTML entity decodification using Apache commons lang3

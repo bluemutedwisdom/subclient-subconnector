@@ -23,6 +23,7 @@ package net.subclient.subsonic.deserializers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.subclient.subsonic.mappings.ChildInfo;
 import net.subclient.subsonic.mappings.FolderInfo;
@@ -78,9 +79,9 @@ public class SearchResultDeserializer implements JsonDeserializer<SearchResult> 
 	@Override
 	public SearchResult deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		SearchResult searchResult		= null;
-		ArrayList<ChildInfo> songs		= null;
-		ArrayList<ChildInfo> albums		= null;
-		ArrayList<FolderInfo> artists	= null;
+		List<ChildInfo> songs		= null;
+		List<ChildInfo> albums		= null;
+		List<FolderInfo> artists	= null;
 		JsonElement songsElement		= json.getAsJsonObject().get("song");
 		JsonElement albumsElement		= json.getAsJsonObject().get("album");
 		JsonElement artistsElement		= json.getAsJsonObject().get("artist");
@@ -88,7 +89,7 @@ public class SearchResultDeserializer implements JsonDeserializer<SearchResult> 
 		if(songsElement == null)
 			songs = new ArrayList<ChildInfo>();
 		else if(songsElement.isJsonArray()) 
-			songs = gson.fromJson(songsElement, new TypeToken<ArrayList<ChildInfo>>(){}.getType());			
+			songs = gson.fromJson(songsElement, new TypeToken<List<ChildInfo>>(){}.getType());			
 		else {
 			songs 			= new ArrayList<ChildInfo>();
 			ChildInfo info	= gson.fromJson(songsElement, ChildInfo.class);
@@ -98,7 +99,7 @@ public class SearchResultDeserializer implements JsonDeserializer<SearchResult> 
 		if(albumsElement == null)
 			albums = new ArrayList<ChildInfo>();
 		else if(albumsElement.isJsonArray()) 
-			albums = gson.fromJson(albumsElement, new TypeToken<ArrayList<ChildInfo>>(){}.getType());			
+			albums = gson.fromJson(albumsElement, new TypeToken<List<ChildInfo>>(){}.getType());			
 		else {
 			albums 			= new ArrayList<ChildInfo>();
 			ChildInfo info	= gson.fromJson(albumsElement, ChildInfo.class);
@@ -108,7 +109,7 @@ public class SearchResultDeserializer implements JsonDeserializer<SearchResult> 
 		if(artistsElement == null)
 			artists = new ArrayList<FolderInfo>();
 		else if(artistsElement.isJsonArray()) 
-			artists = gson.fromJson(artistsElement, new TypeToken<ArrayList<FolderInfo>>(){}.getType());			
+			artists = gson.fromJson(artistsElement, new TypeToken<List<FolderInfo>>(){}.getType());			
 		else {
 			artists 				= new ArrayList<FolderInfo>();
 			FolderInfo folderInfo	= gson.fromJson(artistsElement, FolderInfo.class);

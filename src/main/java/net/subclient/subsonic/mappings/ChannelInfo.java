@@ -24,6 +24,7 @@ package net.subclient.subsonic.mappings;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -47,7 +48,7 @@ public class ChannelInfo implements Cloneable {
 	private String publishDate;
 	/** Array of episodes availables on this channel */
 	@SerializedName("episode")
-	private ArrayList<PodcastInfo> episodesArray;
+	private List<PodcastInfo> episodesArray;
 	
 	/**
 	 * Constructs a new ChannelInfo object with default values:
@@ -129,7 +130,7 @@ public class ChannelInfo implements Cloneable {
 	 * Returns the array of episodes of this channel
 	 * @return The array of episodes of this channel
 	 */
-	public ArrayList<PodcastInfo> getEpisodesArray() {
+	public List<PodcastInfo> getEpisodesArray() {
 		return this.episodesArray;
 	}
 	
@@ -192,7 +193,7 @@ public class ChannelInfo implements Cloneable {
 	 * @param episodesArray New episodes array
 	 * @return this channel
 	 */
-	public ChannelInfo setEpisodesArray(ArrayList<PodcastInfo> episodesArray) {
+	public ChannelInfo setEpisodesArray(List<PodcastInfo> episodesArray) {
 		this.episodesArray = episodesArray;
 		return this;
 	}

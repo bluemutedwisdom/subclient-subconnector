@@ -22,6 +22,7 @@
 package net.subclient.subsonic.mappings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -37,7 +38,7 @@ public class Directory {
 	private String name;
 	/** Array of childs of this directory */
 	@SerializedName("child")
-	private ArrayList<ChildInfo> childsArray;
+	private List<ChildInfo> childsArray;
 	
 	/**
 	 * Constructs a new Directory object with default values
@@ -70,7 +71,7 @@ public class Directory {
 	/**
 	 * @return This directory childs array
 	 */
-	public ArrayList<ChildInfo> getChildsArray() {
+	public List<ChildInfo> getChildsArray() {
 		return this.childsArray;
 	}
 	
@@ -97,7 +98,7 @@ public class Directory {
 	 * @param childsArray
 	 * @return This directory
 	 */
-	public Directory setChildsArray(ArrayList<ChildInfo> childsArray) {
+	public Directory setChildsArray(List<ChildInfo> childsArray) {
 		this.childsArray = childsArray;
 		return this;
 	}

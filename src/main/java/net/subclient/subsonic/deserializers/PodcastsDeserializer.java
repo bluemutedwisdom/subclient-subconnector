@@ -23,6 +23,7 @@ package net.subclient.subsonic.deserializers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.subclient.subsonic.mappings.ChannelInfo;
 import net.subclient.subsonic.mappings.Podcasts;
@@ -82,11 +83,11 @@ public class PodcastsDeserializer implements JsonDeserializer<Podcasts> {
 	@Override
 	public Podcasts deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		Podcasts podcasts 				= null;
-		ArrayList<ChannelInfo> channels	= null;
+		List<ChannelInfo> channels	= null;
 		JsonElement channelsElement		= json.getAsJsonObject().get("channel");
 		
 		if(channelsElement.isJsonArray()) 
-			channels = gson.fromJson(channelsElement, new TypeToken<ArrayList<ChannelInfo>>(){}.getType());			
+			channels = gson.fromJson(channelsElement, new TypeToken<List<ChannelInfo>>(){}.getType());			
 		else {
 			channels 				= new ArrayList<ChannelInfo>();
 			ChannelInfo childInfo	= gson.fromJson(channelsElement, ChannelInfo.class);
