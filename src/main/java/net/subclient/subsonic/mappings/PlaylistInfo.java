@@ -30,18 +30,14 @@ import com.google.gson.annotations.SerializedName;
  * Java representation of a playlist JSON object
  * @author Alejandro Celaya Alastrué
  */
-public class PlaylistInfo implements Cloneable {
+public class PlaylistInfo extends FolderInfo implements Cloneable {
 	
-	/** ID of this PlaylistInfo */
-	private String id;
 	/** Duration of this PlaylistInfo */
 	private int duration;
 	/** Number of songs of this PlaylistInfo */
 	private int songCount;
 	/** Date this PlaylistInfo was created */
 	private String created;
-	/** Name of this PlaylistInfo */
-	private String name;
 	/** User owner of this PlaylistInfo */
 	private String owner;
 	/** Comment of this PlaylistInfo */
@@ -70,20 +66,17 @@ public class PlaylistInfo implements Cloneable {
 	 * </pre>
 	 */
 	public PlaylistInfo() {
-		this.id 			= "-1";
+		super();
+		
 		this.duration 		= 0;
 		this.songCount		= 0;
 		this.created 		= "";
-		this.name 			= " - ";
 		this.owner 			= "";
 		this.comment		= "";
 		this.isPublic 		= false;
 		this.entriesArray	= new ArrayList<ChildInfo>();
 	}
 	
-	public String getId() {
-		return this.id;
-	}
 	public int getDuration() {
 		return this.duration;
 	}
@@ -92,9 +85,6 @@ public class PlaylistInfo implements Cloneable {
 	}
 	public String getCreationDate() {
 		return this.created;
-	}
-	public String getName() {
-		return this.name;
 	}
 	public String getOwner() {
 		return this.owner;
@@ -109,10 +99,6 @@ public class PlaylistInfo implements Cloneable {
 		return this.entriesArray;
 	}
 	
-	public PlaylistInfo setId(String id) {
-		this.id = id;
-		return this;
-	}
 	public PlaylistInfo setDuration(int duration) {
 		this.duration = duration;
 		return this;
@@ -123,10 +109,6 @@ public class PlaylistInfo implements Cloneable {
 	}
 	public PlaylistInfo setCreationDate(String created) {
 		this.created = created;
-		return this;
-	}
-	public PlaylistInfo setName(String name) {
-		this.name = name;
 		return this;
 	}
 	public PlaylistInfo setOwner(String owner) {
@@ -165,11 +147,11 @@ public class PlaylistInfo implements Cloneable {
 			.setCreationDate(this.getCreationDate())
 			.setDuration(this.getDuration())
 			.setEntriesArray(this.getEntriesArray())
-			.setId(this.getId())
-			.setName(this.getName())
 			.setOwner(this.getOwner())
 			.setPublic(this.isPublic())
-			.setSongCount(this.getSongCount());
+			.setSongCount(this.getSongCount())
+			.setId(this.getId())
+			.setName(this.getName());
 		return info;
 	}
 	

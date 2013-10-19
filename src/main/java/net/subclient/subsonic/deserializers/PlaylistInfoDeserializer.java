@@ -105,11 +105,11 @@ public class PlaylistInfoDeserializer implements JsonDeserializer<PlaylistInfo> 
 					.setCreationDate(created)
 					.setDuration(duration)
 					.setEntriesArray(entries)
-					.setId(id)
-					.setName(name)
 					.setOwner(owner)
 					.setPublic(isPublic)
-					.setSongCount(songCount);
+					.setSongCount(songCount)
+					.setId(id)
+					.setName(name);
 		return playlistInfo;
 	}
 
