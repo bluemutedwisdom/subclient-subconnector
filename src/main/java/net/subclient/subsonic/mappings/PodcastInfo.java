@@ -124,7 +124,6 @@ public class PodcastInfo extends ChildInfo {
 			.setCreationDate(this.getCreationDate())
 			.setDuration(this.getDuration())
 			.setGenre(this.getGenre())
-			.setId(this.getId())
 			.setIsDir(this.isDir())
 			.setIsVideo(this.isVideo())
 			.setParent(this.getParent())
@@ -136,7 +135,8 @@ public class PodcastInfo extends ChildInfo {
 			.setType(this.getType())
 			.setYear(this.getYear())
 			.setAverageRating(this.getAverageRating())
-			.setUserRating(this.getUserRating());
+			.setUserRating(this.getUserRating())
+			.setId(this.getId());
 		return info;
 	}
 	
@@ -165,7 +165,6 @@ public class PodcastInfo extends ChildInfo {
 			.setCreationDate(this.getCreationDate())
 			.setDuration(this.getDuration())
 			.setGenre(this.getGenre())
-			.setId(this.getId())
 			.setIsDir(this.isDir())
 			.setIsVideo(this.isVideo())
 			.setParent(this.getParent())
@@ -177,7 +176,8 @@ public class PodcastInfo extends ChildInfo {
 			.setType(this.getType())
 			.setYear(this.getYear())
 			.setAverageRating(this.getAverageRating())
-			.setUserRating(this.getUserRating());
+			.setUserRating(this.getUserRating())
+			.setId(this.getId());
 		return info;
 	}
 	

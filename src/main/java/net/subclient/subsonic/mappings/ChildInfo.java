@@ -25,13 +25,11 @@ package net.subclient.subsonic.mappings;
  * Java representation of a child JSON object
  * @author Alejandro Celaya Alastrué
  */
-public class ChildInfo implements Cloneable {
+public class ChildInfo extends FolderInfo implements Cloneable {
 	
 	/** Sets if this child is being played. Not in Subsonic API */
 	private boolean playing;
 	
-	/** ID of this child */
-	private String id;
 	/** Title of this child */
 	private String title;
 	/** Album of this child */
@@ -109,8 +107,9 @@ public class ChildInfo implements Cloneable {
 	 * </pre>
 	 */
 	public ChildInfo() {
+		super();
+		
 		this.playing		= false;
-		this.id 			= "-1";
 		this.title 			= " - ";
 		this.album 			= " - ";
 		this.albumId 		= "-1";
@@ -137,13 +136,6 @@ public class ChildInfo implements Cloneable {
 	
 	public boolean isPlaying() {
 		return this.playing;
-	}
-	/**
-	 * Returns this child ID
-	 * @return This child ID
-	 */
-	public String getId() {
-		return this.id;
 	}
 	/**
 	 * Returns this child title
@@ -302,15 +294,6 @@ public class ChildInfo implements Cloneable {
 	
 	public ChildInfo setPlaying(boolean playing) {
 		this.playing = playing;
-		return this;
-	}
-	/**
-	 * Sets this child ID
-	 * @param id New ID
-	 * @return this child
-	 */
-	public ChildInfo setId(String id) {
-		this.id = id;
 		return this;
 	}
 	/**
@@ -533,7 +516,6 @@ public class ChildInfo implements Cloneable {
 			.setCreationDate(this.getCreationDate())
 			.setDuration(this.getDuration())
 			.setGenre(this.getGenre())
-			.setId(this.getId())
 			.setIsDir(this.isDir())
 			.setIsVideo(this.isVideo())
 			.setParent(this.getParent())
@@ -545,7 +527,8 @@ public class ChildInfo implements Cloneable {
 			.setType(this.getType())
 			.setYear(this.getYear())
 			.setAverageRating(this.getAverageRating())
-			.setUserRating(this.getUserRating());
+			.setUserRating(this.getUserRating())
+			.setId(this.getId());
 		return info;
 	}
 	
