@@ -32,10 +32,8 @@ import com.google.gson.annotations.SerializedName;
  * Java representation of the "channel" JSON object.
  * @author Alejandro Celaya Alastrué
  */
-public class ChannelInfo implements Cloneable {
+public class ChannelInfo extends FolderInfo implements Cloneable {
 	
-	/** ID of this channel */
-	private String id;
 	/** Title of this channel */
 	private String title;
 	/** Status of this channel */
@@ -64,7 +62,7 @@ public class ChannelInfo implements Cloneable {
 	 * </pre>
 	 */
 	public ChannelInfo() {
-		this.id 			= "-1";
+		super();
 		this.title 			= " - ";
 		this.status 		= "completed";
 		this.description	= "";
@@ -73,13 +71,6 @@ public class ChannelInfo implements Cloneable {
 		this.episodesArray 	= new ArrayList<PodcastInfo>();
 	}
 	
-	/**
-	 * Returns this channel id
-	 * @return this channel id
-	 */
-	public String getId() {
-		return this.id;
-	}
 	/**
 	 * Returns this channel title
 	 * @return this channel title
@@ -134,15 +125,6 @@ public class ChannelInfo implements Cloneable {
 		return this.episodesArray;
 	}
 	
-	/**
-	 * Sets this channel id
-	 * @param id New id
-	 * @return this channel
-	 */
-	public ChannelInfo setId(String id) {
-		this.id = id;
-		return this;
-	}
 	/**
 	 * Sets this channel title
 	 * @param title New title
@@ -220,10 +202,10 @@ public class ChannelInfo implements Cloneable {
 		ChannelInfo info = new ChannelInfo();
 		info.setDescription(this.getDescription())
 			.setEpisodesArray(this.getEpisodesArray())
-			.setId(this.getId())
 			.setStatus(this.getStatus())
 			.setTitle(this.getTitle())
-			.setUrl(this.getUrl());
+			.setUrl(this.getUrl())
+			.setId(this.getId());
 		return info;
 	}
 	

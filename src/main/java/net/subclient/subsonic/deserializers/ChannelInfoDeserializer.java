@@ -111,10 +111,10 @@ public class ChannelInfoDeserializer implements JsonDeserializer<ChannelInfo> {
 		channelInfo = new ChannelInfo();
 		channelInfo.setDescription(description)
 				   .setEpisodesArray(episodesArray)
-				   .setId(id)
 				   .setStatus(status)
 				   .setTitle(title)
-				   .setUrl(urlObj);
+				   .setUrl(urlObj)
+				   .setId(id);
 		return channelInfo;
 	}
 
