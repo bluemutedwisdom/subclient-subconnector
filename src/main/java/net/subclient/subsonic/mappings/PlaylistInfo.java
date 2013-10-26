@@ -138,7 +138,7 @@ public class PlaylistInfo extends FolderInfo implements Cloneable {
 	 */
 	@Override
 	public String toString() {
-		return this.name;
+		return this.getName();
 	}
 	@Override
 	public PlaylistInfo clone() {

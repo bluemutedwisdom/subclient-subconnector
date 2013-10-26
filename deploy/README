@@ -1,3 +1,6 @@
+Subconnector 1.3.4
+    Solved bad property visibility on FolderInfo class
+    
 Subconnector 1.3.3
     Refactored ChannelInfo class to make it extend FolderInfo
     

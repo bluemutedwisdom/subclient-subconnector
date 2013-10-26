@@ -28,9 +28,9 @@ package net.subclient.subsonic.mappings;
 public class FolderInfo implements Cloneable {
 	
 	/** ID of this folder */
-	public String id;
+	private String id;
 	/** Name of this folder */
-	public String name;
+	private String name;
 	
 	/**
 	 * Constructs a new FolderInfo object with default values:
