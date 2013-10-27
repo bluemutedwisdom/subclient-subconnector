@@ -44,9 +44,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import javax.xml.ws.http.HTTPException;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
-import net.subclient.subsonic.util.GetAlbumsType;
 import net.subclient.subsonic.deserializers.AlbumsDeserializer;
 import net.subclient.subsonic.deserializers.ChannelInfoDeserializer;
 import net.subclient.subsonic.deserializers.DirectoryDeserializer;
@@ -91,8 +88,11 @@ import net.subclient.subsonic.responses.GetRandomSongsResponse;
 import net.subclient.subsonic.responses.SearchResponse;
 import net.subclient.subsonic.responses.SubsonicResponse;
 import net.subclient.subsonic.util.AlbumRating;
+import net.subclient.subsonic.util.GetAlbumsType;
 import net.subclient.subsonic.util.HttpParameter;
 import net.subclient.subsonic.util.Version;
+
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -342,7 +342,6 @@ public class SubsonicConnection implements Connection {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String singleLine;
         while((singleLine = reader.readLine()) != null) resp.append(singleLine);
-//        JsonElement responseElement = this.parser.parse(HTMLUtils.decode(resp.toString())).getAsJsonObject().get(SUBSONIC_RESPONSE_IDENTIFIER);
         JsonElement responseElement = this.parser.parse(StringEscapeUtils.unescapeXml(resp.toString())).getAsJsonObject().get(SUBSONIC_RESPONSE_IDENTIFIER);
         
         //Parse Subsonic string response to its corresponding Java Object and check if an error occured
@@ -364,7 +363,7 @@ public class SubsonicConnection implements Connection {
      * @return True if the current server version is greater than or equal than the specified version. False otherwise
      */
     private boolean isCompatible(Version methodVersion) {
-    	if(this.serverApiVersion == null) return true;
+    	if (this.serverApiVersion == null) return true;
     	return (this.serverApiVersion.compareTo(methodVersion) >= 0);
     }
     
@@ -392,11 +391,8 @@ public class SubsonicConnection implements Connection {
     	return this.serverApiVersion;
     }
     
-    /**
-     * Checks connectivity with current Subsonic server.
-     * @return True if Subsonic server is reached. False otherwise.
-     */
-    public boolean ping() {
+    @Override
+	public boolean ping() {
         Version methodApiVersion = new Version(1, 0, 0);
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
@@ -409,16 +405,9 @@ public class SubsonicConnection implements Connection {
         	return false;
         }
     }
-    /**
-     * Gets detailed information about current server license
-     * @return A {@link net.subclient.subsonic.responses.GetLicenseResponse GetLicenseResponse} object with the server license information
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public GetLicenseResponse getLicense() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+    
+    @Override
+	public GetLicenseResponse getLicense() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
     	Version methodApiVersion = new Version(1, 0, 0);
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
@@ -427,16 +416,9 @@ public class SubsonicConnection implements Connection {
         parameters.add(version);
         return this.parseResponse(this.connect(GET_LICENSE, parameters), GetLicenseResponse.class);
     }
-    /**
-     * Gets the available music folders list
-     * @return A {@link net.subclient.subsonic.responses.GetMusicFoldersResponse GetMusicFoldersResponse} object with the folders list
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public GetMusicFoldersResponse getMusicFolders() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+    
+    @Override
+	public GetMusicFoldersResponse getMusicFolders() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
     	Version methodApiVersion = new Version(1, 0, 0);
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
@@ -445,55 +427,20 @@ public class SubsonicConnection implements Connection {
         parameters.add(version);
         return this.parseResponse(this.connect(GET_MUSIC_FOLDERS, parameters), GetMusicFoldersResponse.class);
     }
-    /**
-     * Gets a list of all the directories (indexes) in the root of all music folders
-     * @return A {@link net.subclient.subsonic.responses.GetIndexesResponse GetIndexesResponse} object with the indexes list
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public GetIndexesResponse getIndexes() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+    
+    @Override
+	public GetIndexesResponse getIndexes() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
         return this.getIndexes("-1", 0);
     }
-    /**
-     * Gets a list of all the directories (indexes) in the root of the specified music folder
-     * @param musicFolderId Id of the music folder to be listed
-     * @return A {@link net.subclient.subsonic.responses.GetIndexesResponse GetIndexesResponse} object with the indexes list
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public GetIndexesResponse getIndexes(String musicFolderId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+    @Override
+	public GetIndexesResponse getIndexes(String musicFolderId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
         return this.getIndexes(musicFolderId, 0);
     }
-    /**
-     * Gets a list of all the directories (indexes) in the root of all music folders that has been modified after the specified timestamp
-     * @param modifiedSince Timestamp in milliseconds
-     * @return A {@link net.subclient.subsonic.responses.GetIndexesResponse GetIndexesResponse} object with the indexes list
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public GetIndexesResponse getIndexes(long modifiedSince) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+    @Override
+	public GetIndexesResponse getIndexes(long modifiedSince) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
         return this.getIndexes("-1", modifiedSince);
     }
-    /**
-     * Gets a list of all the directories (indexes) in the root of the specified music folder that has been modified after the specified timestamp
-     * @param musicFolderId Id of the music folder to be listed
-     * @param modifiedSince Timestamp in milliseconds
-     * @return A {@link net.subclient.subsonic.responses.GetIndexesResponse GetIndexesResponse} object with the indexes list
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200 
-     */
+    @Override
     public GetIndexesResponse getIndexes(String musicFolderId, long modifiedSince) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
     	Version methodApiVersion = new Version(1, 0, 0);
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
@@ -505,17 +452,9 @@ public class SubsonicConnection implements Connection {
         if(!musicFolderId.equals("-1")) parameters.add(new HttpParameter("musicFolderId", musicFolderId));
         return this.parseResponse(this.connect(GET_INDEXES, parameters), GetIndexesResponse.class);
     }
-    /**
-     * Returns all the albums and songs in the specified directory
-     * @param uniqueFolderId ID of the directory to be listed
-     * @return A {@link net.subclient.subsonic.responses.GetMusicDirectoryResponse GetMusicDirectoryResponse} object with the albums and songs
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public GetMusicDirectoryResponse getMusicDirectory(String uniqueFolderId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+    
+    @Override
+	public GetMusicDirectoryResponse getMusicDirectory(String uniqueFolderId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
     	Version methodApiVersion = new Version(1, 0, 0);
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
@@ -525,52 +464,17 @@ public class SubsonicConnection implements Connection {
         parameters.add(new HttpParameter("id", uniqueFolderId));
         return this.parseResponse(this.connect(GET_MUSIC_DIRECTORY, parameters), GetMusicDirectoryResponse.class);
     }
-    /**
-     * Gets a list of max 20 artists, albums and songs that meet the specified query.
-     * Corresponds to search2 Subsonic API method since search is deprecated
-     * @param query Search criterion
-     * @return A {@link net.subclient.subsonic.responses.SearchResponse SearchResponse} object with the artists, albums and songs
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public SearchResponse search(String query) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+    
+    @Override
+	public SearchResponse search(String query) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
         return this.search(query, 0, 0);
     }
-    /**
-     * Gets the specified number of artists, albums and songs that meet the specified query.
-     * Corresponds to search2 Subsonic API method since search is deprecated
-     * @param query Search criterion
-     * @param count Max number of artists, albums and songs to return
-     * @return A {@link net.subclient.subsonic.responses.SearchResponse SearchResponse} object with the artists, albums and songs
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public SearchResponse search(String query, int count) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+    @Override
+	public SearchResponse search(String query, int count) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	return this.search(query, count, 0);
     }
-    /**
-     * Gets the specified number of artists, albums and songs that meet the specified query.
-     * Corresponds to search2 Subsonic API method since search is deprecated
-     * @param query Search criterion
-     * @param count Max number of artists, albums and songs to return
-     * @param offset Index to start returning results. For pagination purposes
-     * @return A {@link net.subclient.subsonic.responses.SearchResponse SearchResponse} object with the artists, albums and songs
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public SearchResponse search(String query, int count, int offset) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+    @Override
+	public SearchResponse search(String query, int count, int offset) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	Version methodApiVersion = new Version(1, 4, 0);
     	//Check compatibility
         if(!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
@@ -590,16 +494,9 @@ public class SubsonicConnection implements Connection {
         }
         return this.parseResponse(this.connect(SEARCH_2, parameters), SearchResponse.class);
     }    
-    /**
-     * Gets the playlists available for the current user
-     * @return A {@link net.subclient.subsonic.responses.GetPlaylistsResponse GetPlaylistsResponse} object with the playlists available
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public GetPlaylistsResponse getPlaylists() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+    
+    @Override
+	public GetPlaylistsResponse getPlaylists() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
     	Version methodApiVersion = new Version(1, 0, 0);
         HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
@@ -608,17 +505,8 @@ public class SubsonicConnection implements Connection {
         parameters.add(version);
         return this.parseResponse(this.connect(GET_PLAYLISTS, parameters),GetPlaylistsResponse.class);
     }
-    /**
-     * Gets information about a specific playlist including songs list on that playlist
-     * @param playlistId ID of the playlist to be returned
-     * @return A {@link net.subclient.subsonic.responses.GetPlaylistResponse GetPlaylistResponse} object with information about the specified playlist
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public GetPlaylistResponse getPlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+    @Override
+	public GetPlaylistResponse getPlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
     	Version methodApiVersion = new Version(1, 0, 0);
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
@@ -628,19 +516,9 @@ public class SubsonicConnection implements Connection {
         parameters.add(new HttpParameter("id", playlistId));
         return this.parseResponse(this.connect(GET_PLAYLIST, parameters), GetPlaylistResponse.class);
     }
-    /**
-     * Creates a new playlist with the specified songs list and name
-     * @param songsList List of IDs of songs that will form the playlist
-     * @param name Name to be asigned to the playlist
-     * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public SubsonicResponse createPlaylist(List<String> songsList, String name) 
+    
+    @Override
+	public SubsonicResponse createPlaylist(List<String> songsList, String name) 
     		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException 
     {
     	Version methodApiVersion = new Version(1, 2, 0);
@@ -657,18 +535,9 @@ public class SubsonicConnection implements Connection {
         }
         return this.parseResponse(this.connect(CREATE_PLAYLIST, parameters), SubsonicResponse.class);
     }
-    /**
-     * Deletes the specified playlist
-     * @param playlistId ID of the playlist to be deleted
-     * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public SubsonicResponse deletePlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+    
+    @Override
+	public SubsonicResponse deletePlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	Version methodApiVersion = new Version(1, 2, 0);
     	//Check compatibility
         if(!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
@@ -680,52 +549,17 @@ public class SubsonicConnection implements Connection {
         parameters.add(new HttpParameter("id", playlistId));
         return this.parseResponse(this.connect(DELETE_PLAYLIST, parameters), SubsonicResponse.class);
     }
-    /**
-     * Gets a list of 10 albums of the specified type
-     * @param type Type of the albums to be returned. Valid types are defined in {@link net.subclient.subsonic.util.GetAlbumsType GetAlbumsType}
-     * @return A {@link net.subclient.subsonic.responses.GetAlbumsResponse GetAlbumsResponse} object with the list of albums
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     * @see net.subclient.subsonic.util.GetAlbumsType
-     */
-    public GetAlbumsResponse getAlbumsList(GetAlbumsType type) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
-    {
+    
+    @Override
+	public GetAlbumsResponse getAlbumsList(GetAlbumsType type) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
         return this.getAlbumsList(type, 10, 0);
     }
-    /**
-     * Gets the defined number of albums of the specified type
-     * @param type Type of the albums to be returned. Valid types are defined in {@link net.subclient.subsonic.util.GetAlbumsType GetAlbumsType}
-     * @param size Number of albums to return
-     * @return A {@link net.subclient.subsonic.responses.GetAlbumsResponse GetAlbumsResponse} object with the list of albums
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public GetAlbumsResponse getAlbumsList(GetAlbumsType type, int size) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
-    {
+    @Override
+	public GetAlbumsResponse getAlbumsList(GetAlbumsType type, int size) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	return this.getAlbumsList(type, size, 0);
     }
-    /**
-     * Gets the defined number of albums of the specified type
-     * @param type Type of the albums to be returned. Valid types are defined in {@link net.subclient.subsonic.util.GetAlbumsType GetAlbumsType}
-     * @param size Number of albums to return
-     * @param offset Index to start returning results. For pagination purposes
-     * @return A {@link net.subclient.subsonic.responses.GetAlbumsResponse GetAlbumsResponse} object with the list of albums
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-    public GetAlbumsResponse getAlbumsList(GetAlbumsType type, int size, int offset) 
+    @Override
+	public GetAlbumsResponse getAlbumsList(GetAlbumsType type, int size, int offset) 
     		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException 
     {
     	Version methodApiVersion = new Version(1, 2, 0);
@@ -742,50 +576,21 @@ public class SubsonicConnection implements Connection {
         parameters.add(new HttpParameter("offset"	, String.valueOf(offset)));
         return this.parseResponse(this.connect(GET_ALBUM_LIST, parameters), GetAlbumsResponse.class);
     }
-    /**
-     * Gets a list of 10 random songs in all music folders
-     * @return A {@link net.subclient.subsonic.responses.GetRandomSongsResponse GetRandomSongsResponse} object with the list of songs
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws JsonSyntaxException
-     * @throws IOException
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response
-     * @throws CompatibilityException If this method is not compatible with the current server
-     * @throws HTTPException If the server response code is other than 200
-     */
-    public GetRandomSongsResponse getRandomSongs() 
+    
+    @Override
+	public GetRandomSongsResponse getRandomSongs() 
     		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
     {
     	return this.getRandomSongs("-1", 10);
     }
-    /**
-     * Gets a list of 10 random songs in a specific music folder
-     * @param folderId ID of the music folder used to get the songs list
-     * @return A {@link net.subclient.subsonic.responses.GetRandomSongsResponse GetRandomSongsResponse} object with the list of songs
-     * @throws JsonSyntaxException
-     * @throws IOException
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-     */
-    public GetRandomSongsResponse getRandomSongs(String folderId) 
+    @Override
+	public GetRandomSongsResponse getRandomSongs(String folderId) 
     		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
     {
     	return this.getRandomSongs(folderId, 10);
     }
-    /**
-     * Gets a defined number of random songs in a specific music folder
-     * @param folderId ID of the music folder used to get the songs list
-     * @param size Number of songs the be returned
-     * @return A {@link net.subclient.subsonic.responses.GetRandomSongsResponse GetRandomSongsResponse} object with the list of songs
-     * @throws JsonSyntaxException
-     * @throws IOException
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-     */
-    public GetRandomSongsResponse getRandomSongs(String folderId, int size) 
+    @Override
+	public GetRandomSongsResponse getRandomSongs(String folderId, int size) 
     		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
     {
     	Version methodApiVersion = new Version(1, 2, 0);
@@ -801,17 +606,9 @@ public class SubsonicConnection implements Connection {
         	parameters.add(new HttpParameter("musicFolderId", folderId));
         return this.parseResponse(this.connect(GET_RANDOM_SONGS, parameters), GetRandomSongsResponse.class);
     }
-    /**
-     * Gets the list of podcasts in the server
-     * @return A {@link net.subclient.subsonic.responses.GetPodcastsResponse GetPodcastsResponse} object with the list of channels the server is subscribed
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-     */
-    public GetPodcastsResponse getPodcasts() 
+    
+    @Override
+	public GetPodcastsResponse getPodcasts() 
     		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
     {
     	Version methodApiVersion = new Version(1, 6, 0);
@@ -824,18 +621,9 @@ public class SubsonicConnection implements Connection {
         parameters.add(version);
         return this.parseResponse(this.connect(GET_PODCASTS, parameters), GetPodcastsResponse.class);
     }
-    /**
-     * Gets the episodes of the specified podcast
-     * @param podcastId ID of the podcast channel whose episodes have to be returned
-     * @return A {@link net.subclient.subsonic.responses.GetPodcastResponse GetPodcastResponse} object with the list of episodes of the podcast
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-     */
-    public GetPodcastResponse getPodcastEpisodes(String podcastId) 
+    
+    @Override
+	public GetPodcastResponse getPodcastEpisodes(String podcastId) 
     		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
     {
     	//Get all podcasts
@@ -854,19 +642,9 @@ public class SubsonicConnection implements Connection {
     	
     	return podcastResponse;
     }
-    /**
-     * Sets an album rating
-     * @param rating AlbumRating object with the album id and the rating to be set to that album
-     * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-     * @see net.subclient.subsonic.util.AlbumRating
-     */
-    public SubsonicResponse setRating(AlbumRating rating) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+    
+    @Override
+	public SubsonicResponse setRating(AlbumRating rating) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	Version methodApiVersion = new Version(1, 6, 0);
     	//Check compatibility
         if(!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
@@ -879,15 +657,9 @@ public class SubsonicConnection implements Connection {
         parameters.add(new HttpParameter("rating"	, String.valueOf(rating.getRating())));
         return this.parseResponse(this.connect(SET_RATING, parameters), SubsonicResponse.class);
     }
-    /**
-     * Gets a stream of an element (directory or song) to be downloaded.
-     * @param uniqueId ID of the element to be downloaded
-     * @return InputStream to the content to be downloaded
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws IOException 
-     * @throws HTTPException If the server response code is other than 200
-     */
-    public InputStream download(String uniqueId) throws HTTPException, IOException, InvalidResponseException {
+    
+    @Override
+	public InputStream download(String uniqueId) throws HTTPException, IOException, InvalidResponseException {
     	Version methodApiVersion = new Version(1, 0, 0);
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
@@ -897,27 +669,13 @@ public class SubsonicConnection implements Connection {
         parameters.add(new HttpParameter("id", uniqueId));
         return this.connect(DOWNLOAD, parameters, false);
     }
-    /**
-     * Gets the stream of a song to be played.
-     * @param uniqueId ID of the song to be played
-     * @return InputStream of the song to be played
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws IOException 
-     * @throws HTTPException If the server response code is other than 200
-     */
-    public InputStream stream(String uniqueId) throws HTTPException, IOException, InvalidResponseException {
+    
+    @Override
+	public InputStream stream(String uniqueId) throws HTTPException, IOException, InvalidResponseException {
         return this.stream(uniqueId, 0);
     }
-    /**
-     * Gets the stream of a song to be played.
-     * @param uniqueId ID of the song to be played
-     * @param maxBitRate Max bitrate of the stream
-     * @return InputStream of the song to be played
-     * @throws IOException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200
-     */
-    public InputStream stream(String uniqueId, int maxBitRate) throws IOException, InvalidResponseException, HTTPException {
+    @Override
+	public InputStream stream(String uniqueId, int maxBitRate) throws IOException, InvalidResponseException, HTTPException {
     	Version methodApiVersion = new Version(1, 0, 0);
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
@@ -928,21 +686,13 @@ public class SubsonicConnection implements Connection {
         parameters.add(new HttpParameter("maxBitRate"	, String.valueOf(maxBitRate)));
         return this.connect(STREAM, parameters, false);
     }
-    /**
-     * Returns a valid URL for streaming a song from the current Subsonic server specified by its ID
-     * @param uniqueId ID of the song to be played
-     * @return streaming URL
-     */
-    public String getStreamURL(String uniqueId) {
+    
+    @Override
+	public String getStreamURL(String uniqueId) {
     	return this.getStreamURL(uniqueId, 0);
     }
-    /**
-     * Returns a valid URL for streaming a song from the current Subsonic server specified by its ID
-     * @param uniqueId ID of the song to be played
-     * @param maxBitRate Max bitrate of the stream
-     * @return streaming URL
-     */
-    public String getStreamURL(String uniqueId, int maxBitRate) {
+    @Override
+	public String getStreamURL(String uniqueId, int maxBitRate) {
     	Version methodApiVersion = new Version(1, 0, 0);
         String version = "&v=" + methodApiVersion.toString(true);
         String urlPath = this.serverURL.toString() + STREAM;
@@ -951,27 +701,13 @@ public class SubsonicConnection implements Connection {
         
         return finalUrl;
     }
-    /**
-     * Returns a cover art specified by the provided ID and a size of 100x100 pixels
-     * @param coverId ID of the cover art to be returned
-     * @return BufferedImage with the cover art
-     * @throws IOException
-     * @throws InvalidResponseException If Subsonic servers returns a non parseable response
-     * @throws HTTPException If the server response code is other than 200
-     */
-    public BufferedImage getCoverArt(String coverId) throws IOException, InvalidResponseException, HTTPException {
+    
+    @Override
+	public BufferedImage getCoverArt(String coverId) throws IOException, InvalidResponseException, HTTPException {
         return this.getCoverArt(coverId, 100);
     }
-    /**
-     * Returns a cover art defined by the provided ID and a specified size
-     * @param coverId ID of the cover art to be returned
-     * @param size Size in pixels of the returned image
-     * @return BufferedImage with the cover art
-     * @throws IOException
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200
-     */
-    public BufferedImage getCoverArt(String coverId, int size) throws IOException, InvalidResponseException, HTTPException {
+    @Override
+	public BufferedImage getCoverArt(String coverId, int size) throws IOException, InvalidResponseException, HTTPException {
     	Version methodApiVersion = new Version(1, 0, 0);
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
