@@ -44,37 +44,11 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import javax.xml.ws.http.HTTPException;
 
-import net.subclient.subsonic.deserializers.AlbumsDeserializer;
-import net.subclient.subsonic.deserializers.ChannelInfoDeserializer;
-import net.subclient.subsonic.deserializers.DirectoryDeserializer;
-import net.subclient.subsonic.deserializers.GetAlbumsResponseDeserializer;
-import net.subclient.subsonic.deserializers.GetMusicFoldersResponseDeserializer;
-import net.subclient.subsonic.deserializers.GetPlaylistsResponseDeserializer;
-import net.subclient.subsonic.deserializers.GetPodcastsResponseDeserializer;
-import net.subclient.subsonic.deserializers.GetRandomSongsResponseDeserializer;
-import net.subclient.subsonic.deserializers.IndexInfoDeserializer;
-import net.subclient.subsonic.deserializers.IndexesDeserializer;
-import net.subclient.subsonic.deserializers.MusicFoldersDeserializer;
-import net.subclient.subsonic.deserializers.PlaylistInfoDeserializer;
-import net.subclient.subsonic.deserializers.PlaylistsDeserializer;
-import net.subclient.subsonic.deserializers.PodcastsDeserializer;
-import net.subclient.subsonic.deserializers.RandomSongsDeserializer;
-import net.subclient.subsonic.deserializers.SearchResponseDeserializer;
-import net.subclient.subsonic.deserializers.SearchResultDeserializer;
 import net.subclient.subsonic.exceptions.CompatibilityException;
 import net.subclient.subsonic.exceptions.InvalidResponseException;
 import net.subclient.subsonic.exceptions.SubsonicException;
-import net.subclient.subsonic.mappings.Albums;
+import net.subclient.subsonic.factories.GsonFactory;
 import net.subclient.subsonic.mappings.ChannelInfo;
-import net.subclient.subsonic.mappings.Directory;
-import net.subclient.subsonic.mappings.IndexInfo;
-import net.subclient.subsonic.mappings.Indexes;
-import net.subclient.subsonic.mappings.MusicFolders;
-import net.subclient.subsonic.mappings.PlaylistInfo;
-import net.subclient.subsonic.mappings.Playlists;
-import net.subclient.subsonic.mappings.Podcasts;
-import net.subclient.subsonic.mappings.RandomSongs;
-import net.subclient.subsonic.mappings.SearchResult;
 import net.subclient.subsonic.responses.GetAlbumsResponse;
 import net.subclient.subsonic.responses.GetIndexesResponse;
 import net.subclient.subsonic.responses.GetLicenseResponse;
@@ -95,7 +69,6 @@ import net.subclient.subsonic.util.Version;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
@@ -208,25 +181,7 @@ public class SubsonicConnection implements Connection {
     	this.parametersString		= paramsBuilder.toString();
     	
     	//Define JSON object handlers
-    	this.gson	= new GsonBuilder()
-					  .registerTypeHierarchyAdapter(GetMusicFoldersResponse.class	, new GetMusicFoldersResponseDeserializer())
-					  .registerTypeHierarchyAdapter(MusicFolders.class				, new MusicFoldersDeserializer())
-					  .registerTypeHierarchyAdapter(IndexInfo.class					, new IndexInfoDeserializer())
-					  .registerTypeHierarchyAdapter(SearchResponse.class			, new SearchResponseDeserializer())
-					  .registerTypeHierarchyAdapter(SearchResult.class				, new SearchResultDeserializer())
-					  .registerTypeHierarchyAdapter(GetPlaylistsResponse.class		, new GetPlaylistsResponseDeserializer())
-					  .registerTypeHierarchyAdapter(Playlists.class					, new PlaylistsDeserializer())
-					  .registerTypeHierarchyAdapter(PlaylistInfo.class				, new PlaylistInfoDeserializer())
-					  .registerTypeHierarchyAdapter(GetAlbumsResponse.class			, new GetAlbumsResponseDeserializer())
-					  .registerTypeHierarchyAdapter(Albums.class					, new AlbumsDeserializer())
-					  .registerTypeHierarchyAdapter(GetPodcastsResponse.class		, new GetPodcastsResponseDeserializer())
-					  .registerTypeHierarchyAdapter(Podcasts.class					, new PodcastsDeserializer())
-					  .registerTypeHierarchyAdapter(ChannelInfo.class				, new ChannelInfoDeserializer())
-					  .registerTypeHierarchyAdapter(Directory.class					, new DirectoryDeserializer())
-					  .registerTypeHierarchyAdapter(Indexes.class					, new IndexesDeserializer())
-					  .registerTypeHierarchyAdapter(GetRandomSongsResponse.class	, new GetRandomSongsResponseDeserializer())
-					  .registerTypeHierarchyAdapter(RandomSongs.class				, new RandomSongsDeserializer())
-					  .create();
+    	this.gson	= GsonFactory.getDeserializer();
     	this.parser	= new JsonParser();
         
         //If URL uses HTTPS protocol then SSL is assumed

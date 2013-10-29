@@ -2,6 +2,7 @@ Subconnector 1.4.0
     Solved bad property visibility on FolderInfo class
     Refactored javadocs
     Added method to Connection interface that was missed and only defined in SubsonicConnection
+    Created GsonFactory with factory methods to create Gson deserializers
     
 Subconnector 1.3.3
     Refactored ChannelInfo class to make it extend FolderInfo
