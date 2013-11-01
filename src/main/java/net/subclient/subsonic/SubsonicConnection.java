@@ -181,7 +181,7 @@ public class SubsonicConnection implements Connection {
     	this.parametersString		= paramsBuilder.toString();
     	
     	//Define JSON object handlers
-    	this.gson	= GsonFactory.getDeserializer();
+    	this.gson	= GsonFactory.createDeserializer();
     	this.parser	= new JsonParser();
         
         //If URL uses HTTPS protocol then SSL is assumed

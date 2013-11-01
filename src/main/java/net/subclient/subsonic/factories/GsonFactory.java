@@ -70,7 +70,7 @@ public class GsonFactory {
 	 * Returns a JSON deserializer that will properly work with Subsonic connections, by including all needed deserialization strategies
 	 * @return Gson deserializer
 	 */
-	public static Gson getDeserializer() {
+	public static Gson createDeserializer() {
 		return getBuilder().create();
 	}
 	
@@ -79,7 +79,7 @@ public class GsonFactory {
 	 * It pretty prints any serialized object
 	 * @return Gson deserializer
 	 */
-	public static Gson getPrettyPrintingDeserializer() {
+	public static Gson createPrettyPrintingDeserializer() {
 		return getBuilder().setPrettyPrinting()
 						   .create();
 	}
