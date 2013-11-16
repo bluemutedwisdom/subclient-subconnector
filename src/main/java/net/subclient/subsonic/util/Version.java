@@ -21,13 +21,12 @@
 
 package net.subclient.subsonic.util;
 
-
-
 /**
  * Generates an object to handle a version
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public class Version {
+public class Version implements Comparable<Version> {
 		
 	/** Major number of this version */
 	private int majorNumber;
@@ -84,30 +83,24 @@ public class Version {
 		return this.revisionNumber;
 	}
 	
-	/**
-	 * Compares this Version with another Version, returning 1 if this Version is greater than provided one and -1 otherwise. 0 is returned if both Versions are equal.
-	 * @param version Version object to be compared with this Version
-	 * @return 1 if this Version is greater than provided one and -1 otherwise. 0 is returned if both Versions are equal.
-	 * @throws IllegalArgumentException If provided version is null
-	 */
+	@Override
 	public int compareTo(Version version) throws IllegalArgumentException {
-        if (version == null) {
+        if (version == null)
             throw new IllegalArgumentException();
-        }
         
-        if (this.majorNumber > version.getMajorNumber()) {
+        if (this.majorNumber > version.getMajorNumber())
             return 1;
-        } else if (this.majorNumber < version.getMajorNumber()) {
+        else if (this.majorNumber < version.getMajorNumber())
             return -1;
-        } else if (this.minorNumber > version.getMinorNumber()) {
+        else if (this.minorNumber > version.getMinorNumber())
             return 1;
-        } else if (this.minorNumber < version.getMinorNumber()) {
+        else if (this.minorNumber < version.getMinorNumber())
             return -1;
-        } else if (this.revisionNumber > version.getRevisionNumber()) {
+        else if (this.revisionNumber > version.getRevisionNumber())
             return 1;
-        } else if (this.revisionNumber < version.getRevisionNumber()) {
+        else if (this.revisionNumber < version.getRevisionNumber())
             return -1;
-        } else return 0;
+        else return 0;
     }
 	
 	/**
