@@ -24,6 +24,7 @@ package net.subclient.subsonic.exceptions;
 /**
  * Exception thrown whenever a Subsonic API call produces an error
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class SubsonicException extends Exception {
 	

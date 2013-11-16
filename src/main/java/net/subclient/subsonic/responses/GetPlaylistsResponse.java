@@ -24,9 +24,10 @@ package net.subclient.subsonic.responses;
 import net.subclient.subsonic.mappings.Playlists;
 
 /**
- * Object returned on {@link net.subclient.subsonic.SubsonicConnection#getPlaylists() getPlaylists} calls
+ * Object returned on {@link net.subclient.subsonic.Connection#getPlaylists() getPlaylists} calls
+ * @see net.subclient.subsonic.Connection
  * @author Alejandro Celaya Alastrué
- * @see net.subclient.subsonic.SubsonicConnection
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class GetPlaylistsResponse extends SubsonicResponse {
 	

@@ -62,7 +62,7 @@ import com.google.gson.GsonBuilder;
 /**
  * Includes static factory methods to create Gson objects
  * @author Alejandro Celaya Alastrué
- *
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class GsonFactory {
 	

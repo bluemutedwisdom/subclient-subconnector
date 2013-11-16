@@ -24,9 +24,10 @@ package net.subclient.subsonic.responses;
 import net.subclient.subsonic.mappings.ChannelInfo;
 
 /**
- * Object returned on {@link net.subclient.subsonic.SubsonicConnection#getPodcastEpisodes(String) getPodcastEpisodes} calls
+ * Object returned on {@link net.subclient.subsonic.Connection#getPodcastEpisodes(String) getPodcastEpisodes} calls
+ * @see net.subclient.subsonic.Connection
  * @author Alejandro Celaya Alastrué
- * @see net.subclient.subsonic.SubsonicConnection
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class GetPodcastResponse extends SubsonicResponse {
 	

@@ -31,6 +31,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Java representation of the "channel" JSON object.
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class ChannelInfo extends FolderInfo implements Cloneable {
 	

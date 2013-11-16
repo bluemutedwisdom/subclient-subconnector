@@ -24,6 +24,7 @@ package net.subclient.subsonic.exceptions;
 /**
  * Exception thrown when a user tries to call a method that is not compatible with the current server
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class CompatibilityException extends Exception {
 

@@ -24,9 +24,10 @@ package net.subclient.subsonic.responses;
 import net.subclient.subsonic.mappings.Indexes;
 
 /**
- * Object returned on {@link net.subclient.subsonic.SubsonicConnection#getIndexes() getIndexes} calls
+ * Object returned on {@link net.subclient.subsonic.Connection#getIndexes() getIndexes} calls
+ * @see net.subclient.subsonic.Connection
  * @author Alejandro Celaya Alastrué
- * @see net.subclient.subsonic.SubsonicConnection
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class GetIndexesResponse extends SubsonicResponse {
 	

@@ -68,6 +68,7 @@ import com.google.gson.JsonParseException;
  * </ul>
  * This class takes the single child, creates an array and returns an array with that child in those cases.
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class SearchResponseDeserializer implements JsonDeserializer<SearchResponse> {
 	

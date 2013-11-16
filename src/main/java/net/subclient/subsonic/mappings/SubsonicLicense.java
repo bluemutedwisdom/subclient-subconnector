@@ -26,6 +26,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Java representation of the Subsonic license JSON Object
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class SubsonicLicense {
 	

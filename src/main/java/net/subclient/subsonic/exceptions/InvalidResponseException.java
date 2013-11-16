@@ -24,6 +24,7 @@ package net.subclient.subsonic.exceptions;
 /**
  * Exception thrown whenever a Subsonic returns an invalid content type or a non parseable response
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class InvalidResponseException extends Exception {
 

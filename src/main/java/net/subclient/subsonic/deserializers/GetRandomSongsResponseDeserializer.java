@@ -23,9 +23,7 @@ package net.subclient.subsonic.deserializers;
 
 import java.lang.reflect.Type;
 
-import net.subclient.subsonic.mappings.MusicFolders;
 import net.subclient.subsonic.mappings.RandomSongs;
-import net.subclient.subsonic.responses.GetMusicFoldersResponse;
 import net.subclient.subsonic.responses.GetRandomSongsResponse;
 
 import com.google.gson.Gson;
@@ -60,6 +58,7 @@ import com.google.gson.JsonParseException;
  * </ul>
  * This class takes the empty string, creates an object and returns it.
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class GetRandomSongsResponseDeserializer implements JsonDeserializer<GetRandomSongsResponse> {
 	

@@ -25,10 +25,11 @@ import net.subclient.subsonic.util.Version;
 
 /**
  * Subsonic base class for the Subsonic API call responses
+ * @see net.subclient.subsonic.Connection
  * @author Alejandro Celaya Alastrué
- * @see net.subclient.subsonic.SubsonicConnection
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public class SubsonicResponse implements ResponseInterface {
+public class SubsonicResponse implements Response {
 	
 	/** Status returned on any successfull response */
 	public static final String STATUS_OK 		= "ok";
@@ -48,9 +49,11 @@ public class SubsonicResponse implements ResponseInterface {
 		this.version	= "1.0.0";
 	}
 	
+	@Override
 	public String getStatus() {
 		return this.status;
 	}
+	@Override
 	public Version getVersion() {
 		try {			
 			return Version.parseVersion(this.version);
@@ -59,14 +62,17 @@ public class SubsonicResponse implements ResponseInterface {
 		}
 	}
 	
+	@Override
 	public SubsonicResponse setStatus(String status) {
 		this.status = status;
 		return this;
 	}
+	@Override
 	public SubsonicResponse setVersion(String version) {
 		this.version = version;
 		return this;
 	}
+	@Override
 	public SubsonicResponse setVersion(Version version) {
 		this.version = version.toString(true);
 		return this;

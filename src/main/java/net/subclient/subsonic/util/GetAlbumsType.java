@@ -2,8 +2,9 @@ package net.subclient.subsonic.util;
 
 
 /**
- * Valid types for {@link net.subclient.subsonic.SubsonicConnection#getAlbumsList(GetAlbumsType) getAlbumsList} method in {@link net.subclient.subsonic.SubsonicConnection SubsonicConnection} class
+ * Valid types for {@link net.subclient.subsonic.Connection#getAlbumsList(GetAlbumsType) getAlbumsList} method in {@link net.subclient.subsonic.Connection Connection} class
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public enum GetAlbumsType {
 	
@@ -27,6 +28,7 @@ public enum GetAlbumsType {
 		return this.minVersion;
 	}
 	
+	@Override
 	public String toString() {
 		return this.type;
 	}

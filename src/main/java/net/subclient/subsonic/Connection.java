@@ -51,6 +51,7 @@ import com.google.gson.JsonSyntaxException;
 /**
  * Connection interface defining all the methods needed in the Subsonic connection
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public interface Connection {
 	
