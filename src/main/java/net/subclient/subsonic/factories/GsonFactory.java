@@ -86,7 +86,7 @@ public class GsonFactory {
 	
 	/**
 	 * Constructs a GsonBuilder object that includes all deserialization strategies
-	 * @return
+	 * @return A GsonBuilder wich will be used to create a Gson deserializer
 	 */
 	private static GsonBuilder getBuilder() {
 		return new GsonBuilder().registerTypeHierarchyAdapter(GetMusicFoldersResponse.class	, new GetMusicFoldersResponseDeserializer())
