@@ -24,9 +24,10 @@ package net.subclient.subsonic.responses;
 import net.subclient.subsonic.mappings.RandomSongs;
 
 /**
- * Object returned on {@link net.subclient.subsonic.SubsonicConnection#getRandomSongs() getRandomSongs} calls
+ * Object returned on {@link net.subclient.subsonic.Connection#getRandomSongs() getRandomSongs} calls
+ * @see net.subclient.subsonic.Connection
  * @author Alejandro Celaya Alastrué
- * @see net.subclient.subsonic.SubsonicConnection
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class GetRandomSongsResponse extends SubsonicResponse {
 	

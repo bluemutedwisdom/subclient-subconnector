@@ -21,14 +21,15 @@
 
 package net.subclient.subsonic.responses;
 
-import com.google.gson.annotations.SerializedName;
-
 import net.subclient.subsonic.mappings.SearchResult;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
- * Object returned on {@link net.subclient.subsonic.SubsonicConnection#search(String) search} calls
+ * Object returned on {@link net.subclient.subsonic.Connection#search(String) search} calls
+ * @see net.subclient.subsonic.Connection
  * @author Alejandro Celaya Alastrué
- * @see net.subclient.subsonic.SubsonicConnection
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class SearchResponse extends SubsonicResponse {
 	

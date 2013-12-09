@@ -24,6 +24,7 @@ package net.subclient.subsonic.util;
 /**
  * Steroes an album rating
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class AlbumRating {
     

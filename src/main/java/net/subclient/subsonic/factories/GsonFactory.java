@@ -62,7 +62,7 @@ import com.google.gson.GsonBuilder;
 /**
  * Includes static factory methods to create Gson objects
  * @author Alejandro Celaya Alastrué
- *
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class GsonFactory {
 	
@@ -86,7 +86,7 @@ public class GsonFactory {
 	
 	/**
 	 * Constructs a GsonBuilder object that includes all deserialization strategies
-	 * @return
+	 * @return A GsonBuilder wich will be used to create a Gson deserializer
 	 */
 	private static GsonBuilder getBuilder() {
 		return new GsonBuilder().registerTypeHierarchyAdapter(GetMusicFoldersResponse.class	, new GetMusicFoldersResponseDeserializer())

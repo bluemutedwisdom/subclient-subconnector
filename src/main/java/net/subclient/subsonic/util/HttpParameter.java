@@ -25,6 +25,7 @@ package net.subclient.subsonic.util;
  * Creates a key-value pair whose string representation is key=value.
  * It is used on HTTP connections to store those connections parameters
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class HttpParameter {
     

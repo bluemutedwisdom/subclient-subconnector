@@ -24,6 +24,7 @@ package net.subclient.subsonic.mappings;
 /**
  * 
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class PodcastInfo extends ChildInfo {
 	

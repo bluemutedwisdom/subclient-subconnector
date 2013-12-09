@@ -25,15 +25,15 @@ import net.subclient.subsonic.util.Version;
 
 /**
  * Base response interface
- * @author Alejandro
- *
+ * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public interface ResponseInterface {
+public interface Response {
 	
 	public String getStatus();
-	public Version getVersion();
-	
 	public SubsonicResponse setStatus(String status);
+	
+	public Version getVersion();
 	public SubsonicResponse setVersion(String version);
 	public SubsonicResponse setVersion(Version version);
 	

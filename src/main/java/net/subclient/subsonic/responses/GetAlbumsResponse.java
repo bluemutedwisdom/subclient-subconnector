@@ -24,9 +24,10 @@ package net.subclient.subsonic.responses;
 import net.subclient.subsonic.mappings.Albums;
 
 /**
- * Object returned on {@link net.subclient.subsonic.SubsonicConnection#getAlbumsList(net.subclient.subsonic.util.GetAlbumsType) getAlbumsList} calls
+ * Object returned on {@link net.subclient.subsonic.Connection#getAlbumsList(net.subclient.subsonic.util.GetAlbumsType) getAlbumsList} calls
+ * @see net.subclient.subsonic.Connection
  * @author Alejandro Celaya Alastrué
- * @see net.subclient.subsonic.SubsonicConnection
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class GetAlbumsResponse extends SubsonicResponse {
 	

@@ -24,6 +24,7 @@ package net.subclient.subsonic.mappings;
 /**
  * Java representation of a child JSON object
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class ChildInfo extends FolderInfo implements Cloneable {
 	

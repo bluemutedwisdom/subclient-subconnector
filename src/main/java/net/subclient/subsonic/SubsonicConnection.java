@@ -77,6 +77,7 @@ import com.google.gson.JsonSyntaxException;
 /**
  * Connection interface between a Java application and Subsonic API
  * @author Alejandro Celaya Alastrué
+ * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
 public class SubsonicConnection implements Connection {
 	
