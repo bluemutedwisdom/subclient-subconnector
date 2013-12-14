@@ -189,7 +189,7 @@ public class SubsonicConnection implements Connection {
         this.isSSL = (urlObj.getProtocol().equalsIgnoreCase("https")) ? true : false;
         if(this.isSSL) this.setSSLProperties();
         
-        //Initialize API versión environement
+        //Initialize API version environement
         Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
