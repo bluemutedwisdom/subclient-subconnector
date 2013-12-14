@@ -93,6 +93,6 @@ For a complete Subconnector API reference, please refer to [Subconnector javadoc
 Unit testing
 ----------------------
 
-This library includes all unit tests of its own in `src/tes/java`.
+This library includes all unit tests of its own in `src/test/java`.
 
 Also, the main `SubsonicConnection` object is designed to be mocked too, by implementing a `Connection` interface.
