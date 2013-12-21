@@ -21,25 +21,25 @@ Usage
 The main object is the `Connection` object. It allows you to preconfigure the connection against the Subsonic server that will be used on each HTTP request.
 
 ```java
-    try {
-        URL url = new URL("http://myserver.com:4040");
-        // By default, the password is expected to be hex-encoded.
-        Connection connection = new SubsonicConnection(url, "username", "70617373776F7264");
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+try {
+    URL url = new URL("http://myserver.com:4040");
+    // By default, the password is expected to be hex-encoded.
+    Connection connection = new SubsonicConnection(url, "username", "70617373776F7264");
+} catch (Exception e) {
+    e.printStackTrace();
+}
 ```
 
 To provide a plain-text password, a fourth param has to be specified, telling the password is not hex-encoded.
 
 ```java
-    Connection connection = new SubsonicConnection(url, "username", "password", true);
+Connection connection = new SubsonicConnection(url, "username", "password", true);
 ```
 
 Also, a client identifier can be provided to let Subsonic server properly track connections. It is **Subclient** by default.
 
 ```java
-    Connection connection = new SubsonicConnection(url, "username", "70617373776F7264", "MyAppName");
+Connection connection = new SubsonicConnection(url, "username", "70617373776F7264", "MyAppName");
 ```
 
 `Connection` interface maps all supported Subsonic API methods to Java methods and results are returned as Java objects.
@@ -47,19 +47,19 @@ Also, a client identifier can be provided to let Subsonic server properly track 
 For example, we could retrieve the list of music directories in the server like this.
 
 ```java
-    try {
-        URL url = new URL("http://myserver.com:4040");
-        Connection connection = new SubsonicConnection(url, "username", "70617373776F7264");
-        
-        GetMusicFoldersResponse response = connection.getMusicFolders();
-        // This response object contains a list of FolderInfo objects, each one of them wraps the name and the ID of one of the folders
-        for (FolderInfo folder : response.getMusicFolders().getMusicFoldersArray()) {
-            System.out.println(folder.getId());     // This is the ID of the folder
-            System.out.println(folder.getName());   // This is the name of the folder
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
+try {
+    URL url = new URL("http://myserver.com:4040");
+    Connection connection = new SubsonicConnection(url, "username", "70617373776F7264");
+    
+    GetMusicFoldersResponse response = connection.getMusicFolders();
+    // This response object contains a list of FolderInfo objects, each one of them wraps the name and the ID of one of the folders
+    for (FolderInfo folder : response.getMusicFolders().getMusicFoldersArray()) {
+        System.out.println(folder.getId());     // This is the ID of the folder
+        System.out.println(folder.getName());   // This is the name of the folder
     }
+} catch (Exception e) {
+    e.printStackTrace();
+}
 ```
 
 Almost all methods defined in `Connection` interface return a response object, either a `SubsonicResponse` object or an object extending `SusbonicResponse`.
@@ -71,19 +71,19 @@ If an error occurs while performing the request, an exception is thrown. Each me
 In the previous example this could be done.
 
 ```java
-    try {
-        URL url = new URL("http://myserver.com:4040");
-        Connection connection = new SubsonicConnection(url, "username", "70617373776F7264");        
-        GetMusicFoldersResponse response = connection.getMusicFolders();
-        
-        // If everything went ok we could get response information at this point.
-        System.out.println(String.format("The server version is %s", response.getVersion()));
-    } catch (SubsonicException e) {
-        // The exception contains the error message returned by the Subsonic server
-        System.err.println(String.format("Request failed with message %s", e.getMessage()));
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+try {
+    URL url = new URL("http://myserver.com:4040");
+    Connection connection = new SubsonicConnection(url, "username", "70617373776F7264");        
+    GetMusicFoldersResponse response = connection.getMusicFolders();
+    
+    // If everything went ok we could get response information at this point.
+    System.out.println(String.format("The server version is %s", response.getVersion()));
+} catch (SubsonicException e) {
+    // The exception contains the error message returned by the Subsonic server
+    System.err.println(String.format("Request failed with message %s", e.getMessage()));
+} catch (Exception e) {
+    e.printStackTrace();
+}
 ```
 
 Subconnector now supports almost any methods for a basic functionality with music folders, podcasts and playlists, as well as item searches.
