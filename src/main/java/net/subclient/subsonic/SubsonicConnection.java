@@ -650,12 +650,10 @@ public class SubsonicConnection implements Connection {
     @Override
 	public String getStreamURL(String uniqueId, int maxBitRate) {
     	Version methodApiVersion = new Version(1, 0, 0);
-        String version = "&v=" + methodApiVersion.toString(true);
-        String urlPath = this.serverURL.toString() + STREAM;
-        String params = this.parametersString + version + "&id=" + uniqueId + "&maxBitRate=" + String.valueOf(maxBitRate);
-        String finalUrl = urlPath + "?" + params;
+        String urlPath 	= this.serverURL.toString() + STREAM;
+        String params 	= String.format("%s&v=%s&id=%s&maxBitRate=%s", this.parametersString, methodApiVersion.toString(true), uniqueId, maxBitRate);
         
-        return finalUrl;
+        return String.format("%s?%s", urlPath, params);
     }
     
     @Override

@@ -113,6 +113,14 @@
     </target>
 	
 	<!-- Run unit tests -->
+	<target name="net.subclient.subsonic-test">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="net.subclient.subsonic.SubsonicConnectionTest" todir="${junit.output.dir}"/>
+            <classpath refid="Subconnector.classpath"/>
+        </junit>
+    </target>
 	<target name="net.subclient.subsonic.responses-test">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
@@ -151,7 +159,7 @@
     </target>
 	
 	<!-- Upload to sourceforge last package and README -->
-	<target name="deploy" depends="compile-tests, net.subclient.subsonic.responses-test, net.subclient.subsonic.util-test, junitreport">
+	<target name="deploy" depends="compile-tests, net.subclient.subsonic-test, net.subclient.subsonic.responses-test, net.subclient.subsonic.util-test, junitreport">
 	    <scp sftp="true" todir="${sftp.user}:${sftp.pass}@${sftp.host}:${sftp.output.dir}" file="deploy/subclient-subconnector-${version}.zip" trust="true" verbose="true">
 	    	<fileset dir="deploy" includes="subclient-subconnector-${version}.zip,README" />
 	    </scp>
