@@ -82,24 +82,24 @@ import com.google.gson.JsonSyntaxException;
 public class SubsonicConnection implements Connection {
 	
 	/* Supported Subsonic API functions */
-	private static final String REST_PREFIX			= "/rest/";
-	private static final String PING 				= REST_PREFIX + "ping.view";
-	private static final String GET_LICENSE 		= REST_PREFIX + "getLicense.view";
-	private static final String GET_MUSIC_FOLDERS 	= REST_PREFIX + "getMusicFolders.view";
-	private static final String GET_INDEXES 		= REST_PREFIX + "getIndexes.view";
-	private static final String GET_MUSIC_DIRECTORY	= REST_PREFIX + "getMusicDirectory.view";
-	private static final String SEARCH_2			= REST_PREFIX + "search2.view";
-	private static final String GET_PLAYLISTS 		= REST_PREFIX + "getPlaylists.view";
-	private static final String GET_PLAYLIST 		= REST_PREFIX + "getPlaylist.view";
-	private static final String CREATE_PLAYLIST 	= REST_PREFIX + "createPlaylist.view";
-	private static final String DELETE_PLAYLIST 	= REST_PREFIX + "deletePlaylist.view";
-	private static final String DOWNLOAD 			= REST_PREFIX + "download.view";
-	private static final String STREAM 				= REST_PREFIX + "stream.view";
-	private static final String GET_COVER_ART 		= REST_PREFIX + "getCoverArt.view";
-	private static final String GET_ALBUM_LIST 		= REST_PREFIX + "getAlbumList.view";
-	private static final String GET_RANDOM_SONGS	= REST_PREFIX + "getRandomSongs.view";
-	private static final String GET_PODCASTS 		= REST_PREFIX + "getPodcasts.view";
-	private static final String SET_RATING 			= REST_PREFIX + "setRating.view";
+	private static final String REST_PREFIX			= "/rest/%s";
+	private static final String PING 				= String.format(REST_PREFIX, "ping.view");
+	private static final String GET_LICENSE 		= String.format(REST_PREFIX, "getLicense.view");
+	private static final String GET_MUSIC_FOLDERS 	= String.format(REST_PREFIX, "getMusicFolders.view");
+	private static final String GET_INDEXES 		= String.format(REST_PREFIX, "getIndexes.view");
+	private static final String GET_MUSIC_DIRECTORY	= String.format(REST_PREFIX, "getMusicDirectory.view");
+	private static final String SEARCH_2			= String.format(REST_PREFIX, "search2.view");
+	private static final String GET_PLAYLISTS 		= String.format(REST_PREFIX, "getPlaylists.view");
+	private static final String GET_PLAYLIST 		= String.format(REST_PREFIX, "getPlaylist.view");
+	private static final String CREATE_PLAYLIST 	= String.format(REST_PREFIX, "createPlaylist.view");
+	private static final String DELETE_PLAYLIST 	= String.format(REST_PREFIX, "deletePlaylist.view");
+	private static final String DOWNLOAD 			= String.format(REST_PREFIX, "download.view");
+	private static final String STREAM 				= String.format(REST_PREFIX, "stream.view");
+	private static final String GET_COVER_ART 		= String.format(REST_PREFIX, "getCoverArt.view");
+	private static final String GET_ALBUM_LIST 		= String.format(REST_PREFIX, "getAlbumList.view");
+	private static final String GET_RANDOM_SONGS	= String.format(REST_PREFIX, "getRandomSongs.view");
+	private static final String GET_PODCASTS 		= String.format(REST_PREFIX, "getPodcasts.view");
+	private static final String SET_RATING 			= String.format(REST_PREFIX, "setRating.view");
 	
 	/** Identifier of the main JSON object in any Subsonic response */
     private static final String SUBSONIC_RESPONSE_IDENTIFIER = "subsonic-response";
@@ -168,18 +168,13 @@ public class SubsonicConnection implements Connection {
      */
     public SubsonicConnection(URL urlObj, String user, String pass, String clientIdentifier, boolean isPassEncoded) throws KeyManagementException, NoSuchAlgorithmException {
     	this.serverURL 				= urlObj;
-    	//Generate parameters string
-    	StringBuilder paramsBuilder = new StringBuilder();
     	HttpParameter userParam 	= new HttpParameter("u", user);
-    	HttpParameter passParam 	= new HttpParameter("p", pass);
+    	HttpParameter passParam 	= new HttpParameter("p", (!isPassEncoded) ? pass : String.format("enc:%s", pass));
     	HttpParameter clientParam	= new HttpParameter("c", clientIdentifier);
     	HttpParameter jsonParam 	= new HttpParameter("f", "json");
-    	if(isPassEncoded) passParam.setValue("enc:" + passParam.getValue());
-    	paramsBuilder.append(userParam.toString() + "&")
-    				 .append(passParam.toString() + "&")
-    				 .append(clientParam.toString() + "&")
-    				 .append(jsonParam.toString());
-    	this.parametersString		= paramsBuilder.toString();
+    	
+    	//Generate parameters string
+    	this.parametersString = String.format("%s&%s&%s&%s", userParam.toString(), passParam.toString(), clientParam.toString(), jsonParam.toString());
     	
     	//Define JSON object handlers
     	this.gson	= GsonFactory.createDeserializer();
@@ -187,13 +182,13 @@ public class SubsonicConnection implements Connection {
         
         //If URL uses HTTPS protocol then SSL is assumed
         this.isSSL = (urlObj.getProtocol().equalsIgnoreCase("https")) ? true : false;
-        if(this.isSSL) this.setSSLProperties();
+        if (this.isSSL) this.setSSLProperties();
         
         //Initialize API version environement
         Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				SubsonicConnection.this.initApiVersion();
+				initApiVersion();
 			}
         });
         thread.start();
@@ -267,7 +262,7 @@ public class SubsonicConnection implements Connection {
         //Add parameters to be sent
         OutputStreamWriter connOut = new OutputStreamWriter(conn.getOutputStream());
         StringBuilder auxParams = new StringBuilder(this.parametersString);
-        for(HttpParameter parameter : parameters) auxParams.append("&" + parameter.toString());
+        for (HttpParameter parameter : parameters) auxParams.append(String.format("&%s", parameter.toString()));
         //Send parameters to outer connection
         connOut.write(auxParams.toString());
         connOut.flush();
