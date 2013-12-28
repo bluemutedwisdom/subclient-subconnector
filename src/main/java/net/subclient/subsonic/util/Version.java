@@ -118,19 +118,19 @@ public class Version implements Comparable<Version> {
 		
 		try {
 			//Parse version parts to int
-			if(parts.length == 1)
+			if (parts.length == 1)
 				majorNumber 	= Integer.parseInt(parts[0]);
-			else if(parts.length == 2) {
+			else if (parts.length == 2) {
 				majorNumber 	= Integer.parseInt(parts[0]);
 				minorNumber 	= Integer.parseInt(parts[1]);
-			} else if(parts.length == 3) {
+			} else if (parts.length == 3) {
 				majorNumber 	= Integer.parseInt(parts[0]);
 				minorNumber 	= Integer.parseInt(parts[1]);
 				revisionNumber	= Integer.parseInt(parts[2]);
 			} else throw new IllegalArgumentException();
 			
 			return new Version(majorNumber, minorNumber, revisionNumber);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw new IllegalArgumentException();
 		}
 	}
@@ -149,10 +149,8 @@ public class Version implements Comparable<Version> {
 	 * @return String representation of this Version
 	 */
 	public String toString(boolean printComplete) {
-		String versionToShow = String.valueOf(this.majorNumber) + "." + String.valueOf(this.minorNumber); 
-		if(this.revisionNumber > 0 || printComplete)
-			versionToShow += "." + String.valueOf(this.revisionNumber);
-		
-		return versionToShow;
+		return (this.revisionNumber > 0 || printComplete) 											?
+				String.format("%s.%s.%s", this.majorNumber, this.minorNumber, this.revisionNumber)	:
+				String.format("%s.%s", this.majorNumber, this.minorNumber);
 	}
 }

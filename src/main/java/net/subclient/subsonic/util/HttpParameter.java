@@ -75,6 +75,6 @@ public class HttpParameter {
     
     @Override
     public String toString() {
-        return this.key + "=" + this.value;
+        return String.format("%s=%s", this.key, this.value);
     }
 }

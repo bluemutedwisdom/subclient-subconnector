@@ -1,3 +1,31 @@
+/*
+ 
+ This file is part of Subconnector.
+ import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.io.IOException;
+import java.net.URLDecoder;
+
+import net.subclient.subsonic.deserializers.GetPodcastsResponseDeserializer;
+import net.subclient.subsonic.mappings.ChannelInfo;
+import net.subclient.subsonic.util.FileUtils;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+LITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with Subconnector. If not, see <http://www.gnu.org/licenses/>.
+ 
+ Copyright 2012, 2013 Alejandro Celaya Alastrué
+ 
+ */
+
 package net.subclient.subsonic.responses;
 
 import static org.junit.Assert.*;

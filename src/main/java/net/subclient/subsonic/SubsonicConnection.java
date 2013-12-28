@@ -82,24 +82,24 @@ import com.google.gson.JsonSyntaxException;
 public class SubsonicConnection implements Connection {
 	
 	/* Supported Subsonic API functions */
-	private static final String REST_PREFIX			= "/rest/";
-	private static final String PING 				= REST_PREFIX + "ping.view";
-	private static final String GET_LICENSE 		= REST_PREFIX + "getLicense.view";
-	private static final String GET_MUSIC_FOLDERS 	= REST_PREFIX + "getMusicFolders.view";
-	private static final String GET_INDEXES 		= REST_PREFIX + "getIndexes.view";
-	private static final String GET_MUSIC_DIRECTORY	= REST_PREFIX + "getMusicDirectory.view";
-	private static final String SEARCH_2			= REST_PREFIX + "search2.view";
-	private static final String GET_PLAYLISTS 		= REST_PREFIX + "getPlaylists.view";
-	private static final String GET_PLAYLIST 		= REST_PREFIX + "getPlaylist.view";
-	private static final String CREATE_PLAYLIST 	= REST_PREFIX + "createPlaylist.view";
-	private static final String DELETE_PLAYLIST 	= REST_PREFIX + "deletePlaylist.view";
-	private static final String DOWNLOAD 			= REST_PREFIX + "download.view";
-	private static final String STREAM 				= REST_PREFIX + "stream.view";
-	private static final String GET_COVER_ART 		= REST_PREFIX + "getCoverArt.view";
-	private static final String GET_ALBUM_LIST 		= REST_PREFIX + "getAlbumList.view";
-	private static final String GET_RANDOM_SONGS	= REST_PREFIX + "getRandomSongs.view";
-	private static final String GET_PODCASTS 		= REST_PREFIX + "getPodcasts.view";
-	private static final String SET_RATING 			= REST_PREFIX + "setRating.view";
+	private static final String REST_PREFIX			= "/rest/%s";
+	private static final String PING 				= String.format(REST_PREFIX, "ping.view");
+	private static final String GET_LICENSE 		= String.format(REST_PREFIX, "getLicense.view");
+	private static final String GET_MUSIC_FOLDERS 	= String.format(REST_PREFIX, "getMusicFolders.view");
+	private static final String GET_INDEXES 		= String.format(REST_PREFIX, "getIndexes.view");
+	private static final String GET_MUSIC_DIRECTORY	= String.format(REST_PREFIX, "getMusicDirectory.view");
+	private static final String SEARCH_2			= String.format(REST_PREFIX, "search2.view");
+	private static final String GET_PLAYLISTS 		= String.format(REST_PREFIX, "getPlaylists.view");
+	private static final String GET_PLAYLIST 		= String.format(REST_PREFIX, "getPlaylist.view");
+	private static final String CREATE_PLAYLIST 	= String.format(REST_PREFIX, "createPlaylist.view");
+	private static final String DELETE_PLAYLIST 	= String.format(REST_PREFIX, "deletePlaylist.view");
+	private static final String DOWNLOAD 			= String.format(REST_PREFIX, "download.view");
+	private static final String STREAM 				= String.format(REST_PREFIX, "stream.view");
+	private static final String GET_COVER_ART 		= String.format(REST_PREFIX, "getCoverArt.view");
+	private static final String GET_ALBUM_LIST 		= String.format(REST_PREFIX, "getAlbumList.view");
+	private static final String GET_RANDOM_SONGS	= String.format(REST_PREFIX, "getRandomSongs.view");
+	private static final String GET_PODCASTS 		= String.format(REST_PREFIX, "getPodcasts.view");
+	private static final String SET_RATING 			= String.format(REST_PREFIX, "setRating.view");
 	
 	/** Identifier of the main JSON object in any Subsonic response */
     private static final String SUBSONIC_RESPONSE_IDENTIFIER = "subsonic-response";
@@ -168,18 +168,13 @@ public class SubsonicConnection implements Connection {
      */
     public SubsonicConnection(URL urlObj, String user, String pass, String clientIdentifier, boolean isPassEncoded) throws KeyManagementException, NoSuchAlgorithmException {
     	this.serverURL 				= urlObj;
-    	//Generate parameters string
-    	StringBuilder paramsBuilder = new StringBuilder();
     	HttpParameter userParam 	= new HttpParameter("u", user);
-    	HttpParameter passParam 	= new HttpParameter("p", pass);
+    	HttpParameter passParam 	= new HttpParameter("p", (!isPassEncoded) ? pass : String.format("enc:%s", pass));
     	HttpParameter clientParam	= new HttpParameter("c", clientIdentifier);
     	HttpParameter jsonParam 	= new HttpParameter("f", "json");
-    	if(isPassEncoded) passParam.setValue("enc:" + passParam.getValue());
-    	paramsBuilder.append(userParam.toString() + "&")
-    				 .append(passParam.toString() + "&")
-    				 .append(clientParam.toString() + "&")
-    				 .append(jsonParam.toString());
-    	this.parametersString		= paramsBuilder.toString();
+    	
+    	//Generate parameters string
+    	this.parametersString = String.format("%s&%s&%s&%s", userParam.toString(), passParam.toString(), clientParam.toString(), jsonParam.toString());
     	
     	//Define JSON object handlers
     	this.gson	= GsonFactory.createDeserializer();
@@ -187,13 +182,13 @@ public class SubsonicConnection implements Connection {
         
         //If URL uses HTTPS protocol then SSL is assumed
         this.isSSL = (urlObj.getProtocol().equalsIgnoreCase("https")) ? true : false;
-        if(this.isSSL) this.setSSLProperties();
+        if (this.isSSL) this.setSSLProperties();
         
         //Initialize API version environement
         Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				SubsonicConnection.this.initApiVersion();
+				initApiVersion();
 			}
         });
         thread.start();
@@ -267,16 +262,16 @@ public class SubsonicConnection implements Connection {
         //Add parameters to be sent
         OutputStreamWriter connOut = new OutputStreamWriter(conn.getOutputStream());
         StringBuilder auxParams = new StringBuilder(this.parametersString);
-        for(HttpParameter parameter : parameters) auxParams.append("&" + parameter.toString());
+        for (HttpParameter parameter : parameters) auxParams.append(String.format("&%s", parameter.toString()));
         //Send parameters to outer connection
         connOut.write(auxParams.toString());
         connOut.flush();
         connOut.close();
         
         //Check the response code is 200
-        if(conn.getResponseCode() != HttpURLConnection.HTTP_OK) throw new HTTPException(conn.getResponseCode());
+        if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) throw new HTTPException(conn.getResponseCode());
         //Check the content type is application/json
-        if(isJson && conn.getContentType().indexOf(JSON_CONTENT_TYPE) == -1) throw new InvalidResponseException(conn.getContentType());
+        if (isJson && conn.getContentType().indexOf(JSON_CONTENT_TYPE) == -1) throw new InvalidResponseException(conn.getContentType());
         
         //Return the connection InputStream
         return conn.getInputStream();
@@ -302,7 +297,7 @@ public class SubsonicConnection implements Connection {
         
         //Parse Subsonic string response to its corresponding Java Object and check if an error occured
         response = this.gson.fromJson(responseElement, responseClass);
-        if(response.getStatus().equalsIgnoreCase(SubsonicResponse.STATUS_FAILED)) {
+        if (response.getStatus().equalsIgnoreCase(SubsonicResponse.STATUS_FAILED)) {
         	int code = responseElement.getAsJsonObject().get("error").getAsJsonObject().get("code").getAsInt();
         	String message = responseElement.getAsJsonObject().get("error").getAsJsonObject().get("message").getAsString();
         	throw new SubsonicException(code, message);
@@ -405,7 +400,7 @@ public class SubsonicConnection implements Connection {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
         parameters.add(new HttpParameter("ifModifiedSince", Long.toString(modifiedSince)));
-        if(!musicFolderId.equals("-1")) parameters.add(new HttpParameter("musicFolderId", musicFolderId));
+        if (!musicFolderId.equals("-1")) parameters.add(new HttpParameter("musicFolderId", musicFolderId));
         return this.parseResponse(this.connect(GET_INDEXES, parameters), GetIndexesResponse.class);
     }
     
@@ -433,14 +428,14 @@ public class SubsonicConnection implements Connection {
 	public SearchResponse search(String query, int count, int offset) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	Version methodApiVersion = new Version(1, 4, 0);
     	//Check compatibility
-        if(!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
+        if (!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
         //Send request and return response
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
         parameters.add(new HttpParameter("query", query));
-        if(count > 0) {
+        if (count > 0) {
             parameters.add(new HttpParameter("artistCount"	, String.valueOf(count)));
             parameters.add(new HttpParameter("artistOffset"	, String.valueOf(offset)));
             parameters.add(new HttpParameter("albumCount"	, String.valueOf(count)));
@@ -479,7 +474,7 @@ public class SubsonicConnection implements Connection {
     {
     	Version methodApiVersion = new Version(1, 2, 0);
     	//Check compatibility
-        if(!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
+        if (!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
     	//Send request and return response
@@ -496,7 +491,7 @@ public class SubsonicConnection implements Connection {
 	public SubsonicResponse deletePlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	Version methodApiVersion = new Version(1, 2, 0);
     	//Check compatibility
-        if(!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
+        if (!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
         //Send request and return response
@@ -520,8 +515,8 @@ public class SubsonicConnection implements Connection {
     {
     	Version methodApiVersion = new Version(1, 2, 0);
     	//Check method compatibility and parameters compatibility
-        if(!this.isCompatible(methodApiVersion)) 		throw new CompatibilityException();
-        if(!this.isCompatible(type.getMinVersion()))	throw new CompatibilityException();
+        if (!this.isCompatible(methodApiVersion)) 		throw new CompatibilityException();
+        if (!this.isCompatible(type.getMinVersion()))	throw new CompatibilityException();
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
     	
         //Send request and return response
@@ -551,14 +546,14 @@ public class SubsonicConnection implements Connection {
     {
     	Version methodApiVersion = new Version(1, 2, 0);
     	//Check compatibility
-        if(!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
+        if (!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
     	
     	//Send request and return response
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
         parameters.add(new HttpParameter("size", String.valueOf(size)));
-        if(!folderId.equals("-1"))
+        if (!folderId.equals("-1"))
         	parameters.add(new HttpParameter("musicFolderId", folderId));
         return this.parseResponse(this.connect(GET_RANDOM_SONGS, parameters), GetRandomSongsResponse.class);
     }
@@ -569,7 +564,7 @@ public class SubsonicConnection implements Connection {
     {
     	Version methodApiVersion = new Version(1, 6, 0);
     	//Check compatibility
-        if(!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
+        if (!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
         //Send request and return response
@@ -588,7 +583,7 @@ public class SubsonicConnection implements Connection {
         
     	//Fetch the specified podcast in the podcasts array
     	for(ChannelInfo channel : podcastsResponse.getPodcasts().getChannelsArray()) {
-    		if(channel.getId().equals(podcastId)) {
+    		if (channel.getId().equals(podcastId)) {
     			podcastResponse.setChannel(channel)
     						   .setStatus(podcastsResponse.getStatus())
     						   .setVersion(podcastsResponse.getVersion());
@@ -603,7 +598,7 @@ public class SubsonicConnection implements Connection {
 	public SubsonicResponse setRating(AlbumRating rating) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	Version methodApiVersion = new Version(1, 6, 0);
     	//Check compatibility
-        if(!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
+        if (!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
     	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
         
         //Send request and return response
