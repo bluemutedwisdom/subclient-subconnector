@@ -69,8 +69,8 @@ public class AlbumRating {
      * @return Valid rating from 0 to 5
      */
     private int getValidRating(int rating) {
-        if(rating > 5) rating = 5;
-        else if(rating < 0) rating = 0;
+        if (rating > 5) rating = 5;
+        else if (rating < 0) rating = 0;
         return rating;
     }
 }
