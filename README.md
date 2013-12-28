@@ -88,7 +88,7 @@ try {
 
 Subconnector now supports almost any methods for a basic functionality with music folders, podcasts and playlists, as well as item searches.
 
-For a complete Subconnector API reference, please refer to [Subconnector javadoc](http://www.subclient.net/subconnector-javadoc)
+For a complete Subconnector API reference, please refer to the [Wiki](https://github.com/acelaya/subclient-subconnector/wiki) and the [javadoc](http://www.subclient.net/subconnector-javadoc)
 
 Unit testing
 ----------------------
