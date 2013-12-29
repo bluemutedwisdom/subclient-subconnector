@@ -24,6 +24,7 @@ package net.subclient.subsonic;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import javax.xml.ws.http.HTTPException;
@@ -355,6 +356,32 @@ public interface Connection {
      * @throws HTTPException If the server response code is other than 200
 	 */
 	public SubsonicResponse refreshPodcasts() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	
+	/**
+	 * Creates a new podcast channel defined by a URL
+	 * @param url The URL of the podcast as string
+	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
+	 * @throws SubsonicException If a Subsonic error occurs
+     * @throws IOException 
+     * @throws JsonSyntaxException 
+     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
+     * @throws CompatibilityException If this method is not compatible with the current server 
+     * @throws HTTPException If the server response code is other than 200
+	 */
+	public SubsonicResponse createPodcastChannel(String url) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	
+	/**
+	 * Creates a new podcast channel defined by a URL
+	 * @param url The URL of the podcast as java.net.URL object
+	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
+	 * @throws SubsonicException If a Subsonic error occurs
+     * @throws IOException 
+     * @throws JsonSyntaxException 
+     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
+     * @throws CompatibilityException If this method is not compatible with the current server 
+     * @throws HTTPException If the server response code is other than 200
+	 */
+	public SubsonicResponse createPodcastChannel(URL url) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
      * Sets an album rating
