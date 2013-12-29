@@ -81,7 +81,7 @@ import com.google.gson.JsonSyntaxException;
  */
 public class SubsonicConnection implements Connection {
 	
-	/* Supported Subsonic API functions */
+	/* Supported Subsonic API methods */
 	private static final String REST_PREFIX			= "/rest/%s";
 	private static final String PING 				= String.format(REST_PREFIX, "ping.view");
 	private static final String GET_LICENSE 		= String.format(REST_PREFIX, "getLicense.view");
@@ -101,6 +101,7 @@ public class SubsonicConnection implements Connection {
 	private static final String GET_PODCASTS 		= String.format(REST_PREFIX, "getPodcasts.view");
 	private static final String REFRESH_PODCASTS 	= String.format(REST_PREFIX, "refreshPodcasts.view");
 	private static final String CREATE_PODCAST 		= String.format(REST_PREFIX, "createPodcastChannel.view");
+	private static final String DELETE_PODCAST 		= String.format(REST_PREFIX, "deletePodcastChannel.view");
 	private static final String SET_RATING 			= String.format(REST_PREFIX, "setRating.view");
 	
 	/** Identifier of the main JSON object in any Subsonic response */
@@ -230,20 +231,20 @@ public class SubsonicConnection implements Connection {
 	}
     
     /**
-     * Performs a connection to the server executing specified function and passing provided parameters. It is assumed that JSON must be returned
-     * @param function One of the supported functions
+     * Performs a connection to the server executing specified method and passing provided parameters. It is assumed that JSON must be returned
+     * @param method One of the supported methods
      * @param parameters Parametters to be passed to server
      * @return InputStream corresponding the preformed HTTP connection
      * @throws IOException
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200
      */
-    private InputStream connect(String function, List<HttpParameter> parameters) throws IOException, InvalidResponseException, HTTPException {
-    	return this.connect(function, parameters, true);
+    private InputStream connect(String method, List<HttpParameter> parameters) throws IOException, InvalidResponseException, HTTPException {
+    	return this.connect(method, parameters, true);
     }
     /**
-     * Performs a connection to the server executing specified function and passing provided parameters.
-     * @param function One of the supported functions
+     * Performs a connection to the server executing specified method and passing provided parameters.
+     * @param method One of the supported methods
      * @param parameters Parametters to be passed to server
      * @param isJson Defines if JSON is expected. It won't on any method returning binary contents
      * @return InputStream corresponding the preformed HTTP connection
@@ -251,9 +252,9 @@ public class SubsonicConnection implements Connection {
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200
      */
-    private InputStream connect(String function, List<HttpParameter> parameters, boolean isJson) throws IOException, InvalidResponseException, HTTPException {
+    private InputStream connect(String method, List<HttpParameter> parameters, boolean isJson) throws IOException, InvalidResponseException, HTTPException {
     	//Generate URL object
-    	String urlPath = this.serverURL.toString() + function;
+    	String urlPath = this.serverURL.toString() + method;
         URL url = new URL(urlPath);
         
         //Open HTTP/HTTPS Connection
@@ -625,6 +626,19 @@ public class SubsonicConnection implements Connection {
         return this.parseResponse(this.connect(CREATE_PODCAST, parameters), SubsonicResponse.class);
 	}
     
+	@Override
+	public SubsonicResponse deletePodcastChannel(String channelId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+		Version methodApiVersion = new Version(1, 9, 0);
+		//Check compatibility
+        if (!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
+		
+        //Send request and return response
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
+    	parameters.add(new HttpParameter("v", methodApiVersion.toString(true)));
+    	parameters.add(new HttpParameter("id", channelId));
+    	return this.parseResponse(this.connect(DELETE_PODCAST, parameters), SubsonicResponse.class);
+	}
+	
     @Override
 	public SubsonicResponse setRating(AlbumRating rating) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	Version methodApiVersion = new Version(1, 6, 0);

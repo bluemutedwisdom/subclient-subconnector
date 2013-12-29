@@ -384,6 +384,19 @@ public interface Connection {
 	public SubsonicResponse createPodcastChannel(URL url) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
+	 * Deletes the podcast channel defined by its ID
+	 * @param channelId The ID of the podcast channel
+	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
+	 * @throws SubsonicException If a Subsonic error occurs
+     * @throws IOException 
+     * @throws JsonSyntaxException 
+     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
+     * @throws CompatibilityException If this method is not compatible with the current server 
+     * @throws HTTPException If the server response code is other than 200
+	 */
+	public SubsonicResponse deletePodcastChannel(String channelId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	
+	/**
      * Sets an album rating
      * @param rating AlbumRating object with the album id and the rating to be set to that album
      * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
