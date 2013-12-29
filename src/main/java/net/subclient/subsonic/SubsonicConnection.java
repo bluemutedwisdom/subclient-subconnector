@@ -99,6 +99,7 @@ public class SubsonicConnection implements Connection {
 	private static final String GET_ALBUM_LIST 		= String.format(REST_PREFIX, "getAlbumList.view");
 	private static final String GET_RANDOM_SONGS	= String.format(REST_PREFIX, "getRandomSongs.view");
 	private static final String GET_PODCASTS 		= String.format(REST_PREFIX, "getPodcasts.view");
+	private static final String REFRESH_PODCASTS 	= String.format(REST_PREFIX, "refreshPodcasts.view");
 	private static final String SET_RATING 			= String.format(REST_PREFIX, "setRating.view");
 	
 	/** Identifier of the main JSON object in any Subsonic response */
@@ -595,6 +596,18 @@ public class SubsonicConnection implements Connection {
     }
     
     @Override
+	public SubsonicResponse refreshPodcasts() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+		Version methodApiVersion = new Version(1, 9, 0);
+		//Check compatibility
+        if (!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
+		
+        //Send request and return response
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
+        parameters.add(new HttpParameter("v", methodApiVersion.toString(true)));
+        return this.parseResponse(this.connect(REFRESH_PODCASTS, parameters), SubsonicResponse.class);
+	}
+    
+    @Override
 	public SubsonicResponse setRating(AlbumRating rating) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	Version methodApiVersion = new Version(1, 6, 0);
     	//Check compatibility
@@ -667,5 +680,5 @@ public class SubsonicConnection implements Connection {
         parameters.add(new HttpParameter("size"	, String.valueOf(size)));
         return ImageIO.read(this.connect(GET_COVER_ART, parameters, false));
     }
-
+	
 }
