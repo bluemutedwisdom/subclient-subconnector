@@ -82,32 +82,6 @@ import com.google.gson.JsonSyntaxException;
  */
 public class SubsonicConnection implements Connection {
 	
-	/* Supported Subsonic API methods */
-	private static final String REST_PREFIX			= "/rest/%s";
-	private static final String PING 				= String.format(REST_PREFIX, "ping.view");
-	private static final String GET_LICENSE 		= String.format(REST_PREFIX, "getLicense.view");
-	private static final String GET_MUSIC_FOLDERS 	= String.format(REST_PREFIX, "getMusicFolders.view");
-	private static final String GET_INDEXES 		= String.format(REST_PREFIX, "getIndexes.view");
-	private static final String GET_MUSIC_DIRECTORY	= String.format(REST_PREFIX, "getMusicDirectory.view");
-	private static final String SEARCH_2			= String.format(REST_PREFIX, "search2.view");
-	private static final String GET_PLAYLISTS 		= String.format(REST_PREFIX, "getPlaylists.view");
-	private static final String GET_PLAYLIST 		= String.format(REST_PREFIX, "getPlaylist.view");
-	private static final String CREATE_PLAYLIST 	= String.format(REST_PREFIX, "createPlaylist.view");
-	private static final String DELETE_PLAYLIST 	= String.format(REST_PREFIX, "deletePlaylist.view");
-	private static final String DOWNLOAD 			= String.format(REST_PREFIX, "download.view");
-	private static final String STREAM 				= String.format(REST_PREFIX, "stream.view");
-	private static final String GET_COVER_ART 		= String.format(REST_PREFIX, "getCoverArt.view");
-	private static final String GET_ALBUM_LIST 		= String.format(REST_PREFIX, "getAlbumList.view");
-	private static final String GET_RANDOM_SONGS	= String.format(REST_PREFIX, "getRandomSongs.view");
-	private static final String GET_PODCASTS 		= String.format(REST_PREFIX, "getPodcasts.view");
-	private static final String REFRESH_PODCASTS 	= String.format(REST_PREFIX, "refreshPodcasts.view");
-	private static final String CREATE_PODCAST 		= String.format(REST_PREFIX, "createPodcastChannel.view");
-	private static final String DELETE_PODCAST 		= String.format(REST_PREFIX, "deletePodcastChannel.view");
-	private static final String SET_RATING 			= String.format(REST_PREFIX, "setRating.view");
-	private static final String STAR 				= String.format(REST_PREFIX, "star.view");
-	private static final String UNSTAR 				= String.format(REST_PREFIX, "unstar.view");
-	private static final String GET_STARRED			= String.format(REST_PREFIX, "getStarred.view");
-	
 	/** Identifier of the main JSON object in any Subsonic response */
     private static final String SUBSONIC_RESPONSE_IDENTIFIER = "subsonic-response";
     /** JSON Content-type header */
@@ -732,7 +706,7 @@ public class SubsonicConnection implements Connection {
     @Override
 	public String getStreamURL(String uniqueId, int maxBitRate) {
     	Version methodApiVersion = new Version(1, 0, 0);
-        String urlPath 	= this.serverURL.toString() + STREAM;
+        String urlPath 	= this.serverURL.toString() + ApiMethod.STREAM.toString();
         String params 	= String.format("%s&v=%s&id=%s&maxBitRate=%s", this.parametersString, methodApiVersion.toString(true), uniqueId, maxBitRate);
         
         return String.format("%s?%s", urlPath, params);
