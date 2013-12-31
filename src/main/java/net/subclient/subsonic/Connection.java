@@ -411,6 +411,19 @@ public interface Connection {
 	public SubsonicResponse setRating(AlbumRating rating) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
+	 * Attaches a star to a song, album or artist
+	 * @param id Album, artist or song's ID
+	 *  @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
+     * @throws SubsonicException If a Subsonic error occurs
+     * @throws IOException 
+     * @throws JsonSyntaxException
+     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
+     * @throws CompatibilityException If this method is not compatible with the current server 
+     * @throws HTTPException If the server response code is other than 200
+	 */
+	public SubsonicResponse star(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	
+	/**
      * Gets a stream of an element (directory or song) to be downloaded.
      * @param uniqueId ID of the element to be downloaded
      * @return InputStream to the content to be downloaded
