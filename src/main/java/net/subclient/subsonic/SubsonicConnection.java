@@ -82,32 +82,6 @@ import com.google.gson.JsonSyntaxException;
  */
 public class SubsonicConnection implements Connection {
 	
-	/* Supported Subsonic API methods */
-	private static final String REST_PREFIX			= "/rest/%s";
-	private static final String PING 				= String.format(REST_PREFIX, "ping.view");
-	private static final String GET_LICENSE 		= String.format(REST_PREFIX, "getLicense.view");
-	private static final String GET_MUSIC_FOLDERS 	= String.format(REST_PREFIX, "getMusicFolders.view");
-	private static final String GET_INDEXES 		= String.format(REST_PREFIX, "getIndexes.view");
-	private static final String GET_MUSIC_DIRECTORY	= String.format(REST_PREFIX, "getMusicDirectory.view");
-	private static final String SEARCH_2			= String.format(REST_PREFIX, "search2.view");
-	private static final String GET_PLAYLISTS 		= String.format(REST_PREFIX, "getPlaylists.view");
-	private static final String GET_PLAYLIST 		= String.format(REST_PREFIX, "getPlaylist.view");
-	private static final String CREATE_PLAYLIST 	= String.format(REST_PREFIX, "createPlaylist.view");
-	private static final String DELETE_PLAYLIST 	= String.format(REST_PREFIX, "deletePlaylist.view");
-	private static final String DOWNLOAD 			= String.format(REST_PREFIX, "download.view");
-	private static final String STREAM 				= String.format(REST_PREFIX, "stream.view");
-	private static final String GET_COVER_ART 		= String.format(REST_PREFIX, "getCoverArt.view");
-	private static final String GET_ALBUM_LIST 		= String.format(REST_PREFIX, "getAlbumList.view");
-	private static final String GET_RANDOM_SONGS	= String.format(REST_PREFIX, "getRandomSongs.view");
-	private static final String GET_PODCASTS 		= String.format(REST_PREFIX, "getPodcasts.view");
-	private static final String REFRESH_PODCASTS 	= String.format(REST_PREFIX, "refreshPodcasts.view");
-	private static final String CREATE_PODCAST 		= String.format(REST_PREFIX, "createPodcastChannel.view");
-	private static final String DELETE_PODCAST 		= String.format(REST_PREFIX, "deletePodcastChannel.view");
-	private static final String SET_RATING 			= String.format(REST_PREFIX, "setRating.view");
-	private static final String STAR 				= String.format(REST_PREFIX, "star.view");
-	private static final String UNSTAR 				= String.format(REST_PREFIX, "unstar.view");
-	private static final String GET_STARRED			= String.format(REST_PREFIX, "getStarred.view");
-	
 	/** Identifier of the main JSON object in any Subsonic response */
     private static final String SUBSONIC_RESPONSE_IDENTIFIER = "subsonic-response";
     /** JSON Content-type header */
@@ -243,7 +217,7 @@ public class SubsonicConnection implements Connection {
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200
      */
-    private InputStream connect(String method, List<HttpParameter> parameters) throws IOException, InvalidResponseException, HTTPException {
+    private InputStream connect(ApiMethod method, List<HttpParameter> parameters) throws IOException, InvalidResponseException, HTTPException {
     	return this.connect(method, parameters, true);
     }
     /**
@@ -256,9 +230,9 @@ public class SubsonicConnection implements Connection {
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200
      */
-    private InputStream connect(String method, List<HttpParameter> parameters, boolean isJson) throws IOException, InvalidResponseException, HTTPException {
+    private InputStream connect(ApiMethod method, List<HttpParameter> parameters, boolean isJson) throws IOException, InvalidResponseException, HTTPException {
     	//Generate URL object
-    	String urlPath = this.serverURL.toString() + method;
+    	String urlPath = this.serverURL.toString() + method.toString();
         URL url = new URL(urlPath);
         
         //Open HTTP/HTTPS Connection
@@ -335,7 +309,7 @@ public class SubsonicConnection implements Connection {
     	parameters.add(version);
     	
     	try {
-    		SubsonicResponse resp = this.parseResponse(this.connect(PING, parameters), SubsonicResponse.class);
+    		SubsonicResponse resp = this.parseResponse(this.connect(ApiMethod.PING, parameters), SubsonicResponse.class);
     		this.serverApiVersion = resp.getVersion();
 		} catch (Exception e) {
 			this.serverApiVersion = new Version(1);
@@ -357,7 +331,7 @@ public class SubsonicConnection implements Connection {
     	parameters.add(version);
     	
         try {
-        	SubsonicResponse resp = this.parseResponse(this.connect(PING, parameters), SubsonicResponse.class);        	
+        	SubsonicResponse resp = this.parseResponse(this.connect(ApiMethod.PING, parameters), SubsonicResponse.class);        	
         	return (resp.getStatus().equalsIgnoreCase(SubsonicResponse.STATUS_OK));
         } catch(Exception e) {
         	return false;
@@ -372,7 +346,7 @@ public class SubsonicConnection implements Connection {
         //Send request and return response
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
-        return this.parseResponse(this.connect(GET_LICENSE, parameters), GetLicenseResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.GET_LICENSE, parameters), GetLicenseResponse.class);
     }
     
     @Override
@@ -383,7 +357,7 @@ public class SubsonicConnection implements Connection {
         //Send request and return response
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
-        return this.parseResponse(this.connect(GET_MUSIC_FOLDERS, parameters), GetMusicFoldersResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.GET_MUSIC_FOLDERS, parameters), GetMusicFoldersResponse.class);
     }
     
     @Override
@@ -408,7 +382,7 @@ public class SubsonicConnection implements Connection {
         parameters.add(version);
         parameters.add(new HttpParameter("ifModifiedSince", Long.toString(modifiedSince)));
         if (!musicFolderId.equals("-1")) parameters.add(new HttpParameter("musicFolderId", musicFolderId));
-        return this.parseResponse(this.connect(GET_INDEXES, parameters), GetIndexesResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.GET_INDEXES, parameters), GetIndexesResponse.class);
     }
     
     @Override
@@ -420,7 +394,7 @@ public class SubsonicConnection implements Connection {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
         parameters.add(new HttpParameter("id", uniqueFolderId));
-        return this.parseResponse(this.connect(GET_MUSIC_DIRECTORY, parameters), GetMusicDirectoryResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.GET_MUSIC_DIRECTORY, parameters), GetMusicDirectoryResponse.class);
     }
     
     @Override
@@ -450,7 +424,7 @@ public class SubsonicConnection implements Connection {
             parameters.add(new HttpParameter("songCount"	, String.valueOf(count)));
             parameters.add(new HttpParameter("songOffset"	, String.valueOf(offset)));
         }
-        return this.parseResponse(this.connect(SEARCH_2, parameters), SearchResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.SEARCH_2, parameters), SearchResponse.class);
     }    
     
     @Override
@@ -461,7 +435,7 @@ public class SubsonicConnection implements Connection {
         //Send request and return response
         List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
-        return this.parseResponse(this.connect(GET_PLAYLISTS, parameters),GetPlaylistsResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.GET_PLAYLISTS, parameters),GetPlaylistsResponse.class);
     }
     @Override
 	public GetPlaylistResponse getPlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
@@ -472,7 +446,7 @@ public class SubsonicConnection implements Connection {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
         parameters.add(new HttpParameter("id", playlistId));
-        return this.parseResponse(this.connect(GET_PLAYLIST, parameters), GetPlaylistResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.GET_PLAYLIST, parameters), GetPlaylistResponse.class);
     }
     
     @Override
@@ -491,7 +465,7 @@ public class SubsonicConnection implements Connection {
         for(String song : songsList) {
             parameters.add(new HttpParameter("songId", song));
         }
-        return this.parseResponse(this.connect(CREATE_PLAYLIST, parameters), SubsonicResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.CREATE_PLAYLIST, parameters), SubsonicResponse.class);
     }
     
     @Override
@@ -505,7 +479,7 @@ public class SubsonicConnection implements Connection {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
         parameters.add(new HttpParameter("id", playlistId));
-        return this.parseResponse(this.connect(DELETE_PLAYLIST, parameters), SubsonicResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.DELETE_PLAYLIST, parameters), SubsonicResponse.class);
     }
     
     @Override
@@ -532,7 +506,7 @@ public class SubsonicConnection implements Connection {
         parameters.add(new HttpParameter("type"		, type.toString()));
         parameters.add(new HttpParameter("size"		, String.valueOf(size)));
         parameters.add(new HttpParameter("offset"	, String.valueOf(offset)));
-        return this.parseResponse(this.connect(GET_ALBUM_LIST, parameters), GetAlbumsResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.GET_ALBUM_LIST, parameters), GetAlbumsResponse.class);
     }
     
     @Override
@@ -562,7 +536,7 @@ public class SubsonicConnection implements Connection {
         parameters.add(new HttpParameter("size", String.valueOf(size)));
         if (!folderId.equals("-1"))
         	parameters.add(new HttpParameter("musicFolderId", folderId));
-        return this.parseResponse(this.connect(GET_RANDOM_SONGS, parameters), GetRandomSongsResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.GET_RANDOM_SONGS, parameters), GetRandomSongsResponse.class);
     }
     
     @Override
@@ -577,7 +551,7 @@ public class SubsonicConnection implements Connection {
         //Send request and return response
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
-        return this.parseResponse(this.connect(GET_PODCASTS, parameters), GetPodcastsResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.GET_PODCASTS, parameters), GetPodcastsResponse.class);
     }
     
     @Override
@@ -610,7 +584,7 @@ public class SubsonicConnection implements Connection {
         //Send request and return response
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(new HttpParameter("v", methodApiVersion.toString(true)));
-        return this.parseResponse(this.connect(REFRESH_PODCASTS, parameters), SubsonicResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.REFRESH_PODCASTS, parameters), SubsonicResponse.class);
 	}
     
     @Override
@@ -627,7 +601,7 @@ public class SubsonicConnection implements Connection {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	parameters.add(new HttpParameter("v", methodApiVersion.toString(true)));
         parameters.add(new HttpParameter("url", url.toString()));
-        return this.parseResponse(this.connect(CREATE_PODCAST, parameters), SubsonicResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.CREATE_PODCAST, parameters), SubsonicResponse.class);
 	}
     
 	@Override
@@ -640,7 +614,7 @@ public class SubsonicConnection implements Connection {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	parameters.add(new HttpParameter("v", methodApiVersion.toString(true)));
     	parameters.add(new HttpParameter("id", channelId));
-    	return this.parseResponse(this.connect(DELETE_PODCAST, parameters), SubsonicResponse.class);
+    	return this.parseResponse(this.connect(ApiMethod.DELETE_PODCAST, parameters), SubsonicResponse.class);
 	}
 	
     @Override
@@ -655,7 +629,7 @@ public class SubsonicConnection implements Connection {
         parameters.add(version);
         parameters.add(new HttpParameter("id"		, rating.getAlbumId()));
         parameters.add(new HttpParameter("rating"	, String.valueOf(rating.getRating())));
-        return this.parseResponse(this.connect(SET_RATING, parameters), SubsonicResponse.class);
+        return this.parseResponse(this.connect(ApiMethod.SET_RATING, parameters), SubsonicResponse.class);
     }
     
 	@Override
@@ -668,7 +642,7 @@ public class SubsonicConnection implements Connection {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	parameters.add(version);
     	parameters.add(new HttpParameter("id", id));
-    	return this.parseResponse(this.connect(STAR, parameters), SubsonicResponse.class);
+    	return this.parseResponse(this.connect(ApiMethod.STAR, parameters), SubsonicResponse.class);
 	}
 	
 	@Override
@@ -681,7 +655,7 @@ public class SubsonicConnection implements Connection {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	parameters.add(version);
     	parameters.add(new HttpParameter("id", id));
-    	return this.parseResponse(this.connect(UNSTAR, parameters), SubsonicResponse.class);
+    	return this.parseResponse(this.connect(ApiMethod.UNSTAR, parameters), SubsonicResponse.class);
 	}
 	
 	@Override
@@ -693,7 +667,7 @@ public class SubsonicConnection implements Connection {
     	
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	parameters.add(version);
-    	return this.parseResponse(this.connect(GET_STARRED, parameters), GetStarredResponse.class);
+    	return this.parseResponse(this.connect(ApiMethod.GET_STARRED, parameters), GetStarredResponse.class);
 	}
 	
     @Override
@@ -705,7 +679,7 @@ public class SubsonicConnection implements Connection {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(version);
         parameters.add(new HttpParameter("id", uniqueId));
-        return this.connect(DOWNLOAD, parameters, false);
+        return this.connect(ApiMethod.DOWNLOAD, parameters, false);
     }
     
     @Override
@@ -722,7 +696,7 @@ public class SubsonicConnection implements Connection {
         parameters.add(version);
         parameters.add(new HttpParameter("id"			, uniqueId));
         parameters.add(new HttpParameter("maxBitRate"	, String.valueOf(maxBitRate)));
-        return this.connect(STREAM, parameters, false);
+        return this.connect(ApiMethod.STREAM, parameters, false);
     }
     
     @Override
@@ -732,7 +706,7 @@ public class SubsonicConnection implements Connection {
     @Override
 	public String getStreamURL(String uniqueId, int maxBitRate) {
     	Version methodApiVersion = new Version(1, 0, 0);
-        String urlPath 	= this.serverURL.toString() + STREAM;
+        String urlPath 	= this.serverURL.toString() + ApiMethod.STREAM.toString();
         String params 	= String.format("%s&v=%s&id=%s&maxBitRate=%s", this.parametersString, methodApiVersion.toString(true), uniqueId, maxBitRate);
         
         return String.format("%s?%s", urlPath, params);
@@ -752,7 +726,7 @@ public class SubsonicConnection implements Connection {
         parameters.add(version);
         parameters.add(new HttpParameter("id"	, coverId));
         parameters.add(new HttpParameter("size"	, String.valueOf(size)));
-        return ImageIO.read(this.connect(GET_COVER_ART, parameters, false));
+        return ImageIO.read(this.connect(ApiMethod.GET_COVER_ART, parameters, false));
     }
 	
 }
