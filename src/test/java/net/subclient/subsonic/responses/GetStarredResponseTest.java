@@ -135,4 +135,33 @@ public class GetStarredResponseTest {
 		}
 	}
 	
+	@Test
+	public void testGetStarredResponseEmpty() {
+		String mockFile = "GetStarredResponseEmptyMock.json";
+		try {
+			//Read response file
+			String responseText = FileUtils.readTextFile(
+				URLDecoder.decode(
+					GetStarredResponseTest.class.getResource("../mocks/" + mockFile).getPath(), 
+					"UTF-8"
+				)
+			);
+			
+			GetStarredResponse resp = this.gson.fromJson(responseText, GetStarredResponse.class);
+			
+			int expectedSongs 	= 0,
+				expectedAlbums 	= 0,
+				expectedArtists	= 0;
+			
+			// Assert array sizes
+			assertEquals(expectedSongs, resp.getStarred().getSongsArray().size());
+			assertEquals(expectedAlbums, resp.getStarred().getAlbumsArray().size());
+			assertEquals(expectedArtists, resp.getStarred().getArtistsArray().size());
+		} catch (IOException e) {
+			fail(String.format("IOException while opening %s", mockFile));
+		} catch (Exception e) {
+			fail(String.format("Exception of type %s thrown", e.getClass().getName()));
+		}
+	}
+	
 }
