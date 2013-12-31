@@ -436,6 +436,8 @@ public interface Connection {
 	 */
 	public SubsonicResponse unstar(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
+	
+	
 	/**
      * Gets a stream of an element (directory or song) to be downloaded.
      * @param uniqueId ID of the element to be downloaded
