@@ -59,6 +59,7 @@ import net.subclient.subsonic.responses.GetPlaylistsResponse;
 import net.subclient.subsonic.responses.GetPodcastResponse;
 import net.subclient.subsonic.responses.GetPodcastsResponse;
 import net.subclient.subsonic.responses.GetRandomSongsResponse;
+import net.subclient.subsonic.responses.GetStarredResponse;
 import net.subclient.subsonic.responses.SearchResponse;
 import net.subclient.subsonic.responses.SubsonicResponse;
 import net.subclient.subsonic.util.AlbumRating;
@@ -105,6 +106,7 @@ public class SubsonicConnection implements Connection {
 	private static final String SET_RATING 			= String.format(REST_PREFIX, "setRating.view");
 	private static final String STAR 				= String.format(REST_PREFIX, "star.view");
 	private static final String UNSTAR 				= String.format(REST_PREFIX, "unstar.view");
+	private static final String GET_STARRED			= String.format(REST_PREFIX, "getStarred.view");
 	
 	/** Identifier of the main JSON object in any Subsonic response */
     private static final String SUBSONIC_RESPONSE_IDENTIFIER = "subsonic-response";
@@ -680,6 +682,18 @@ public class SubsonicConnection implements Connection {
     	parameters.add(version);
     	parameters.add(new HttpParameter("id", id));
     	return this.parseResponse(this.connect(UNSTAR, parameters), SubsonicResponse.class);
+	}
+	
+	@Override
+	public GetStarredResponse getStarred() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+		Version methodApiVersion = new Version(1, 8, 0);
+    	// Check compatibility
+        if (!this.isCompatible(methodApiVersion)) throw new CompatibilityException();
+    	HttpParameter version = new HttpParameter("v", methodApiVersion.toString(true));
+    	
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
+    	parameters.add(version);
+    	return this.parseResponse(this.connect(GET_STARRED, parameters), GetStarredResponse.class);
 	}
 	
     @Override

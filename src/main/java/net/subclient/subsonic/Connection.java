@@ -42,6 +42,7 @@ import net.subclient.subsonic.responses.GetPlaylistsResponse;
 import net.subclient.subsonic.responses.GetPodcastResponse;
 import net.subclient.subsonic.responses.GetPodcastsResponse;
 import net.subclient.subsonic.responses.GetRandomSongsResponse;
+import net.subclient.subsonic.responses.GetStarredResponse;
 import net.subclient.subsonic.responses.SearchResponse;
 import net.subclient.subsonic.responses.SubsonicResponse;
 import net.subclient.subsonic.util.AlbumRating;
@@ -436,7 +437,17 @@ public interface Connection {
 	 */
 	public SubsonicResponse unstar(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
-	
+	/**
+	 * Returns all artists, albums and songs that have received a star
+	 * @return A {@link net.subclient.subsonic.responses.GetStarredResponse GetStarredResponse} object
+     * @throws SubsonicException If a Subsonic error occurs
+     * @throws IOException 
+     * @throws JsonSyntaxException
+     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
+     * @throws CompatibilityException If this method is not compatible with the current server 
+     * @throws HTTPException If the server response code is other than 200
+	 */
+	public GetStarredResponse getStarred() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
      * Gets a stream of an element (directory or song) to be downloaded.
