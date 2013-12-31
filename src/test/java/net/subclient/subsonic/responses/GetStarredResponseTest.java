@@ -87,4 +87,52 @@ public class GetStarredResponseTest {
 		}
 	}
 	
+	@Test
+	public void testGetStarredResponseMixed() {
+		String mockFile = "GetStarredResponseMixedMock.json";
+		try {
+			//Read response file
+			String responseText = FileUtils.readTextFile(
+				URLDecoder.decode(
+					GetStarredResponseTest.class.getResource("../mocks/" + mockFile).getPath(), 
+					"UTF-8"
+				)
+			);
+			
+			GetStarredResponse resp = this.gson.fromJson(responseText, GetStarredResponse.class);
+			
+			int expectedSongs 	= 3,
+				expectedAlbums 	= 0,
+				expectedArtists	= 1,
+				i				= 0;
+			
+			// Assert array sizes
+			assertEquals(expectedSongs, resp.getStarred().getSongsArray().size());
+			assertEquals(expectedAlbums, resp.getStarred().getAlbumsArray().size());
+			assertEquals(expectedArtists, resp.getStarred().getArtistsArray().size());
+			
+			// Assert array contents
+			String[] songTitles = new String[] {
+				"Bodyrox & Luciana - What Planet Are You On? (deadmau5 Remix)", 
+				"James Talk - Remote (deadmau5 Remix)", 
+				"NuBreed - Nufunk (deadmau5 Remix)"
+			};
+			String[] artists = new String[] {"Armin Van Buuren"};
+			
+			for(ChildInfo song : resp.getStarred().getSongsArray()) {
+				assertEquals(songTitles[i], song.getTitle());
+				i++;
+			}
+			i = 0;
+			for(FolderInfo artist : resp.getStarred().getArtistsArray()) {
+				assertEquals(artists[i], artist.getName());
+				i++;
+			}
+		} catch (IOException e) {
+			fail(String.format("IOException while opening %s", mockFile));
+		} catch (Exception e) {
+			fail(String.format("Exception of type %s thrown", e.getClass().getName()));
+		}
+	}
+	
 }
