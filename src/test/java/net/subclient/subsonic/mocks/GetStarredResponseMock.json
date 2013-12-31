@@ -1,0 +1,114 @@
+{
+ "starred": {
+  "song": [
+   {
+    "genre": "House",
+    "albumId": 205,
+    "album": "The Remixes Deluxe",
+    "track": 4,
+    "parent": 8573,
+    "contentType": "audio/mpeg",
+    "isDir": false,
+    "type": "music",
+    "suffix": "mp3",
+    "isVideo": false,
+    "size": 17465742,
+    "id": 8706,
+    "title": "Bodyrox & Luciana - What Planet Are You On? (deadmau5 Remix)",
+    "duration": 434,
+    "artistId": 75,
+    "created": "2012-04-28T09:11:00",
+    "starred": "2013-12-31T19:42:34",
+    "path": "Deadmau5/Deadmau5 - (2011) The Remixes Deluxe/Deadmau5 - 04 Bodyrox & Luciana - What Planet Are You On (deadmau5 Remix).mp3",
+    "year": 2012,
+    "artist": "Deadmau5",
+    "bitRate": 320,
+    "coverArt": 8573
+   },
+   {
+    "genre": "House",
+    "albumId": 205,
+    "album": "The Remixes Deluxe",
+    "track": 3,
+    "parent": 8573,
+    "contentType": "audio/mpeg",
+    "isDir": false,
+    "type": "music",
+    "suffix": "mp3",
+    "isVideo": false,
+    "size": 14885841,
+    "id": 8711,
+    "title": "James Talk - Remote (deadmau5 Remix)",
+    "duration": 369,
+    "artistId": 75,
+    "created": "2012-04-28T09:09:54",
+    "starred": "2013-12-31T19:42:32",
+    "path": "Deadmau5/Deadmau5 - (2011) The Remixes Deluxe/Deadmau5 - 03 James Talk - Remote (deadmau5 Remix).mp3",
+    "year": 2012,
+    "artist": "Deadmau5",
+    "bitRate": 320,
+    "coverArt": 8573
+   },
+   {
+    "genre": "House",
+    "albumId": 205,
+    "album": "The Remixes Deluxe",
+    "track": 2,
+    "parent": 8573,
+    "contentType": "audio/mpeg",
+    "isDir": false,
+    "type": "music",
+    "suffix": "mp3",
+    "isVideo": false,
+    "size": 18410275,
+    "id": 8694,
+    "title": "NuBreed - Nufunk (deadmau5 Remix)",
+    "duration": 457,
+    "artistId": 75,
+    "created": "2012-04-28T09:10:08",
+    "starred": "2013-12-31T19:42:32",
+    "path": "Deadmau5/Deadmau5 - (2011) The Remixes Deluxe/Deadmau5 - 02 NuBreed - Nufunk (deadmau5 Remix).mp3",
+    "year": 2012,
+    "artist": "Deadmau5",
+    "bitRate": 320,
+    "coverArt": 8573
+   }
+  ],
+  "album": [
+   {
+    "id": 7353,
+    "title": "Daft Punk - (2010) The Third Twin - Homemade",
+    "starred": "2013-12-31T19:34:18",
+    "created": "2012-02-24T23:59:19",
+    "album": "Homemade",
+    "parent": 35,
+    "isDir": true,
+    "artist": "The Third Twin",
+    "coverArt": 7353
+   },
+   {
+    "id": 7355,
+    "title": "Daft Punk - (2005) Human After All",
+    "starred": "2013-12-31T19:34:17",
+    "created": "2012-02-24T23:59:17",
+    "album": "Humans After All",
+    "parent": 35,
+    "isDir": true,
+    "artist": "Daft Punk",
+    "coverArt": 7355
+   }
+  ],
+  "artist": [
+   {
+    "id": 57,
+    "name": "Armin Van Buuren"
+   },
+   {
+    "id": 14123,
+    "name": "Amaranthe"
+   }
+  ]
+ },
+ "status": "ok",
+ "version": "1.9.0"
+}
