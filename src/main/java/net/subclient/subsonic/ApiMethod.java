@@ -26,37 +26,37 @@ package net.subclient.subsonic;
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public enum ApiMethods {
+public enum ApiMethod {
 	
-	PING				(String.format(ApiMethods.REST_PREFIX, "ping.view")),
-	GET_LICENSE			(String.format(ApiMethods.REST_PREFIX, "getLicense.view")),
-	GET_MUSIC_FOLDERS	(String.format(ApiMethods.REST_PREFIX, "getMusicFolders.view")),
-	GET_INDEXES			(String.format(ApiMethods.REST_PREFIX, "getIndexes.view")),
-	GET_MUSIC_DIRECTORY	(String.format(ApiMethods.REST_PREFIX, "getMusicDirectory.view")),
-	SEARCH_2			(String.format(ApiMethods.REST_PREFIX, "search2.view")),
-	GET_PLAYLISTS		(String.format(ApiMethods.REST_PREFIX, "getPlaylists.view")),
-	GET_PLAYLIST		(String.format(ApiMethods.REST_PREFIX, "getPlaylist.view")),
-	CREATE_PLAYLIST		(String.format(ApiMethods.REST_PREFIX, "createPlaylist.view")),
-	DELETE_PLAYLIST		(String.format(ApiMethods.REST_PREFIX, "deletePlaylist.view")),
-	DOWNLOAD			(String.format(ApiMethods.REST_PREFIX, "download.view")),
-	STREAM				(String.format(ApiMethods.REST_PREFIX, "stream.view")),
-	GET_COVER_ART		(String.format(ApiMethods.REST_PREFIX, "getCoverArt.view")),
-	GET_ALBUM_LIST		(String.format(ApiMethods.REST_PREFIX, "getAlbumList.view")),
-	GET_RANDOM_SONGS	(String.format(ApiMethods.REST_PREFIX, "getRandomSongs.view")),
-	GET_PODCASTS		(String.format(ApiMethods.REST_PREFIX, "getPodcasts.view")),
-	REFRESH_PODCASTS	(String.format(ApiMethods.REST_PREFIX, "refreshPodcasts.view")),
-	CREATE_PODCAST		(String.format(ApiMethods.REST_PREFIX, "createPodcastChannel.view")),
-	DELETE_PODCAST		(String.format(ApiMethods.REST_PREFIX, "deletePodcastChannel.view")),
-	SET_RATING			(String.format(ApiMethods.REST_PREFIX, "setRating.view")),
-	STAR				(String.format(ApiMethods.REST_PREFIX, "star.view")),
-	UNSTAR				(String.format(ApiMethods.REST_PREFIX, "unstar.view")),
-	GET_STARRED			(String.format(ApiMethods.REST_PREFIX, "getStarred.view"));
+	PING				(String.format(ApiMethod.REST_PREFIX, "ping.view")),
+	GET_LICENSE			(String.format(ApiMethod.REST_PREFIX, "getLicense.view")),
+	GET_MUSIC_FOLDERS	(String.format(ApiMethod.REST_PREFIX, "getMusicFolders.view")),
+	GET_INDEXES			(String.format(ApiMethod.REST_PREFIX, "getIndexes.view")),
+	GET_MUSIC_DIRECTORY	(String.format(ApiMethod.REST_PREFIX, "getMusicDirectory.view")),
+	SEARCH_2			(String.format(ApiMethod.REST_PREFIX, "search2.view")),
+	GET_PLAYLISTS		(String.format(ApiMethod.REST_PREFIX, "getPlaylists.view")),
+	GET_PLAYLIST		(String.format(ApiMethod.REST_PREFIX, "getPlaylist.view")),
+	CREATE_PLAYLIST		(String.format(ApiMethod.REST_PREFIX, "createPlaylist.view")),
+	DELETE_PLAYLIST		(String.format(ApiMethod.REST_PREFIX, "deletePlaylist.view")),
+	DOWNLOAD			(String.format(ApiMethod.REST_PREFIX, "download.view")),
+	STREAM				(String.format(ApiMethod.REST_PREFIX, "stream.view")),
+	GET_COVER_ART		(String.format(ApiMethod.REST_PREFIX, "getCoverArt.view")),
+	GET_ALBUM_LIST		(String.format(ApiMethod.REST_PREFIX, "getAlbumList.view")),
+	GET_RANDOM_SONGS	(String.format(ApiMethod.REST_PREFIX, "getRandomSongs.view")),
+	GET_PODCASTS		(String.format(ApiMethod.REST_PREFIX, "getPodcasts.view")),
+	REFRESH_PODCASTS	(String.format(ApiMethod.REST_PREFIX, "refreshPodcasts.view")),
+	CREATE_PODCAST		(String.format(ApiMethod.REST_PREFIX, "createPodcastChannel.view")),
+	DELETE_PODCAST		(String.format(ApiMethod.REST_PREFIX, "deletePodcastChannel.view")),
+	SET_RATING			(String.format(ApiMethod.REST_PREFIX, "setRating.view")),
+	STAR				(String.format(ApiMethod.REST_PREFIX, "star.view")),
+	UNSTAR				(String.format(ApiMethod.REST_PREFIX, "unstar.view")),
+	GET_STARRED			(String.format(ApiMethod.REST_PREFIX, "getStarred.view"));
 	
 	private static final String REST_PREFIX	= "/rest/%s";
 	
 	private String path;
 	
-	private ApiMethods(String path) {
+	private ApiMethod(String path) {
 		this.path = path;
 	}
 	
