@@ -19,7 +19,7 @@
  
  */
 
-package net.subclient.subsonic;
+package net.subclient.subsonic.api;
 
 /**
  * List of Subsonic API methods supported by Subconnector
