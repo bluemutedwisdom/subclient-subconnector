@@ -135,6 +135,7 @@
             <test name="net.subclient.subsonic.responses.GetPodcastResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.GetPodcastsResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.GetRandomSongsResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetStarredResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.SearchResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.SubsonicResponseTest" todir="${junit.output.dir}"/>
             <classpath refid="Subconnector.classpath"/>

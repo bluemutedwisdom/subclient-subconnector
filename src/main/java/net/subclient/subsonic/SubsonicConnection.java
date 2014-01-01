@@ -259,8 +259,8 @@ public class SubsonicConnection implements Connection {
         return conn.getInputStream();
     }
     /**
-     * Casts an InputStream returned by method {@link #connect(String, List) connect} to a valid SubsonicResponse
-     * @param in InputStream corresponding to a previous {@link #connect(String, List) connect} call
+     * Casts an InputStream returned by method {@link #connect(ApiMethod, List) connect} to a valid SubsonicResponse
+     * @param in InputStream corresponding to a previous {@link #connect(ApiMethod, List) connect} call
      * @param responseClass Type of the class that extends from SubsonicResponse and has to be returned
      * @return An object extending SubsonicResponse that results from mapping the returned JSON object into a Java object
      * @throws IOException 
