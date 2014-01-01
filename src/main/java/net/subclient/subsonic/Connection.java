@@ -31,6 +31,7 @@ import javax.xml.ws.http.HTTPException;
 
 import net.subclient.subsonic.api.BrowseAPI;
 import net.subclient.subsonic.api.MediaListAPI;
+import net.subclient.subsonic.api.SearchAPI;
 import net.subclient.subsonic.api.SystemAPI;
 import net.subclient.subsonic.exceptions.CompatibilityException;
 import net.subclient.subsonic.exceptions.InvalidResponseException;
@@ -39,7 +40,6 @@ import net.subclient.subsonic.responses.GetPlaylistResponse;
 import net.subclient.subsonic.responses.GetPlaylistsResponse;
 import net.subclient.subsonic.responses.GetPodcastResponse;
 import net.subclient.subsonic.responses.GetPodcastsResponse;
-import net.subclient.subsonic.responses.SearchResponse;
 import net.subclient.subsonic.responses.SubsonicResponse;
 import net.subclient.subsonic.util.AlbumRating;
 
@@ -50,50 +50,7 @@ import com.google.gson.JsonSyntaxException;
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public interface Connection extends SystemAPI, BrowseAPI, MediaListAPI {
-	
-	/**
-     * Gets a list of max 20 artists, albums and songs that meet the specified query.
-     * Corresponds to search2 Subsonic API method since search is deprecated
-     * @param query Search criterion
-     * @return A {@link net.subclient.subsonic.responses.SearchResponse SearchResponse} object with the artists, albums and songs
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-	public SearchResponse search(String query) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	/**
-     * Gets the specified number of artists, albums and songs that meet the specified query.
-     * Corresponds to search2 Subsonic API method since search is deprecated
-     * @param query Search criterion
-     * @param count Max number of artists, albums and songs to return
-     * @return A {@link net.subclient.subsonic.responses.SearchResponse SearchResponse} object with the artists, albums and songs
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-	public SearchResponse search(String query, int count) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	/**
-     * Gets the specified number of artists, albums and songs that meet the specified query.
-     * Corresponds to search2 Subsonic API method since search is deprecated
-     * @param query Search criterion
-     * @param count Max number of artists, albums and songs to return
-     * @param offset Index to start returning results. For pagination purposes
-     * @return A {@link net.subclient.subsonic.responses.SearchResponse SearchResponse} object with the artists, albums and songs
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-	public SearchResponse search(String query, int count, int offset) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+public interface Connection extends SystemAPI, BrowseAPI, MediaListAPI, SearchAPI {
 	
 	/**
      * Gets the playlists available for the current user
