@@ -29,8 +29,6 @@ import net.subclient.subsonic.exceptions.InvalidResponseException;
 import net.subclient.subsonic.exceptions.SubsonicException;
 import net.subclient.subsonic.responses.GetLicenseResponse;
 
-import com.google.gson.JsonSyntaxException;
-
 /**
  * Wraps Subsonic API system methods
  * @author Alejandro Celaya Alastrué
@@ -49,10 +47,9 @@ public interface SystemAPI {
      * @return A {@link net.subclient.subsonic.responses.GetLicenseResponse GetLicenseResponse} object with the server license information
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
      */
-	public GetLicenseResponse getLicense() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetLicenseResponse getLicense() throws IOException, SubsonicException, InvalidResponseException, HTTPException;
 	
 }

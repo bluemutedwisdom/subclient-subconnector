@@ -33,8 +33,6 @@ import net.subclient.subsonic.responses.GetPlaylistResponse;
 import net.subclient.subsonic.responses.GetPlaylistsResponse;
 import net.subclient.subsonic.responses.SubsonicResponse;
 
-import com.google.gson.JsonSyntaxException;
-
 /**
  * Wraps Subsonic playlist handling methods
  * @author Alejandro Celaya Alastrué
@@ -47,22 +45,20 @@ public interface PlaylistsAPI {
      * @return A {@link net.subclient.subsonic.responses.GetPlaylistsResponse GetPlaylistsResponse} object with the playlists available
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
      */
-	public GetPlaylistsResponse getPlaylists() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetPlaylistsResponse getPlaylists() throws IOException, SubsonicException, InvalidResponseException, HTTPException;
 	/**
      * Gets information about a specific playlist including songs list on that playlist
      * @param playlistId ID of the playlist to be returned
      * @return A {@link net.subclient.subsonic.responses.GetPlaylistResponse GetPlaylistResponse} object with information about the specified playlist
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
      */
-	public GetPlaylistResponse getPlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetPlaylistResponse getPlaylist(String playlistId) throws IOException, SubsonicException, InvalidResponseException, HTTPException;
 	
 	/**
      * Creates a new playlist with the specified songs list and name
@@ -71,13 +67,11 @@ public interface PlaylistsAPI {
      * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200 
      */
-	public SubsonicResponse createPlaylist(List<String> songsList, String name) 
-	    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SubsonicResponse createPlaylist(List<String> songsList, String name) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	 
 	/**
      * Deletes the specified playlist
@@ -85,11 +79,10 @@ public interface PlaylistsAPI {
      * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200 
      */
-	public SubsonicResponse deletePlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SubsonicResponse deletePlaylist(String playlistId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 }

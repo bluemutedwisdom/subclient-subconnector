@@ -84,11 +84,11 @@ import com.google.gson.JsonSyntaxException;
 public class SubsonicConnection implements Connection {
 	
 	/** Identifier of the main JSON object in any Subsonic response */
-    private static final String SUBSONIC_RESPONSE_IDENTIFIER = "subsonic-response";
+    private static final String SUBSONIC_RESPONSE_IDENTIFIER	= "subsonic-response";
     /** JSON Content-type header */
-    private static final String JSON_CONTENT_TYPE = "application/json";
+    private static final String JSON_CONTENT_TYPE 				= "application/json";
     /** Default client identifier value */
-    private static final String DEFAULT_CLIENT_IDENTIFIER = "Subclient";
+    private static final String DEFAULT_CLIENT_IDENTIFIER 		= "Subclient";
     
     /** Subsonic server URL */
     private URL serverURL 				= null;
@@ -225,23 +225,23 @@ public class SubsonicConnection implements Connection {
      * Performs a connection to the server executing specified method and passing provided parameters.
      * @param method One of the supported methods
      * @param parameters Parametters to be passed to server
-     * @param isJson Defines if JSON is expected. It won't on any method returning binary contents
+     * @param isJson Defines if JSON is expected. It won't be JSON on any method returning binary contents
      * @return InputStream corresponding the preformed HTTP connection
      * @throws IOException
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200
      */
     private InputStream connect(ApiMethod method, List<HttpParameter> parameters, boolean isJson) throws IOException, InvalidResponseException, HTTPException {
-    	//Generate URL object
+    	// Generate URL object
     	String urlPath = this.serverURL.toString() + method.toString();
         URL url = new URL(urlPath);
         
-        //Open HTTP/HTTPS Connection
+        // Open HTTP/HTTPS Connection
         HttpURLConnection conn = (this.isSSL) ? (HttpsURLConnection) url.openConnection() : (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST"); //Establecer POST como método de comunicación
-        conn.setDoOutput(true); //Permitir envio de información
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
         
-        //Add parameters to be sent
+        // Add parameters to be sent
         OutputStreamWriter connOut = new OutputStreamWriter(conn.getOutputStream());
         StringBuilder auxParams = new StringBuilder(this.parametersString);
         for (HttpParameter parameter : parameters) auxParams.append(String.format("&%s", parameter.toString()));
@@ -250,12 +250,14 @@ public class SubsonicConnection implements Connection {
         connOut.flush();
         connOut.close();
         
-        //Check the response code is 200
-        if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) throw new HTTPException(conn.getResponseCode());
-        //Check the content type is application/json
-        if (isJson && conn.getContentType().indexOf(JSON_CONTENT_TYPE) == -1) throw new InvalidResponseException(conn.getContentType());
+        // Check the response code is 200
+        if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) 
+        	throw new HTTPException(conn.getResponseCode());
+        // Check the content type is application/json
+        if (isJson && conn.getContentType().indexOf(JSON_CONTENT_TYPE) == -1) 
+        	throw new InvalidResponseException(conn.getContentType());
         
-        //Return the connection InputStream
+        // Return the connection InputStream
         return conn.getInputStream();
     }
     /**
@@ -265,29 +267,34 @@ public class SubsonicConnection implements Connection {
      * @return An object extending SubsonicResponse that results from mapping the returned JSON object into a Java object
      * @throws IOException 
      * @throws SubsonicException If a Subsonic error occurs
-     * @throws JsonSyntaxException
+     * @throws InvalidResponseException 
      */
-    private <T extends SubsonicResponse> T parseResponse(InputStream in, Class<T> responseClass) throws IOException, JsonSyntaxException, SubsonicException {
+    private <T extends SubsonicResponse> T parseResponse(InputStream in, Class<T> responseClass) throws IOException, SubsonicException, InvalidResponseException {
         T response = null;
     	
         //Parse Subsonic response to String
-        StringBuilder resp = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        StringBuilder resp 		= new StringBuilder();
+        BufferedReader reader	= new BufferedReader(new InputStreamReader(in));
         String singleLine;
-        while((singleLine = reader.readLine()) != null) resp.append(singleLine);
+        while ((singleLine = reader.readLine()) != null) 
+        	resp.append(singleLine);
         JsonElement responseElement = this.parser.parse(StringEscapeUtils.unescapeXml(resp.toString())).getAsJsonObject().get(SUBSONIC_RESPONSE_IDENTIFIER);
         
-        //Parse Subsonic string response to its corresponding Java Object and check if an error occured
-        response = this.gson.fromJson(responseElement, responseClass);
+        // Parse Subsonic string response to its corresponding Java Object and check if an error occured
+        try {
+        	response = this.gson.fromJson(responseElement, responseClass);
+        } catch (JsonSyntaxException e) {
+        	throw new InvalidResponseException(e);
+        }
         if (response.getStatus().equalsIgnoreCase(SubsonicResponse.STATUS_FAILED)) {
-        	int code = responseElement.getAsJsonObject().get("error").getAsJsonObject().get("code").getAsInt();
-        	String message = responseElement.getAsJsonObject().get("error").getAsJsonObject().get("message").getAsString();
+        	int code 		= responseElement.getAsJsonObject().get("error").getAsJsonObject().get("code").getAsInt();
+        	String message	= responseElement.getAsJsonObject().get("error").getAsJsonObject().get("message").getAsString();
         	throw new SubsonicException(code, message);
         }
-        //Close connection input after finishing reading it
+        // Close connection input after finishing reading it
         in.close();
         
-        //Return  mapped response
+        // Return  mapped response
         return response;
     }
     
@@ -352,33 +359,33 @@ public class SubsonicConnection implements Connection {
     }
     
     @Override
-	public GetLicenseResponse getLicense() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+	public GetLicenseResponse getLicense() throws IOException, SubsonicException, InvalidResponseException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
         parameters.add(new HttpParameter("v", ApiMethod.GET_LICENSE.getVersion().toString(true)));
         return this.parseResponse(this.connect(ApiMethod.GET_LICENSE, parameters), GetLicenseResponse.class);
     }
     
     @Override
-	public GetMusicFoldersResponse getMusicFolders() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+	public GetMusicFoldersResponse getMusicFolders() throws IOException, SubsonicException, InvalidResponseException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
         parameters.add(new HttpParameter("v", ApiMethod.GET_MUSIC_FOLDERS.getVersion().toString(true)));
         return this.parseResponse(this.connect(ApiMethod.GET_MUSIC_FOLDERS, parameters), GetMusicFoldersResponse.class);
     }
     
     @Override
-	public GetIndexesResponse getIndexes() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+	public GetIndexesResponse getIndexes() throws IOException, SubsonicException, InvalidResponseException, HTTPException {
         return this.getIndexes("-1", 0);
     }
     @Override
-	public GetIndexesResponse getIndexes(String musicFolderId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+	public GetIndexesResponse getIndexes(String musicFolderId) throws IOException, SubsonicException, InvalidResponseException, HTTPException {
         return this.getIndexes(musicFolderId, 0);
     }
     @Override
-	public GetIndexesResponse getIndexes(long modifiedSince) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+	public GetIndexesResponse getIndexes(long modifiedSince) throws IOException, SubsonicException, InvalidResponseException, HTTPException {
         return this.getIndexes("-1", modifiedSince);
     }
     @Override
-    public GetIndexesResponse getIndexes(String musicFolderId, long modifiedSince) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+    public GetIndexesResponse getIndexes(String musicFolderId, long modifiedSince) throws IOException, SubsonicException, InvalidResponseException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>(3);
     	// Add params
         parameters.add(new HttpParameter("v"				, ApiMethod.GET_INDEXES.getVersion().toString(true)));
@@ -390,7 +397,7 @@ public class SubsonicConnection implements Connection {
     }
     
     @Override
-	public GetMusicDirectoryResponse getMusicDirectory(String uniqueFolderId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+	public GetMusicDirectoryResponse getMusicDirectory(String uniqueFolderId) throws IOException, SubsonicException, InvalidResponseException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
     	// Set params
         parameters.add(new HttpParameter("v"	, ApiMethod.GET_MUSIC_DIRECTORY.getVersion().toString(true)));
@@ -399,15 +406,15 @@ public class SubsonicConnection implements Connection {
     }
     
     @Override
-	public SearchResponse search(String query) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SearchResponse search(String query) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
         return this.search(query, 0, 0);
     }
     @Override
-	public SearchResponse search(String query, int count) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SearchResponse search(String query, int count) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	return this.search(query, count, 0);
     }
     @Override
-	public SearchResponse search(String query, int count, int offset) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SearchResponse search(String query, int count, int offset) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	// Set params
         parameters.add(new HttpParameter("v", this.getVersionCompatible(ApiMethod.SEARCH_2.getVersion()).toString(true)));
@@ -424,13 +431,13 @@ public class SubsonicConnection implements Connection {
     }    
     
     @Override
-	public GetPlaylistsResponse getPlaylists() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+	public GetPlaylistsResponse getPlaylists() throws IOException, SubsonicException, InvalidResponseException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
         parameters.add(new HttpParameter("v", ApiMethod.GET_PLAYLISTS.getVersion().toString(true)));
         return this.parseResponse(this.connect(ApiMethod.GET_PLAYLISTS, parameters),GetPlaylistsResponse.class);
     }
     @Override
-	public GetPlaylistResponse getPlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException {
+	public GetPlaylistResponse getPlaylist(String playlistId) throws IOException, SubsonicException, InvalidResponseException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
     	// Set params
         parameters.add(new HttpParameter("v"	, ApiMethod.GET_PLAYLIST.getVersion().toString(true)));
@@ -439,8 +446,7 @@ public class SubsonicConnection implements Connection {
     }
     
     @Override
-	public SubsonicResponse createPlaylist(List<String> songsList, String name) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException 
+	public SubsonicResponse createPlaylist(List<String> songsList, String name) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException 
     {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	// Set params
@@ -452,7 +458,7 @@ public class SubsonicConnection implements Connection {
     }
     
     @Override
-	public SubsonicResponse deletePlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SubsonicResponse deletePlaylist(String playlistId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
     	// Set params
         parameters.add(new HttpParameter("v"	, this.getVersionCompatible(ApiMethod.DELETE_PLAYLIST.getVersion()).toString(true)));
@@ -461,16 +467,15 @@ public class SubsonicConnection implements Connection {
     }
     
     @Override
-	public GetAlbumsResponse getAlbumsList(GetAlbumsType type) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public GetAlbumsResponse getAlbumsList(GetAlbumsType type) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
         return this.getAlbumsList(type, 10, 0);
     }
     @Override
-	public GetAlbumsResponse getAlbumsList(GetAlbumsType type, int size) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public GetAlbumsResponse getAlbumsList(GetAlbumsType type, int size) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	return this.getAlbumsList(type, size, 0);
     }
     @Override
-	public GetAlbumsResponse getAlbumsList(GetAlbumsType type, int size, int offset) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException 
+	public GetAlbumsResponse getAlbumsList(GetAlbumsType type, int size, int offset) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException 
     {
     	//Check type compatibility
     	if (!this.isCompatible(type.getMinVersion()))	
@@ -487,21 +492,17 @@ public class SubsonicConnection implements Connection {
     }
     
     @Override
-	public GetRandomSongsResponse getRandomSongs() 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
+	public GetRandomSongsResponse getRandomSongs() throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
     {
     	return this.getRandomSongs("-1", 10);
     }
     @Override
-	public GetRandomSongsResponse getRandomSongs(String folderId) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
+	public GetRandomSongsResponse getRandomSongs(String folderId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
     {
     	return this.getRandomSongs(folderId, 10);
     }
     @Override
-	public GetRandomSongsResponse getRandomSongs(String folderId, int size) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
-    {
+	public GetRandomSongsResponse getRandomSongs(String folderId, int size) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>(3);
         parameters.add(new HttpParameter("v"	, this.getVersionCompatible(ApiMethod.GET_RANDOM_SONGS.getVersion()).toString(true)));
         parameters.add(new HttpParameter("size"	, String.valueOf(size)));
@@ -511,18 +512,14 @@ public class SubsonicConnection implements Connection {
     }
     
     @Override
-	public GetPodcastsResponse getPodcasts() 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
-    {
+	public GetPodcastsResponse getPodcasts() throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
         parameters.add(new HttpParameter("v", this.getVersionCompatible(ApiMethod.GET_PODCASTS.getVersion()).toString(true)));
         return this.parseResponse(this.connect(ApiMethod.GET_PODCASTS, parameters), GetPodcastsResponse.class);
     }
     
     @Override
-	public GetPodcastResponse getPodcastEpisodes(String podcastId) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException
-    {
+	public GetPodcastResponse getPodcastEpisodes(String podcastId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	//Get all podcasts
     	GetPodcastsResponse podcastsResponse	= this.getPodcasts();
     	GetPodcastResponse podcastResponse		= new GetPodcastResponse();
@@ -541,18 +538,18 @@ public class SubsonicConnection implements Connection {
     }
     
     @Override
-	public SubsonicResponse refreshPodcasts() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SubsonicResponse refreshPodcasts() throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
 		List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
         parameters.add(new HttpParameter("v", this.getVersionCompatible(ApiMethod.REFRESH_PODCASTS.getVersion()).toString(true)));
         return this.parseResponse(this.connect(ApiMethod.REFRESH_PODCASTS, parameters), SubsonicResponse.class);
 	}
     
     @Override
-	public SubsonicResponse createPodcastChannel(String url) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SubsonicResponse createPodcastChannel(String url) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
 		return this.createPodcastChannel(new URL(url));
 	}
 	@Override
-	public SubsonicResponse createPodcastChannel(URL url) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SubsonicResponse createPodcastChannel(URL url) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
 		List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
 		// Set params
     	parameters.add(new HttpParameter("v"	, this.getVersionCompatible(ApiMethod.CREATE_PODCAST.getVersion()).toString(true)));
@@ -561,7 +558,7 @@ public class SubsonicConnection implements Connection {
 	}
     
 	@Override
-	public SubsonicResponse deletePodcastChannel(String channelId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SubsonicResponse deletePodcastChannel(String channelId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
 		List<HttpParameter> parameters = new ArrayList<HttpParameter>();
 		// Set params
     	parameters.add(new HttpParameter("v"	, this.getVersionCompatible(ApiMethod.DELETE_PODCAST.getVersion()).toString(true)));
@@ -570,7 +567,7 @@ public class SubsonicConnection implements Connection {
 	}
 	
     @Override
-	public SubsonicResponse setRating(AlbumRating rating) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SubsonicResponse setRating(AlbumRating rating) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>(3);
     	// Set params
         parameters.add(new HttpParameter("v"		, this.getVersionCompatible(ApiMethod.SET_RATING.getVersion()).toString(true)));
@@ -580,7 +577,7 @@ public class SubsonicConnection implements Connection {
     }
     
 	@Override
-	public SubsonicResponse star(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SubsonicResponse star(String id) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
 		List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
 		// Set params
     	parameters.add(new HttpParameter("v"	, this.getVersionCompatible(ApiMethod.STAR.getVersion()).toString(true)));
@@ -589,7 +586,7 @@ public class SubsonicConnection implements Connection {
 	}
 	
 	@Override
-	public SubsonicResponse unstar(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public SubsonicResponse unstar(String id) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
 		List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
 		// Set params
     	parameters.add(new HttpParameter("v"	, this.getVersionCompatible(ApiMethod.UNSTAR.getVersion()).toString(true)));
@@ -598,7 +595,7 @@ public class SubsonicConnection implements Connection {
 	}
 	
 	@Override
-	public GetStarredResponse getStarred() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+	public GetStarredResponse getStarred() throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
 		List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
     	parameters.add(new HttpParameter("v", this.getVersionCompatible(ApiMethod.GET_STARRED.getVersion()).toString(true)));
     	return this.parseResponse(this.connect(ApiMethod.GET_STARRED, parameters), GetStarredResponse.class);

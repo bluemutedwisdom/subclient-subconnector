@@ -34,6 +34,12 @@ public class InvalidResponseException extends Exception {
 	private String contentType;
 	
 	/**
+	 * Constructs a new InvalidResponseException produced by another exception
+	 */
+	public InvalidResponseException(Exception e) {
+		super(e);
+	}
+	/**
 	 * Constructs a new InvalidResponseException with the deffined content-type
 	 * @param contentType Content-type returned by the server
 	 */

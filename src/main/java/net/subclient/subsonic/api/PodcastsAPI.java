@@ -33,8 +33,6 @@ import net.subclient.subsonic.responses.GetPodcastResponse;
 import net.subclient.subsonic.responses.GetPodcastsResponse;
 import net.subclient.subsonic.responses.SubsonicResponse;
 
-import com.google.gson.JsonSyntaxException;
-
 /**
  * Wraps Subsonic API podcast handling methods
  * @author Alejandro Celaya Alastrué
@@ -47,13 +45,11 @@ public interface PodcastsAPI {
      * @return A {@link net.subclient.subsonic.responses.GetPodcastsResponse GetPodcastsResponse} object with the list of channels the server is subscribed
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200
      */
-	public GetPodcastsResponse getPodcasts() 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public GetPodcastsResponse getPodcasts() throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
      * Gets the episodes of the specified podcast
@@ -61,25 +57,22 @@ public interface PodcastsAPI {
      * @return A {@link net.subclient.subsonic.responses.GetPodcastResponse GetPodcastResponse} object with the list of episodes of the podcast
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200
      */
-	public GetPodcastResponse getPodcastEpisodes(String podcastId) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public GetPodcastResponse getPodcastEpisodes(String podcastId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
 	 * Forces the server to check for new podcast episodes in all the channels
 	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
 	 * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200
 	 */
-	public SubsonicResponse refreshPodcasts() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SubsonicResponse refreshPodcasts() throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
 	 * Creates a new podcast channel defined by a URL
@@ -87,12 +80,11 @@ public interface PodcastsAPI {
 	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
 	 * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200
 	 */
-	public SubsonicResponse createPodcastChannel(String url) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SubsonicResponse createPodcastChannel(String url) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
 	 * Creates a new podcast channel defined by a URL
@@ -100,12 +92,11 @@ public interface PodcastsAPI {
 	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
 	 * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200
 	 */
-	public SubsonicResponse createPodcastChannel(URL url) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SubsonicResponse createPodcastChannel(URL url) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
 	 * Deletes the podcast channel defined by its ID
@@ -113,11 +104,10 @@ public interface PodcastsAPI {
 	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
 	 * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200
 	 */
-	public SubsonicResponse deletePodcastChannel(String channelId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SubsonicResponse deletePodcastChannel(String channelId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 }

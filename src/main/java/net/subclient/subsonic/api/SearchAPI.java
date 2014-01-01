@@ -30,8 +30,6 @@ import net.subclient.subsonic.exceptions.InvalidResponseException;
 import net.subclient.subsonic.exceptions.SubsonicException;
 import net.subclient.subsonic.responses.SearchResponse;
 
-import com.google.gson.JsonSyntaxException;
-
 /**
  * Wraps Subsonic API search methods
  * @author Alejandro Celaya Alastrué
@@ -46,12 +44,11 @@ public interface SearchAPI {
      * @return A {@link net.subclient.subsonic.responses.SearchResponse SearchResponse} object with the artists, albums and songs
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200 
      */
-	public SearchResponse search(String query) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SearchResponse search(String query) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	/**
      * Gets the specified number of artists, albums and songs that meet the specified query.
      * Corresponds to search2 Subsonic API method since search is deprecated
@@ -60,12 +57,11 @@ public interface SearchAPI {
      * @return A {@link net.subclient.subsonic.responses.SearchResponse SearchResponse} object with the artists, albums and songs
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200 
      */
-	public SearchResponse search(String query, int count) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SearchResponse search(String query, int count) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	/**
      * Gets the specified number of artists, albums and songs that meet the specified query.
      * Corresponds to search2 Subsonic API method since search is deprecated
@@ -75,11 +71,10 @@ public interface SearchAPI {
      * @return A {@link net.subclient.subsonic.responses.SearchResponse SearchResponse} object with the artists, albums and songs
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200 
      */
-	public SearchResponse search(String query, int count, int offset) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SearchResponse search(String query, int count, int offset) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 }

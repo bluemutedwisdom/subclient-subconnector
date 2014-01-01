@@ -31,8 +31,6 @@ import net.subclient.subsonic.exceptions.SubsonicException;
 import net.subclient.subsonic.responses.SubsonicResponse;
 import net.subclient.subsonic.util.AlbumRating;
 
-import com.google.gson.JsonSyntaxException;
-
 /**
  * Wraps Subsonic API media annotation methods
  * @author Alejandro Celaya Alastrué
@@ -46,13 +44,12 @@ public interface MediaAnnotationAPI {
      * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200
      * @see net.subclient.subsonic.util.AlbumRating
      */
-	public SubsonicResponse setRating(AlbumRating rating) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SubsonicResponse setRating(AlbumRating rating) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
 	 * Attaches a star to a song, album or artist
@@ -60,12 +57,11 @@ public interface MediaAnnotationAPI {
 	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200
 	 */
-	public SubsonicResponse star(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SubsonicResponse star(String id) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
 	 * Removes the star from a song, album or artist
@@ -73,11 +69,10 @@ public interface MediaAnnotationAPI {
 	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
      * @throws SubsonicException If a Subsonic error occurs
      * @throws IOException 
-     * @throws JsonSyntaxException
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws CompatibilityException If this method is not compatible with the current server 
      * @throws HTTPException If the server response code is other than 200
 	 */
-	public SubsonicResponse unstar(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	public SubsonicResponse unstar(String id) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 }
