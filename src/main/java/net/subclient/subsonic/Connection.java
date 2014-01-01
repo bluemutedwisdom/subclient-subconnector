@@ -24,20 +24,18 @@ package net.subclient.subsonic;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
 import javax.xml.ws.http.HTTPException;
 
 import net.subclient.subsonic.api.BrowseAPI;
 import net.subclient.subsonic.api.MediaListAPI;
 import net.subclient.subsonic.api.PlaylistsAPI;
+import net.subclient.subsonic.api.PodcastsAPI;
 import net.subclient.subsonic.api.SearchAPI;
 import net.subclient.subsonic.api.SystemAPI;
 import net.subclient.subsonic.exceptions.CompatibilityException;
 import net.subclient.subsonic.exceptions.InvalidResponseException;
 import net.subclient.subsonic.exceptions.SubsonicException;
-import net.subclient.subsonic.responses.GetPodcastResponse;
-import net.subclient.subsonic.responses.GetPodcastsResponse;
 import net.subclient.subsonic.responses.SubsonicResponse;
 import net.subclient.subsonic.util.AlbumRating;
 
@@ -48,85 +46,7 @@ import com.google.gson.JsonSyntaxException;
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public interface Connection extends SystemAPI, BrowseAPI, MediaListAPI, SearchAPI, PlaylistsAPI {
-	
-	/**
-     * Gets the list of podcasts in the server
-     * @return A {@link net.subclient.subsonic.responses.GetPodcastsResponse GetPodcastsResponse} object with the list of channels the server is subscribed
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-     */
-	public GetPodcastsResponse getPodcasts() 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-     * Gets the episodes of the specified podcast
-     * @param podcastId ID of the podcast channel whose episodes have to be returned
-     * @return A {@link net.subclient.subsonic.responses.GetPodcastResponse GetPodcastResponse} object with the list of episodes of the podcast
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-     */
-	public GetPodcastResponse getPodcastEpisodes(String podcastId) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-	 * Forces the server to check for new podcast episodes in all the channels
-	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
-	 * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-	 */
-	public SubsonicResponse refreshPodcasts() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-	 * Creates a new podcast channel defined by a URL
-	 * @param url The URL of the podcast as string
-	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
-	 * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-	 */
-	public SubsonicResponse createPodcastChannel(String url) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-	 * Creates a new podcast channel defined by a URL
-	 * @param url The URL of the podcast as java.net.URL object
-	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
-	 * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-	 */
-	public SubsonicResponse createPodcastChannel(URL url) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-	 * Deletes the podcast channel defined by its ID
-	 * @param channelId The ID of the podcast channel
-	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
-	 * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-	 */
-	public SubsonicResponse deletePodcastChannel(String channelId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+public interface Connection extends SystemAPI, BrowseAPI, MediaListAPI, SearchAPI, PlaylistsAPI, PodcastsAPI {
 	
 	/**
      * Sets an album rating
