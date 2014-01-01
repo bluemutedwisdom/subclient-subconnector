@@ -21,14 +21,13 @@
 
 package net.subclient.subsonic;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.xml.ws.http.HTTPException;
 
 import net.subclient.subsonic.api.BrowseAPI;
 import net.subclient.subsonic.api.MediaListAPI;
+import net.subclient.subsonic.api.MediaRetrievalAPI;
 import net.subclient.subsonic.api.PlaylistsAPI;
 import net.subclient.subsonic.api.PodcastsAPI;
 import net.subclient.subsonic.api.SearchAPI;
@@ -46,7 +45,7 @@ import com.google.gson.JsonSyntaxException;
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public interface Connection extends SystemAPI, BrowseAPI, MediaListAPI, SearchAPI, PlaylistsAPI, PodcastsAPI {
+public interface Connection extends SystemAPI, BrowseAPI, MediaListAPI, SearchAPI, PlaylistsAPI, PodcastsAPI, MediaRetrievalAPI {
 	
 	/**
      * Sets an album rating
@@ -87,69 +86,5 @@ public interface Connection extends SystemAPI, BrowseAPI, MediaListAPI, SearchAP
      * @throws HTTPException If the server response code is other than 200
 	 */
 	public SubsonicResponse unstar(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-     * Gets a stream of an element (directory or song) to be downloaded.
-     * @param uniqueId ID of the element to be downloaded
-     * @return InputStream to the content to be downloaded
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws IOException 
-     * @throws HTTPException If the server response code is other than 200
-     */
-	public InputStream download(String uniqueId) throws HTTPException, IOException, InvalidResponseException;
-	
-	/**
-     * Gets the stream of a song to be played.
-     * @param uniqueId ID of the song to be played
-     * @return InputStream of the song to be played
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws IOException 
-     * @throws HTTPException If the server response code is other than 200
-     */
-	public InputStream stream(String uniqueId) throws HTTPException, IOException, InvalidResponseException;
-	/**
-     * Gets the stream of a song to be played.
-     * @param uniqueId ID of the song to be played
-     * @param maxBitRate Max bitrate of the stream
-     * @return InputStream of the song to be played
-     * @throws IOException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200
-     */
-	public InputStream stream(String uniqueId, int maxBitRate) throws IOException, InvalidResponseException, HTTPException;
-	
-	/**
-     * Returns a valid URL for streaming a song from the current Subsonic server specified by its ID
-     * @param uniqueId ID of the song to be played
-     * @return streaming URL
-     */
-	public String getStreamURL(String uniqueId);
-	/**
-     * Returns a valid URL for streaming a song from the current Subsonic server specified by its ID
-     * @param uniqueId ID of the song to be played
-     * @param maxBitRate Max bitrate of the stream
-     * @return streaming URL
-     */
-	public String getStreamURL(String uniqueId, int maxBitRate);
-	
-	/**
-     * Returns a cover art specified by the provided ID and a size of 100x100 pixels
-     * @param coverId ID of the cover art to be returned
-     * @return BufferedImage with the cover art
-     * @throws IOException
-     * @throws InvalidResponseException If Subsonic servers returns a non parseable response
-     * @throws HTTPException If the server response code is other than 200
-     */
-	public BufferedImage getCoverArt(String coverId) throws IOException, InvalidResponseException, HTTPException;
-	/**
-     * Returns a cover art defined by the provided ID and a specified size
-     * @param coverArt ID of the cover art to be returned
-     * @param size Size in pixels of the returned image
-     * @return BufferedImage with the cover art
-     * @throws IOException
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200
-     */
-	public BufferedImage getCoverArt(String coverArt, int size) throws IOException, InvalidResponseException, HTTPException;
 	
 }
