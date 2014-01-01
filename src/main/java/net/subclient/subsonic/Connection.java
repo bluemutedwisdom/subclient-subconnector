@@ -21,70 +21,39 @@
 
 package net.subclient.subsonic;
 
-import java.io.IOException;
-
-import javax.xml.ws.http.HTTPException;
-
 import net.subclient.subsonic.api.BrowseAPI;
+import net.subclient.subsonic.api.MediaAnnotationAPI;
 import net.subclient.subsonic.api.MediaListAPI;
 import net.subclient.subsonic.api.MediaRetrievalAPI;
 import net.subclient.subsonic.api.PlaylistsAPI;
 import net.subclient.subsonic.api.PodcastsAPI;
 import net.subclient.subsonic.api.SearchAPI;
 import net.subclient.subsonic.api.SystemAPI;
-import net.subclient.subsonic.exceptions.CompatibilityException;
-import net.subclient.subsonic.exceptions.InvalidResponseException;
-import net.subclient.subsonic.exceptions.SubsonicException;
-import net.subclient.subsonic.responses.SubsonicResponse;
-import net.subclient.subsonic.util.AlbumRating;
-
-import com.google.gson.JsonSyntaxException;
 
 /**
  * Connection interface defining all the methods needed in the Subsonic connection
+ * @see net.subclient.subsonic.api.SystemAPI
+ * @see net.subclient.subsonic.api.BrowseAPI
+ * @see net.subclient.subsonic.api.MediaListAPI
+ * @see net.subclient.subsonic.api.SearchAPI
+ * @see net.subclient.subsonic.api.PlaylistsAPI
+ * @see net.subclient.subsonic.api.PodcastsAPI
+ * @see net.subclient.subsonic.api.MediaRetrievalAPI
+ * @see net.subclient.subsonic.api.MediaAnnotationAPI
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public interface Connection extends SystemAPI, BrowseAPI, MediaListAPI, SearchAPI, PlaylistsAPI, PodcastsAPI, MediaRetrievalAPI {
+public interface Connection extends SystemAPI, 
+									BrowseAPI, 
+									MediaListAPI, 
+									SearchAPI, 
+									PlaylistsAPI, 
+									PodcastsAPI, 
+									MediaRetrievalAPI, 
+									MediaAnnotationAPI {
 	
-	/**
-     * Sets an album rating
-     * @param rating AlbumRating object with the album id and the rating to be set to that album
-     * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-     * @see net.subclient.subsonic.util.AlbumRating
-     */
-	public SubsonicResponse setRating(AlbumRating rating) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-	 * Attaches a star to a song, album or artist
-	 * @param id Album, artist or song's ID
-	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
+	/*
+	 * This interface joins all API interfaces. Take a look at their APIs for documentation
 	 */
-	public SubsonicResponse star(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-	 * Removes the star from a song, album or artist
-	 * @param id Album, artist or song's ID
-	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-	 */
-	public SubsonicResponse unstar(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 }
