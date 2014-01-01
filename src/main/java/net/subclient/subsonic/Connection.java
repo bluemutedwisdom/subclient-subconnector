@@ -29,12 +29,12 @@ import java.util.List;
 
 import javax.xml.ws.http.HTTPException;
 
+import net.subclient.subsonic.api.SystemAPI;
 import net.subclient.subsonic.exceptions.CompatibilityException;
 import net.subclient.subsonic.exceptions.InvalidResponseException;
 import net.subclient.subsonic.exceptions.SubsonicException;
 import net.subclient.subsonic.responses.GetAlbumsResponse;
 import net.subclient.subsonic.responses.GetIndexesResponse;
-import net.subclient.subsonic.responses.GetLicenseResponse;
 import net.subclient.subsonic.responses.GetMusicDirectoryResponse;
 import net.subclient.subsonic.responses.GetMusicFoldersResponse;
 import net.subclient.subsonic.responses.GetPlaylistResponse;
@@ -55,24 +55,7 @@ import com.google.gson.JsonSyntaxException;
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public interface Connection {
-	
-	/**
-     * Checks connectivity with current Subsonic server.
-     * @return True if Subsonic server is reached. False otherwise.
-     */
-	public boolean ping();
-	
-	/**
-     * Gets detailed information about current server license
-     * @return A {@link net.subclient.subsonic.responses.GetLicenseResponse GetLicenseResponse} object with the server license information
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-	public GetLicenseResponse getLicense() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, HTTPException;
+public interface Connection extends SystemAPI {
 	
 	/**
      * Gets the available music folders list
