@@ -47,8 +47,9 @@ public interface PlaylistsAPI {
      * @throws IOException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public GetPlaylistsResponse getPlaylists() throws IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetPlaylistsResponse getPlaylists() throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	/**
      * Gets information about a specific playlist including songs list on that playlist
      * @param playlistId ID of the playlist to be returned
@@ -57,8 +58,9 @@ public interface PlaylistsAPI {
      * @throws IOException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public GetPlaylistResponse getPlaylist(String playlistId) throws IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetPlaylistResponse getPlaylist(String playlistId) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	
 	/**
      * Creates a new playlist with the specified songs list and name

@@ -63,7 +63,8 @@ public enum ApiMethod {
 	private Version version;
 	
 	private ApiMethod(Version version, String path) {
-		this.path = path;
+		this.version	= version;
+		this.path 		= path;
 	}
 	
 	@Override

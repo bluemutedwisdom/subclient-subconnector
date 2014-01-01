@@ -27,6 +27,7 @@ import java.io.InputStream;
 
 import javax.xml.ws.http.HTTPException;
 
+import net.subclient.subsonic.exceptions.CompatibilityException;
 import net.subclient.subsonic.exceptions.InvalidResponseException;
 
 /**
@@ -43,8 +44,9 @@ public interface MediaRetrievalAPI {
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws IOException 
      * @throws HTTPException If the server response code is other than 200
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public InputStream download(String uniqueId) throws HTTPException, IOException, InvalidResponseException;
+	public InputStream download(String uniqueId) throws HTTPException, IOException, InvalidResponseException, CompatibilityException;
 	
 	/**
      * Gets the stream of a song to be played.
@@ -53,8 +55,9 @@ public interface MediaRetrievalAPI {
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws IOException 
      * @throws HTTPException If the server response code is other than 200
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public InputStream stream(String uniqueId) throws HTTPException, IOException, InvalidResponseException;
+	public InputStream stream(String uniqueId) throws HTTPException, IOException, InvalidResponseException, CompatibilityException;
 	/**
      * Gets the stream of a song to be played.
      * @param uniqueId ID of the song to be played
@@ -63,8 +66,9 @@ public interface MediaRetrievalAPI {
      * @throws IOException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public InputStream stream(String uniqueId, int maxBitRate) throws IOException, InvalidResponseException, HTTPException;
+	public InputStream stream(String uniqueId, int maxBitRate) throws IOException, InvalidResponseException, HTTPException, CompatibilityException;
 	
 	/**
      * Returns a valid URL for streaming a song from the current Subsonic server specified by its ID
@@ -87,8 +91,9 @@ public interface MediaRetrievalAPI {
      * @throws IOException
      * @throws InvalidResponseException If Subsonic servers returns a non parseable response
      * @throws HTTPException If the server response code is other than 200
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public BufferedImage getCoverArt(String coverId) throws IOException, InvalidResponseException, HTTPException;
+	public BufferedImage getCoverArt(String coverId) throws IOException, InvalidResponseException, HTTPException, CompatibilityException;
 	/**
      * Returns a cover art defined by the provided ID and a specified size
      * @param coverArt ID of the cover art to be returned
@@ -97,7 +102,8 @@ public interface MediaRetrievalAPI {
      * @throws IOException
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public BufferedImage getCoverArt(String coverArt, int size) throws IOException, InvalidResponseException, HTTPException;
+	public BufferedImage getCoverArt(String coverArt, int size) throws IOException, InvalidResponseException, HTTPException, CompatibilityException;
 	
 }

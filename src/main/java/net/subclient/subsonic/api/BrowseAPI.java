@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import javax.xml.ws.http.HTTPException;
 
+import net.subclient.subsonic.exceptions.CompatibilityException;
 import net.subclient.subsonic.exceptions.InvalidResponseException;
 import net.subclient.subsonic.exceptions.SubsonicException;
 import net.subclient.subsonic.responses.GetIndexesResponse;
@@ -45,8 +46,9 @@ public interface BrowseAPI {
      * @throws IOException  
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public GetMusicFoldersResponse getMusicFolders() throws IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetMusicFoldersResponse getMusicFolders() throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	
 	/**
      * Gets a list of all the directories (indexes) in the root of all music folders
@@ -55,8 +57,9 @@ public interface BrowseAPI {
      * @throws IOException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public GetIndexesResponse getIndexes() throws IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetIndexesResponse getIndexes() throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	/**
      * Gets a list of all the directories (indexes) in the root of the specified music folder
      * @param musicFolderId Id of the music folder to be listed
@@ -65,8 +68,9 @@ public interface BrowseAPI {
      * @throws IOException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public GetIndexesResponse getIndexes(String musicFolderId) throws IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetIndexesResponse getIndexes(String musicFolderId) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	/**
      * Gets a list of all the directories (indexes) in the root of all music folders that has been modified after the specified timestamp
      * @param modifiedSince Timestamp in milliseconds
@@ -75,8 +79,9 @@ public interface BrowseAPI {
      * @throws IOException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public GetIndexesResponse getIndexes(long modifiedSince) throws IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetIndexesResponse getIndexes(long modifiedSince) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	/**
      * Gets a list of all the directories (indexes) in the root of the specified music folder that has been modified after the specified timestamp
      * @param musicFolderId Id of the music folder to be listed
@@ -86,8 +91,9 @@ public interface BrowseAPI {
      * @throws IOException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public GetIndexesResponse getIndexes(String musicFolderId, long modifiedSince) throws IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetIndexesResponse getIndexes(String musicFolderId, long modifiedSince) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	
 	/**
      * Returns all the albums and songs in specified directory
@@ -97,7 +103,8 @@ public interface BrowseAPI {
      * @throws IOException 
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public GetMusicDirectoryResponse getMusicDirectory(String uniqueFolderId) throws IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetMusicDirectoryResponse getMusicDirectory(String uniqueFolderId) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	
 }

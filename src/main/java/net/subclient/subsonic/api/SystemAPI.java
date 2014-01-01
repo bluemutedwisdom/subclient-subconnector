@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import javax.xml.ws.http.HTTPException;
 
+import net.subclient.subsonic.exceptions.CompatibilityException;
 import net.subclient.subsonic.exceptions.InvalidResponseException;
 import net.subclient.subsonic.exceptions.SubsonicException;
 import net.subclient.subsonic.responses.GetLicenseResponse;
@@ -46,10 +47,11 @@ public interface SystemAPI {
      * Gets detailed information about current server license
      * @return A {@link net.subclient.subsonic.responses.GetLicenseResponse GetLicenseResponse} object with the server license information
      * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
+     * @throws IOException
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200 
+     * @throws CompatibilityException If this method is not compatible with the current server
      */
-	public GetLicenseResponse getLicense() throws IOException, SubsonicException, InvalidResponseException, HTTPException;
+	public GetLicenseResponse getLicense() throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	
 }
