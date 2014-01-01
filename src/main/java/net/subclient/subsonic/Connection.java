@@ -30,21 +30,18 @@ import java.util.List;
 import javax.xml.ws.http.HTTPException;
 
 import net.subclient.subsonic.api.BrowseAPI;
+import net.subclient.subsonic.api.MediaListAPI;
 import net.subclient.subsonic.api.SystemAPI;
 import net.subclient.subsonic.exceptions.CompatibilityException;
 import net.subclient.subsonic.exceptions.InvalidResponseException;
 import net.subclient.subsonic.exceptions.SubsonicException;
-import net.subclient.subsonic.responses.GetAlbumsResponse;
 import net.subclient.subsonic.responses.GetPlaylistResponse;
 import net.subclient.subsonic.responses.GetPlaylistsResponse;
 import net.subclient.subsonic.responses.GetPodcastResponse;
 import net.subclient.subsonic.responses.GetPodcastsResponse;
-import net.subclient.subsonic.responses.GetRandomSongsResponse;
-import net.subclient.subsonic.responses.GetStarredResponse;
 import net.subclient.subsonic.responses.SearchResponse;
 import net.subclient.subsonic.responses.SubsonicResponse;
 import net.subclient.subsonic.util.AlbumRating;
-import net.subclient.subsonic.util.GetAlbumsType;
 
 import com.google.gson.JsonSyntaxException;
 
@@ -53,7 +50,7 @@ import com.google.gson.JsonSyntaxException;
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public interface Connection extends SystemAPI, BrowseAPI {
+public interface Connection extends SystemAPI, BrowseAPI, MediaListAPI {
 	
 	/**
      * Gets a list of max 20 artists, albums and songs that meet the specified query.
@@ -147,90 +144,6 @@ public interface Connection extends SystemAPI, BrowseAPI {
      * @throws HTTPException If the server response code is other than 200 
      */
 	public SubsonicResponse deletePlaylist(String playlistId) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-     * Gets a list of 10 albums of the specified type
-     * @param type Type of the albums to be returned. Valid types are defined in {@link net.subclient.subsonic.util.GetAlbumsType GetAlbumsType}
-     * @return A {@link net.subclient.subsonic.responses.GetAlbumsResponse GetAlbumsResponse} object with the list of albums
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     * @see net.subclient.subsonic.util.GetAlbumsType
-     */
-	public GetAlbumsResponse getAlbumsList(GetAlbumsType type) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	/**
-     * Gets the defined number of albums of the specified type
-     * @param type Type of the albums to be returned. Valid types are defined in {@link net.subclient.subsonic.util.GetAlbumsType GetAlbumsType}
-     * @param size Number of albums to return
-     * @return A {@link net.subclient.subsonic.responses.GetAlbumsResponse GetAlbumsResponse} object with the list of albums
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-	public GetAlbumsResponse getAlbumsList(GetAlbumsType type, int size) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	/**
-     * Gets the defined number of albums of the specified type
-     * @param type Type of the albums to be returned. Valid types are defined in {@link net.subclient.subsonic.util.GetAlbumsType GetAlbumsType}
-     * @param size Number of albums to return
-     * @param offset Index to start returning results. For pagination purposes
-     * @return A {@link net.subclient.subsonic.responses.GetAlbumsResponse GetAlbumsResponse} object with the list of albums
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException 
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200 
-     */
-	public GetAlbumsResponse getAlbumsList(GetAlbumsType type, int size, int offset) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-     * Gets a list of 10 random songs in all music folders
-     * @return A {@link net.subclient.subsonic.responses.GetRandomSongsResponse GetRandomSongsResponse} object with the list of songs
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws JsonSyntaxException
-     * @throws IOException
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response
-     * @throws CompatibilityException If this method is not compatible with the current server
-     * @throws HTTPException If the server response code is other than 200
-     */
-	public GetRandomSongsResponse getRandomSongs() 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	/**
-     * Gets a list of 10 random songs in a specific music folder
-     * @param folderId ID of the music folder used to get the songs list
-     * @return A {@link net.subclient.subsonic.responses.GetRandomSongsResponse GetRandomSongsResponse} object with the list of songs
-     * @throws JsonSyntaxException
-     * @throws IOException
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-     */
-	public GetRandomSongsResponse getRandomSongs(String folderId) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	/**
-     * Gets a defined number of random songs in a specific music folder
-     * @param folderId ID of the music folder used to get the songs list
-     * @param size Number of songs the be returned
-     * @return A {@link net.subclient.subsonic.responses.GetRandomSongsResponse GetRandomSongsResponse} object with the list of songs
-     * @throws JsonSyntaxException
-     * @throws IOException
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-     */
-	public GetRandomSongsResponse getRandomSongs(String folderId, int size) 
-    		throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
      * Gets the list of podcasts in the server
@@ -349,18 +262,6 @@ public interface Connection extends SystemAPI, BrowseAPI {
      * @throws HTTPException If the server response code is other than 200
 	 */
 	public SubsonicResponse unstar(String id) throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
-	
-	/**
-	 * Returns all artists, albums and songs that have received a star
-	 * @return A {@link net.subclient.subsonic.responses.GetStarredResponse GetStarredResponse} object
-     * @throws SubsonicException If a Subsonic error occurs
-     * @throws IOException 
-     * @throws JsonSyntaxException
-     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
-     * @throws CompatibilityException If this method is not compatible with the current server 
-     * @throws HTTPException If the server response code is other than 200
-	 */
-	public GetStarredResponse getStarred() throws JsonSyntaxException, IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 	/**
      * Gets a stream of an element (directory or song) to be downloaded.
