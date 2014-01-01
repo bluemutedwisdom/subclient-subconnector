@@ -44,6 +44,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import javax.xml.ws.http.HTTPException;
 
+import net.subclient.subsonic.api.ApiMethod;
 import net.subclient.subsonic.exceptions.CompatibilityException;
 import net.subclient.subsonic.exceptions.InvalidResponseException;
 import net.subclient.subsonic.exceptions.SubsonicException;
