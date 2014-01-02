@@ -21,6 +21,7 @@
 
 package net.subclient.subsonic.mappings;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -34,6 +35,10 @@ public class Bookmark {
 	
 	@SerializedName("bookmark")
 	public List<BookmarkInfo> bookmarks;
+	
+	public Bookmark() {
+		this.bookmarks = new ArrayList<BookmarkInfo>();
+	}
 	
 	public List<BookmarkInfo> getBookmarksList() {
 		return this.bookmarks;
