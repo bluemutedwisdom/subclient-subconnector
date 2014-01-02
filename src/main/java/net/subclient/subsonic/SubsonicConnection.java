@@ -51,6 +51,7 @@ import net.subclient.subsonic.exceptions.SubsonicException;
 import net.subclient.subsonic.factories.GsonFactory;
 import net.subclient.subsonic.mappings.ChannelInfo;
 import net.subclient.subsonic.responses.GetAlbumsResponse;
+import net.subclient.subsonic.responses.GetBookmarksResponse;
 import net.subclient.subsonic.responses.GetIndexesResponse;
 import net.subclient.subsonic.responses.GetLicenseResponse;
 import net.subclient.subsonic.responses.GetMusicDirectoryResponse;
@@ -391,7 +392,7 @@ public class SubsonicConnection implements Connection {
     }
     @Override
     public GetIndexesResponse getIndexes(String musicFolderId, long modifiedSince) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException {
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	// Add params
         parameters.add(new HttpParameter("ifModifiedSince", String.valueOf(modifiedSince)));
         // Set music folder if defined
@@ -402,7 +403,7 @@ public class SubsonicConnection implements Connection {
     
     @Override
 	public GetMusicDirectoryResponse getMusicDirectory(String uniqueFolderId) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException {
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	// Set params
         parameters.add(new HttpParameter("id", uniqueFolderId));
         return this.parseResponse(this.connect(ApiMethod.GET_MUSIC_DIRECTORY, parameters), GetMusicDirectoryResponse.class);
@@ -438,7 +439,7 @@ public class SubsonicConnection implements Connection {
     }
     @Override
 	public GetPlaylistResponse getPlaylist(String playlistId) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException {
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	// Set params
         parameters.add(new HttpParameter("id", playlistId));
         return this.parseResponse(this.connect(ApiMethod.GET_PLAYLIST, parameters), GetPlaylistResponse.class);
@@ -457,7 +458,7 @@ public class SubsonicConnection implements Connection {
     
     @Override
 	public SubsonicResponse deletePlaylist(String playlistId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	// Set params
         parameters.add(new HttpParameter("id", playlistId));
         return this.parseResponse(this.connect(ApiMethod.DELETE_PLAYLIST, parameters), SubsonicResponse.class);
@@ -479,7 +480,7 @@ public class SubsonicConnection implements Connection {
     		throw new CompatibilityException();
     	
         //Send request and return response
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(3);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	// Set params
         parameters.add(new HttpParameter("type"		, type.toString()));
         parameters.add(new HttpParameter("size"		, String.valueOf(size)));
@@ -499,7 +500,7 @@ public class SubsonicConnection implements Connection {
     }
     @Override
 	public GetRandomSongsResponse getRandomSongs(String folderId, int size) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(new HttpParameter("size", String.valueOf(size)));
         if (!folderId.equals("-1"))
         	parameters.add(new HttpParameter("musicFolderId", folderId));
@@ -508,7 +509,7 @@ public class SubsonicConnection implements Connection {
     
     @Override
 	public GetPodcastsResponse getPodcasts() throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(new HttpParameter("v", this.getVersionCompatible(ApiMethod.GET_PODCASTS.getVersion()).toString(true)));
         return this.parseResponse(this.connect(ApiMethod.GET_PODCASTS, parameters), GetPodcastsResponse.class);
     }
@@ -543,7 +544,7 @@ public class SubsonicConnection implements Connection {
 	}
 	@Override
 	public SubsonicResponse createPodcastChannel(URL url) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
-		List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
+		List<HttpParameter> parameters = new ArrayList<HttpParameter>();
 		// Set params
         parameters.add(new HttpParameter("url", url.toString()));
         return this.parseResponse(this.connect(ApiMethod.CREATE_PODCAST, parameters), SubsonicResponse.class);
@@ -551,7 +552,7 @@ public class SubsonicConnection implements Connection {
     
 	@Override
 	public SubsonicResponse deletePodcastChannel(String channelId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
-		List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
+		List<HttpParameter> parameters = new ArrayList<HttpParameter>();
 		// Set params
     	parameters.add(new HttpParameter("id", channelId));
     	return this.parseResponse(this.connect(ApiMethod.DELETE_PODCAST, parameters), SubsonicResponse.class);
@@ -559,7 +560,7 @@ public class SubsonicConnection implements Connection {
 	
     @Override
 	public SubsonicResponse setRating(AlbumRating rating) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	// Set params
         parameters.add(new HttpParameter("id"		, rating.getAlbumId()));
         parameters.add(new HttpParameter("rating"	, String.valueOf(rating.getRating())));
@@ -568,7 +569,7 @@ public class SubsonicConnection implements Connection {
     
 	@Override
 	public SubsonicResponse star(String id) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
-		List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
+		List<HttpParameter> parameters = new ArrayList<HttpParameter>();
 		// Set params
     	parameters.add(new HttpParameter("id", id));
     	return this.parseResponse(this.connect(ApiMethod.STAR, parameters), SubsonicResponse.class);
@@ -576,7 +577,7 @@ public class SubsonicConnection implements Connection {
 	
 	@Override
 	public SubsonicResponse unstar(String id) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
-		List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
+		List<HttpParameter> parameters = new ArrayList<HttpParameter>();
 		// Set params
     	parameters.add(new HttpParameter("id", id));
     	return this.parseResponse(this.connect(ApiMethod.UNSTAR, parameters), SubsonicResponse.class);
@@ -589,7 +590,7 @@ public class SubsonicConnection implements Connection {
 	
     @Override
 	public InputStream download(String uniqueId) throws HTTPException, IOException, InvalidResponseException, CompatibilityException {
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(1);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
     	// Set params
         parameters.add(new HttpParameter("id", uniqueId));
         return this.connect(ApiMethod.DOWNLOAD, parameters, false);
@@ -601,7 +602,7 @@ public class SubsonicConnection implements Connection {
     }
     @Override
 	public InputStream stream(String uniqueId, int maxBitRate) throws IOException, InvalidResponseException, HTTPException, CompatibilityException {
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(new HttpParameter("id"			, uniqueId));
         parameters.add(new HttpParameter("maxBitRate"	, String.valueOf(maxBitRate)));
         return this.connect(ApiMethod.STREAM, parameters, false);
@@ -625,10 +626,30 @@ public class SubsonicConnection implements Connection {
     }
     @Override
 	public BufferedImage getCoverArt(String coverId, int size) throws IOException, InvalidResponseException, HTTPException, CompatibilityException {
-    	List<HttpParameter> parameters = new ArrayList<HttpParameter>(2);
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
         parameters.add(new HttpParameter("id"	, coverId));
         parameters.add(new HttpParameter("size"	, String.valueOf(size)));
         return ImageIO.read(this.connect(ApiMethod.GET_COVER_ART, parameters, false));
     }
+    
+	@Override
+	public GetBookmarksResponse getBookmarks() throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException {
+		return this.parseResponse(this.connect(ApiMethod.GET_BOOKMARKS), GetBookmarksResponse.class);
+	}
+	@Override
+	public SubsonicResponse createBookmark(String mediaId, long position) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException {
+		List<HttpParameter> parameters = new ArrayList<HttpParameter>();
+		// Set params
+		parameters.add(new HttpParameter("id"		, mediaId));
+    	parameters.add(new HttpParameter("position"	, String.valueOf(position)));
+    	return this.parseResponse(this.connect(ApiMethod.CREATE_BOOKMARK, parameters), SubsonicResponse.class);
+	}
+	@Override
+	public SubsonicResponse deleteBookmark(String mediaId) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException {
+		List<HttpParameter> parameters = new ArrayList<HttpParameter>();
+		// Set params
+		parameters.add(new HttpParameter("id", mediaId));
+    	return this.parseResponse(this.connect(ApiMethod.DELETE_BOOKMARK, parameters), SubsonicResponse.class);
+	}
 	
 }

@@ -64,7 +64,7 @@ public interface BookmarksAPI {
 	
 	/**
 	 * 
-	 * @param bookmarkId
+	 * @param mediaId
 	 * @return
 	 * @throws IOException
 	 * @throws SubsonicException
@@ -72,6 +72,6 @@ public interface BookmarksAPI {
 	 * @throws HTTPException
 	 * @throws CompatibilityException
 	 */
-	public SubsonicResponse deleteBookmark(String bookmarkId) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
+	public SubsonicResponse deleteBookmark(String mediaId) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	
 }
