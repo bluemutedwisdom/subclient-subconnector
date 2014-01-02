@@ -22,9 +22,11 @@
 package net.subclient.subsonic.factories;
 
 import net.subclient.subsonic.deserializers.AlbumsDeserializer;
+import net.subclient.subsonic.deserializers.BookmarkDeserializer;
 import net.subclient.subsonic.deserializers.ChannelInfoDeserializer;
 import net.subclient.subsonic.deserializers.DirectoryDeserializer;
 import net.subclient.subsonic.deserializers.GetAlbumsResponseDeserializer;
+import net.subclient.subsonic.deserializers.GetBookmarksResponseDeserializer;
 import net.subclient.subsonic.deserializers.GetMusicFoldersResponseDeserializer;
 import net.subclient.subsonic.deserializers.GetPlaylistsResponseDeserializer;
 import net.subclient.subsonic.deserializers.GetPodcastsResponseDeserializer;
@@ -41,6 +43,7 @@ import net.subclient.subsonic.deserializers.SearchResponseDeserializer;
 import net.subclient.subsonic.deserializers.SearchResultDeserializer;
 import net.subclient.subsonic.deserializers.StarredDeserializer;
 import net.subclient.subsonic.mappings.Albums;
+import net.subclient.subsonic.mappings.Bookmark;
 import net.subclient.subsonic.mappings.ChannelInfo;
 import net.subclient.subsonic.mappings.Directory;
 import net.subclient.subsonic.mappings.IndexInfo;
@@ -53,6 +56,7 @@ import net.subclient.subsonic.mappings.RandomSongs;
 import net.subclient.subsonic.mappings.SearchResult;
 import net.subclient.subsonic.mappings.Starred;
 import net.subclient.subsonic.responses.GetAlbumsResponse;
+import net.subclient.subsonic.responses.GetBookmarksResponse;
 import net.subclient.subsonic.responses.GetMusicFoldersResponse;
 import net.subclient.subsonic.responses.GetPlaylistsResponse;
 import net.subclient.subsonic.responses.GetPodcastsResponse;
@@ -111,7 +115,9 @@ public class GsonFactory {
 								.registerTypeHierarchyAdapter(GetRandomSongsResponse.class	, new GetRandomSongsResponseDeserializer())
 								.registerTypeHierarchyAdapter(RandomSongs.class				, new RandomSongsDeserializer())
 								.registerTypeHierarchyAdapter(Starred.class					, new StarredDeserializer())
-								.registerTypeHierarchyAdapter(GetStarredResponse.class		, new GetStarredResponseDeserializer());
+								.registerTypeHierarchyAdapter(GetStarredResponse.class		, new GetStarredResponseDeserializer())
+								.registerTypeHierarchyAdapter(GetBookmarksResponse.class	, new GetBookmarksResponseDeserializer())
+								.registerTypeHierarchyAdapter(Bookmark.class				, new BookmarkDeserializer());
 	}
 	
 }

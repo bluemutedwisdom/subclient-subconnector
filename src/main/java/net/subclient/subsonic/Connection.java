@@ -21,6 +21,7 @@
 
 package net.subclient.subsonic;
 
+import net.subclient.subsonic.api.BookmarksAPI;
 import net.subclient.subsonic.api.BrowseAPI;
 import net.subclient.subsonic.api.MediaAnnotationAPI;
 import net.subclient.subsonic.api.MediaListAPI;
@@ -40,6 +41,7 @@ import net.subclient.subsonic.api.SystemAPI;
  * @see net.subclient.subsonic.api.PodcastsAPI
  * @see net.subclient.subsonic.api.MediaRetrievalAPI
  * @see net.subclient.subsonic.api.MediaAnnotationAPI
+ * @see net.subclient.subsonic.api.BookmarksAPI
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
@@ -50,7 +52,8 @@ public interface Connection extends SystemAPI,
 									PlaylistsAPI, 
 									PodcastsAPI, 
 									MediaRetrievalAPI, 
-									MediaAnnotationAPI {
+									MediaAnnotationAPI,
+									BookmarksAPI {
 	
 	/*
 	 * This interface joins all API interfaces. Take a look at their APIs for documentation

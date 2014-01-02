@@ -126,6 +126,7 @@
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
             <test name="net.subclient.subsonic.responses.GetAlbumsResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetBookmarksResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.GetIndexesResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.GetLicenseResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.GetMusicDirectoryResponseTest" todir="${junit.output.dir}"/>
