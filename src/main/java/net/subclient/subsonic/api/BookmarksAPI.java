@@ -39,8 +39,8 @@ import net.subclient.subsonic.responses.SubsonicResponse;
 public interface BookmarksAPI {
 	
 	/**
-	 * 
-	 * @return
+	 * Returns the list of created bookmarks
+	 * @return A {@link net.subclient.subsonic.responses.GetBookmarksResponse GetBookmarksResponse} object with the list bookmarks
 	 * @throws IOException
 	 * @throws SubsonicException
 	 * @throws InvalidResponseException
@@ -50,10 +50,10 @@ public interface BookmarksAPI {
 	public GetBookmarksResponse getBookmarks() throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	
 	/**
-	 * 
+	 * Creates a new bookmark for defined media element at defined position
 	 * @param mediaId
 	 * @param position
-	 * @return
+	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
 	 * @throws IOException
 	 * @throws SubsonicException
 	 * @throws InvalidResponseException
@@ -63,9 +63,9 @@ public interface BookmarksAPI {
 	public SubsonicResponse createBookmark(String mediaId, long position) throws IOException, SubsonicException, InvalidResponseException, HTTPException, CompatibilityException;
 	
 	/**
-	 * 
+	 * Deletes the bookmark for defined media element
 	 * @param mediaId
-	 * @return
+	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
 	 * @throws IOException
 	 * @throws SubsonicException
 	 * @throws InvalidResponseException

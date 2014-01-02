@@ -212,7 +212,7 @@ public class SubsonicConnection implements Connection {
     /**
      * Performs a connection to the server executing specified method with no parameters. It is assumed that JSON must be returned
      * @param method
-     * @return
+     * @return The performed HTTP connection InputStream
      * @throws IOException
      * @throws InvalidResponseException
      * @throws HTTPException
@@ -225,7 +225,7 @@ public class SubsonicConnection implements Connection {
      * Performs a connection to the server executing specified method and passing provided parameters. It is assumed that JSON must be returned
      * @param method One of the supported methods
      * @param parameters Parametters to be passed to server
-     * @return InputStream corresponding the preformed HTTP connection
+     * @return The performed HTTP connection InputStream
      * @throws IOException
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200
@@ -239,7 +239,7 @@ public class SubsonicConnection implements Connection {
      * @param method One of the supported methods
      * @param parameters Parametters to be passed to server
      * @param isJson Defines if JSON is expected. It won't be JSON on any method returning binary contents
-     * @return InputStream corresponding the preformed HTTP connection
+     * @return The performed HTTP connection InputStream
      * @throws IOException
      * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
      * @throws HTTPException If the server response code is other than 200
@@ -316,9 +316,7 @@ public class SubsonicConnection implements Connection {
     
     /**
      * Checks if a version is compatible with current server version. If it is compatible, it returns the version object, if it is not it throws a CompatibilityException
-     * @param majorNumber
-     * @param minorNumber
-     * @param revisionNumber
+     * @param version The version to be checked
      * @return The provided version object
      * @throws CompatibilityException in case specified version is not compatible with current server's version
      */
