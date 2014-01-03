@@ -110,4 +110,6 @@ public interface PodcastsAPI {
 	 */
 	public SubsonicResponse deletePodcastChannel(String channelId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
+	public SubsonicResponse deletePodcastEpisode(String episodeId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	
 }

@@ -556,6 +556,14 @@ public class SubsonicConnection implements Connection {
     	return this.parseResponse(this.connect(ApiMethod.DELETE_PODCAST, parameters), SubsonicResponse.class);
 	}
 	
+	@Override
+	public SubsonicResponse deletePodcastEpisode(String episodeId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+		List<HttpParameter> parameters = new ArrayList<HttpParameter>();
+		// Set params
+    	parameters.add(new HttpParameter("id", episodeId));
+    	return this.parseResponse(this.connect(ApiMethod.DELETE_PODCAST_EPISODE, parameters), SubsonicResponse.class);
+	}
+	
     @Override
 	public SubsonicResponse setRating(AlbumRating rating) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
     	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
