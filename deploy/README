@@ -1,3 +1,17 @@
+Subconnector 2.0.0
+    Added support for Las.fm scrobble method
+    Added support for createBookmark, deleteBookmark and getBookmark API methods
+    Added support for new AlbumLists. Alphabetical by name, alphabetical by artist and starred
+    Added support for star, unstar and getStarred API methods
+    Removed JsonSyntaxException from any method. Now it is internally handled and rethrown as an InvalidResponseException
+    Deep SubsonicConnection private API refactoring
+    Created ConnectionFactory to ease Connection objects creation
+    Added new Unit tests
+    Minor bugfixes
+
+Subconnector 1.5.0
+    Added support for refreshPodcasts, createPodcastChannel and deletePodcastChannel API methods
+
 Subconnector 1.4.0
     Solved bad property visibility on FolderInfo class
     Refactored javadocs
@@ -32,7 +46,7 @@ Subconnector 1.1.0
 
 Subconnector 1.0.1
 	Recovered Subsonic 4.6 and earlier support
-	Minnor bugfixes
+	Minor bugfixes
 
 Subconnector 1.0.0
 	First release
