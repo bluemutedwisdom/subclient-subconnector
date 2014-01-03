@@ -55,7 +55,8 @@ public enum ApiMethod {
 	GET_STARRED			(new Version(1, 8, 0), String.format(ApiMethod.REST_PREFIX, "getStarred.view")),
 	GET_BOOKMARKS		(new Version(1, 9, 0), String.format(ApiMethod.REST_PREFIX, "getBookmarks.view")),
 	CREATE_BOOKMARK		(new Version(1, 9, 0), String.format(ApiMethod.REST_PREFIX, "createBookmark.view")),
-	DELETE_BOOKMARK		(new Version(1, 9, 0), String.format(ApiMethod.REST_PREFIX, "deleteBookmark.view"));
+	DELETE_BOOKMARK		(new Version(1, 9, 0), String.format(ApiMethod.REST_PREFIX, "deleteBookmark.view")),
+	SCROBBLE			(new Version(1, 5, 0), String.format(ApiMethod.REST_PREFIX, "scrobble.view"));
 	
 	private static final String REST_PREFIX	= "/rest/%s";
 	
