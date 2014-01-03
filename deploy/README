@@ -3,6 +3,7 @@ Subconnector 2.0.0
     Added support for createBookmark, deleteBookmark and getBookmark API methods
     Added support for new AlbumLists. Alphabetical by name, alphabetical by artist and starred
     Added support for star, unstar and getStarred API methods
+    Added support for deletePodcastEpisode and downloadPodcastEpisode
     Removed JsonSyntaxException from any method. Now it is internally handled and rethrown as an InvalidResponseException
     Deep SubsonicConnection private API refactoring
     Created ConnectionFactory to ease Connection objects creation
