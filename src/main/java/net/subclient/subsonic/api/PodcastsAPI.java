@@ -110,6 +110,28 @@ public interface PodcastsAPI {
 	 */
 	public SubsonicResponse deletePodcastChannel(String channelId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
+	/**
+	 * Deletes defined podcast episode
+	 * @param episodeId The ID of the episode to be deleted
+	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
+	 * @throws SubsonicException If a Subsonic error occurs
+     * @throws IOException 
+     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
+     * @throws CompatibilityException If this method is not compatible with the current server 
+     * @throws HTTPException If the server response code is other than 200
+	 */
 	public SubsonicResponse deletePodcastEpisode(String episodeId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	
+	/**
+	 * Tells the server to redownload defined podcast episode
+	 * @param episodeId The ID of the episode to be downloaded
+	 * @return The binary stream with the data to be downloaded
+	 * @throws SubsonicException If a Subsonic error occurs
+     * @throws IOException 
+     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
+     * @throws CompatibilityException If this method is not compatible with the current server 
+     * @throws HTTPException If the server response code is other than 200
+	 */
+	public SubsonicResponse downloadPodcastEpisode(String episodeId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
 }
