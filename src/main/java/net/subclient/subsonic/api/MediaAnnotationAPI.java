@@ -75,4 +75,16 @@ public interface MediaAnnotationAPI {
 	 */
 	public SubsonicResponse unstar(String id) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
 	
+	/**
+	 * Sends a scrobble resquest to the current user's Last.fm account if any
+	 * @param mediaId Album, artist or song's ID
+	 * @return A {@link net.subclient.subsonic.responses.SubsonicResponse SubsonicResponse} object
+     * @throws SubsonicException If a Subsonic error occurs
+     * @throws IOException 
+     * @throws InvalidResponseException If the Subsonic servers returns a non parseable response 
+     * @throws CompatibilityException If this method is not compatible with the current server 
+     * @throws HTTPException If the server response code is other than 200
+	 */
+	public SubsonicResponse scrobble(String mediaId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException;
+	
 }

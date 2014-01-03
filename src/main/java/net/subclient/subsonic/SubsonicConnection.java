@@ -565,6 +565,14 @@ public class SubsonicConnection implements Connection {
         return this.parseResponse(this.connect(ApiMethod.SET_RATING, parameters), SubsonicResponse.class);
     }
     
+    @Override
+	public SubsonicResponse scrobble(String mediaId) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
+    	List<HttpParameter> parameters = new ArrayList<HttpParameter>();
+    	// Set params
+        parameters.add(new HttpParameter("id", mediaId));
+        return this.parseResponse(this.connect(ApiMethod.SCROBBLE, parameters), SubsonicResponse.class);
+	}
+    
 	@Override
 	public SubsonicResponse star(String id) throws IOException, SubsonicException, InvalidResponseException, CompatibilityException, HTTPException {
 		List<HttpParameter> parameters = new ArrayList<HttpParameter>();
