@@ -65,9 +65,9 @@ public class GetBookmarksResponseTest {
 			GetBookmarksResponse resp = this.gson.fromJson(responseText, GetBookmarksResponse.class);
 			
 			//Assertions
-			assertEquals(2, resp.getBookmarks().getBookmarksList().size());
-			assertTrue(resp.getBookmarks().getBookmarksList().get(0).getPosition() == 26096);
-			assertTrue(resp.getBookmarks().getBookmarksList().get(1).getPosition() == 292415);
+			assertEquals(2, resp.getBookmarks().getBookmarksArray().size());
+			assertTrue(resp.getBookmarks().getBookmarksArray().get(0).getPosition() == 26096);
+			assertTrue(resp.getBookmarks().getBookmarksArray().get(1).getPosition() == 292415);
 		} catch (IOException e) {
 			fail(String.format("IOException while opening %s", mockFile));
 		} catch (Exception e) {
@@ -90,8 +90,8 @@ public class GetBookmarksResponseTest {
 			GetBookmarksResponse resp = this.gson.fromJson(responseText, GetBookmarksResponse.class);
 			
 			//Assertions
-			assertEquals(1, resp.getBookmarks().getBookmarksList().size());
-			assertTrue(resp.getBookmarks().getBookmarksList().get(0).getPosition() == 26096);
+			assertEquals(1, resp.getBookmarks().getBookmarksArray().size());
+			assertTrue(resp.getBookmarks().getBookmarksArray().get(0).getPosition() == 26096);
 		} catch (IOException e) {
 			fail(String.format("IOException while opening %s", mockFile));
 		} catch (Exception e) {
@@ -114,7 +114,7 @@ public class GetBookmarksResponseTest {
 			GetBookmarksResponse resp = this.gson.fromJson(responseText, GetBookmarksResponse.class);
 			
 			//Assertions
-			assertEquals(0, resp.getBookmarks().getBookmarksList().size());
+			assertEquals(0, resp.getBookmarks().getBookmarksArray().size());
 		} catch (IOException e) {
 			fail(String.format("IOException while opening %s", mockFile));
 		} catch (Exception e) {

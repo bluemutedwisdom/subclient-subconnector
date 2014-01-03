@@ -91,7 +91,7 @@ public class BookmarkDeserializer implements JsonDeserializer<Bookmark> {
 		}
 		
 		bookmark = new Bookmark();
-		bookmark.setBookmarksList(bookmarks);
+		bookmark.setBookmarksArray(bookmarks);
 		return bookmark;
 	}
 

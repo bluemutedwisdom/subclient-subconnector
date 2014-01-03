@@ -40,12 +40,12 @@ public class Bookmark {
 		this.bookmarks = new ArrayList<BookmarkInfo>();
 	}
 	
-	public List<BookmarkInfo> getBookmarksList() {
+	public List<BookmarkInfo> getBookmarksArray() {
 		return this.bookmarks;
 	}
 	
-	public Bookmark setBookmarksList(List<BookmarkInfo> bookmarksList) {
-		this.bookmarks = bookmarksList;
+	public Bookmark setBookmarksArray(List<BookmarkInfo> bookmarks) {
+		this.bookmarks = bookmarks;
 		return this;
 	}
 	
