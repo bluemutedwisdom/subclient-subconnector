@@ -17,42 +17,32 @@
  
  Copyright 2012, 2013 Alejandro Celaya Alastrué
  
- */
+*/
 
-package net.subclient.subsonic.exceptions;
+package net.subclient.subsonic.responses;
+
+import net.subclient.subsonic.mappings.Bookmark;
 
 /**
- * Exception thrown whenever a Subsonic returns an invalid content type or a non parseable response
+ * Response returned while calling {@link net.subclient.subsonic.Connection#getBookmarks getBookmarks} method
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public class InvalidResponseException extends Exception {
-
-	private static final long serialVersionUID = 1L;
+public class GetBookmarksResponse extends SubsonicResponse {
 	
-	/** Content type returned by Susbsinic server */
-	private String contentType;
+	private Bookmark bookmarks;
 	
-	/**
-	 * Constructs a new InvalidResponseException produced by another exception
-	 */
-	public InvalidResponseException(Exception e) {
-		super(e);
-	}
-	/**
-	 * Constructs a new InvalidResponseException with the deffined content-type
-	 * @param contentType Content-type returned by the server
-	 */
-	public InvalidResponseException(String contentType) {
-		this.contentType = contentType;
+	public GetBookmarksResponse() {
+		this.bookmarks = new Bookmark();
 	}
 	
-	/**
-	 * Returns this exception content-type
-	 * @return This exception content type
-	 */
-	public String getContentType() {
-		return this.contentType;
+	public Bookmark getBookmarks() {
+		return this.bookmarks;
+	}
+	
+	public GetBookmarksResponse setBookmarks(Bookmark bookmarks) {
+		this.bookmarks = bookmarks;
+		return this;
 	}
 	
 }

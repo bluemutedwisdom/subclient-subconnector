@@ -17,7 +17,7 @@
  
  Copyright 2012, 2013 Alejandro Celaya Alastrué
  
- */
+*/
 
 package net.subclient.subsonic.responses;
 

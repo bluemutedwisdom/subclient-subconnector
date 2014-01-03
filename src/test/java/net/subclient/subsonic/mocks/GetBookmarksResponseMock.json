@@ -1,0 +1,67 @@
+{
+ "bookmarks": {"bookmark": [
+  {
+   "position": 26096,
+   "username": "alejandro",
+   "created": "2013-11-16T06:47:54",
+   "entry": {
+    "genre": "Pop",
+    "albumId": 416,
+    "album": "The Midsummer Station",
+    "track": 1,
+    "parent": 7870,
+    "contentType": "audio/mpeg",
+    "isDir": false,
+    "type": "music",
+    "suffix": "mp3",
+    "isVideo": false,
+    "size": 6870812,
+    "id": 7911,
+    "title": "Dreams And Disasters",
+    "duration": 225,
+    "artistId": 60,
+    "created": "2012-10-28T21:03:13",
+    "path": "Adam Young/Adam Young - Owl City - (2012) The Midsummer Station/Owl City - 01 Dreams And Disasters.mp3",
+    "year": 2012,
+    "artist": "Owl City",
+    "bitRate": 242,
+    "coverArt": 7870
+   },
+   "changed": "2013-11-16T06:47:56"
+  },
+  {
+   "position": 292415,
+   "username": "alejandro",
+   "created": "2014-01-01T17:42:23",
+   "entry": {
+    "genre": "Electronic Rock",
+    "albumId": 588,
+    "album": "Wish Upon A Blackstar",
+    "track": 12,
+    "parent": 15653,
+    "contentType": "audio/mpeg",
+    "isDir": false,
+    "type": "music",
+    "suffix": "mp3",
+    "discNumber": 1,
+    "isVideo": false,
+    "size": 13118397,
+    "id": 15740,
+    "title": "The Best It's Gonna Get",
+    "duration": 320,
+    "artistId": 271,
+    "created": "2013-10-11T12:42:17",
+    "path": "Celldweller/Celldweller - (2012) Wish Upon A Blackstar/12. The Best It's Gonna Get.mp3",
+    "year": 2012,
+    "artist": "Celldweller",
+    "bitRate": 320,
+    "coverArt": 15653
+   },
+   "comment": "foo",
+   "changed": "2014-01-01T17:42:23"
+  }
+ ]},
+ "status": "ok",
+ "xmlns": "http://subsonic.org/restapi",
+ "version": "1.9.0"
+}

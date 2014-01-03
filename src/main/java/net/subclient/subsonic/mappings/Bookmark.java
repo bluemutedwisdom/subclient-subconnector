@@ -17,42 +17,41 @@
  
  Copyright 2012, 2013 Alejandro Celaya Alastrué
  
- */
+*/
 
-package net.subclient.subsonic.exceptions;
+package net.subclient.subsonic.mappings;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
- * Exception thrown whenever a Subsonic returns an invalid content type or a non parseable response
+ * 
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public class InvalidResponseException extends Exception {
-
-	private static final long serialVersionUID = 1L;
+public class Bookmark {
 	
-	/** Content type returned by Susbsinic server */
-	private String contentType;
+	@SerializedName("bookmark")
+	public List<BookmarkInfo> bookmarks;
 	
-	/**
-	 * Constructs a new InvalidResponseException produced by another exception
-	 */
-	public InvalidResponseException(Exception e) {
-		super(e);
-	}
-	/**
-	 * Constructs a new InvalidResponseException with the deffined content-type
-	 * @param contentType Content-type returned by the server
-	 */
-	public InvalidResponseException(String contentType) {
-		this.contentType = contentType;
+	public Bookmark() {
+		this.bookmarks = new ArrayList<BookmarkInfo>();
 	}
 	
-	/**
-	 * Returns this exception content-type
-	 * @return This exception content type
-	 */
-	public String getContentType() {
-		return this.contentType;
+	public List<BookmarkInfo> getBookmarksArray() {
+		return this.bookmarks;
+	}
+	
+	public Bookmark setBookmarksArray(List<BookmarkInfo> bookmarks) {
+		this.bookmarks = bookmarks;
+		return this;
+	}
+	
+	public Bookmark addBookmark(BookmarkInfo bookmark) {
+		this.bookmarks.add(bookmark);
+		return this;
 	}
 	
 }

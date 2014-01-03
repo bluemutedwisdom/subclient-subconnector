@@ -19,40 +19,33 @@
  
  */
 
-package net.subclient.subsonic.exceptions;
+package net.subclient.subsonic.responses;
+
+import net.subclient.subsonic.mappings.Starred;
 
 /**
- * Exception thrown whenever a Subsonic returns an invalid content type or a non parseable response
+ * Object returned on {@link net.subclient.subsonic.Connection#getStarred() getStarred} calls
  * @author Alejandro Celaya Alastrué
  * @see <a href="http://www.alejandrocelaya.com">www.alejandrocelaya.com</a>
  */
-public class InvalidResponseException extends Exception {
+public class GetStarredResponse extends SubsonicResponse {
+	
+	private Starred starred;
+	
+	/**
+	 * Constructs a new GetStarredResponse with a default constructed Starred object
+	 */
+	public GetStarredResponse() {
+		super();
+		this.starred = new Starred();
+	}
+	
+	public Starred getStarred() {
+		return this.starred;
+	}
+	public GetStarredResponse setStarred(Starred starred) {
+		this.starred = starred;
+		return this;
+	}
 
-	private static final long serialVersionUID = 1L;
-	
-	/** Content type returned by Susbsinic server */
-	private String contentType;
-	
-	/**
-	 * Constructs a new InvalidResponseException produced by another exception
-	 */
-	public InvalidResponseException(Exception e) {
-		super(e);
-	}
-	/**
-	 * Constructs a new InvalidResponseException with the deffined content-type
-	 * @param contentType Content-type returned by the server
-	 */
-	public InvalidResponseException(String contentType) {
-		this.contentType = contentType;
-	}
-	
-	/**
-	 * Returns this exception content-type
-	 * @return This exception content type
-	 */
-	public String getContentType() {
-		return this.contentType;
-	}
-	
 }

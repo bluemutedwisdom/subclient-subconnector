@@ -4,7 +4,7 @@
 	
 	<!-- PROPERTIES -->
 	<property environment="env"/> 
-	<property name="version" value="1.5.0"/>
+	<property name="version" value="2.0.0"/>
 	
     <property name="junit.output.dir" value="junit"/>
     <property name="jabadoc.private.output.dir" value="docs/private_javadoc"/>
@@ -126,6 +126,7 @@
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
             <test name="net.subclient.subsonic.responses.GetAlbumsResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetBookmarksResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.GetIndexesResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.GetLicenseResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.GetMusicDirectoryResponseTest" todir="${junit.output.dir}"/>
@@ -135,6 +136,7 @@
             <test name="net.subclient.subsonic.responses.GetPodcastResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.GetPodcastsResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.GetRandomSongsResponseTest" todir="${junit.output.dir}"/>
+            <test name="net.subclient.subsonic.responses.GetStarredResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.SearchResponseTest" todir="${junit.output.dir}"/>
             <test name="net.subclient.subsonic.responses.SubsonicResponseTest" todir="${junit.output.dir}"/>
             <classpath refid="Subconnector.classpath"/>
