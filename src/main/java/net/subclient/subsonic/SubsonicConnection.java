@@ -100,7 +100,7 @@ public class SubsonicConnection implements Connection {
     private Gson gson 					= null;
     /** Parser used to get the propper level in the JSON response object */
     private JsonParser parser			= null;
-    /** La versión de la API del servidor */
+    /** Server API version */
     private Version serverApiVersion	= null;
     
     /**
