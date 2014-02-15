@@ -1,5 +1,5 @@
-/bin
-/docs
-/junit
-/.classpath
-/.project
+bin
+docs
+junit
+.idea
+Subconnector.iml
