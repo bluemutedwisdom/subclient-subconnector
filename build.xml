@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
-<project basedir="." default="build" name="Subconnector">
+<project basedir="." default="build" name="Subconnector" xmlns:ivy="antlib:org.apache.ivy.ant">
 	
 	<!-- PROPERTIES -->
 	<property environment="env"/> 
@@ -11,7 +11,8 @@
     <property name="jabadoc.public.output.dir" value="docs/public_javadoc"/>
 	<property name="main.source.dir" value="src/main/java"/>
 	<property name="test.source.dir" value="src/test/java"/>
-	
+	<property name="lib.dir" value="lib"/>
+
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
@@ -30,13 +31,14 @@
 	<!-- Build and deploy target -->
 	<target name="build-and-deploy" depends="build, deploy" />
 	<!-- Main build target -->
-	<target name="build" depends="clean, init, compile, javadocs, jars, packetize, tests" />
+	<target name="build" depends="clean, init, retrieve-dependencies, compile, javadocs, jars, packetize, tests" />
 	<!-- Test target -->
 	<target name="tests" depends="init-tests, compile-tests, net.subclient.subsonic.responses-test, net.subclient.subsonic.util-test, junitreport" />
 	
 	<!-- Delete the old bin directory -->
 	<target name="clean">
         <delete dir="bin"/>
+        <delete dir="${lib.dir}"/>
 		<delete>
 		    <fileset dir="deploy">
 		    	<exclude name="license.txt"/>
@@ -53,8 +55,14 @@
             </fileset>
         </copy>
     </target>
+    <target name="retrieve-dependencies"
+            description="Retrieve dependencies with Apache IVY">
+        <mkdir dir="${lib.dir}"/>
+        <ivy:retrieve />
+    </target>
 	<!-- Compile sources -->
-	<target name="compile">
+	<target name="compile"
+            depends="retrieve-dependencies">
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}" encoding="UTF-8">
             <src path="${main.source.dir}"/>
             <classpath refid="Subconnector.classpath"/>
