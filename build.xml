@@ -22,14 +22,9 @@
 	<!-- CLASSPATH -->
 	<path id="Subconnector.classpath">
         <pathelement location="bin"/>
-        <pathelement location="resources/gson-2.2.2.jar"/>
-        <pathelement location="resources/commons-lang3-3.1.jar"/>
-        <path refid="JUnit 4.libraryclasspath"/>
-    </path>
-	<!-- JUNIT PATH -->
-	<path id="JUnit 4.libraryclasspath">
-        <pathelement location="resources/building/junit.jar"/>
-        <pathelement location="resources/building/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+        <fileset dir="lib">
+            <include name="*.jar" />
+        </fileset>
     </path>
 	
 	<!-- Build and deploy target -->

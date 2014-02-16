@@ -1,5 +1,6 @@
 bin
 docs
+lib
 junit
 .idea
 Subconnector.iml
