@@ -3,7 +3,7 @@ Subconnector
 
 Subconnector is a lightweight Java library designed to help you establish connections to [Subsonic](http://www.subsonic.org/pages/index.jsp) servers, by mapping JSON API responses to Java objects.
 
-This library was mainly created to be used in [Subclient](http://www.subsclient.net) project, a cross-platform desktop client for Subsonic.
+This library was mainly created to be used in [Subclient](http://www.subclient.net) project, a cross-platform desktop client for Subsonic.
 
 For more information take a look into [Subsonic API documentation](http://www.subsonic.org/pages/api.jsp).
 
