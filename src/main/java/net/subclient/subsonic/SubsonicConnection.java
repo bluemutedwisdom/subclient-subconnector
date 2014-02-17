@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with Subconnector. If not, see <http://www.gnu.org/licenses/>.
  
- Copyright 2012, 2013 Alejandro Celaya Alastrué
+ Copyright 2012 - 2014 Alejandro Celaya Alastrué
  
  */
 
@@ -100,7 +100,7 @@ public class SubsonicConnection implements Connection {
     private Gson gson 					= null;
     /** Parser used to get the propper level in the JSON response object */
     private JsonParser parser			= null;
-    /** La versión de la API del servidor */
+    /** Server API version */
     private Version serverApiVersion	= null;
     
     /**
