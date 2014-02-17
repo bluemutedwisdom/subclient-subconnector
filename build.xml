@@ -58,7 +58,7 @@
     <target name="retrieve-dependencies"
             description="Retrieve dependencies with Apache IVY">
         <mkdir dir="${lib.dir}"/>
-        <ivy:retrieve />
+        <ivy:retrieve type="jar" />
     </target>
 	<!-- Compile sources -->
 	<target name="compile"
