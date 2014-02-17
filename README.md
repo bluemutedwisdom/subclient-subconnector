@@ -10,7 +10,11 @@ For more information take a look into [Subsonic API documentation](http://www.su
 Dependencies
 ----------------------
 
-Subconnector depends on this libraries to properly work. Last tested versions are included in resources folder, but you can download them from here.
+Dependencies are handled by [ivy](http://ant.apache.org/ivy/) since Subconnector 2.0.1. They used to be included in this repo in previous versions.
+
+The [ant](http://ant.apache.org/) building script is responsible for downloading all the dependencies by using ivy.
+
+Subconnector depends on this libraries to properly work. Last tested versions are defined in ivy dependencies script, but you can download them from here.
 
 - [Goole GSON](https://code.google.com/p/google-gson/downloads/list)
 - [Apache commons Lang3](http://commons.apache.org/proper/commons-lang/download_lang.cgi)
