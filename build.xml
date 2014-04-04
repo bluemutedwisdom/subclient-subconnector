@@ -17,9 +17,6 @@
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
 	
-    <property name="sftp.host" value="frs.sourceforge.net"/>
-    <property name="sftp.output.dir" value="/home/frs/project/subconnector/"/>
-	
 	<!-- CLASSPATH -->
 	<path id="Subconnector.classpath">
         <pathelement location="bin"/>
@@ -27,13 +24,11 @@
             <include name="*.jar" />
         </fileset>
     </path>
-	
-	<!-- Build and deploy target -->
-	<target name="build-and-deploy" depends="build, deploy" />
+
 	<!-- Main build target -->
-	<target name="build" depends="clean, init, retrieve-dependencies, compile, javadocs, jars, packetize, tests" />
+	<target name="build" depends="clean, init, retrieve-dependencies, compile, javadocs, jars, packetize, test" />
 	<!-- Test target -->
-	<target name="tests" depends="init-tests, compile-tests, net.subclient.subsonic.responses-test, net.subclient.subsonic.util-test, junitreport" />
+	<target name="test" depends="init-tests, compile-tests, net.subclient.subsonic.responses-test, net.subclient.subsonic.util-test, junitreport" />
 	
 	<!-- Delete the old bin directory -->
 	<target name="clean">
@@ -162,12 +157,5 @@
             <report format="frames" todir="${junit.output.dir}"/>
         </junitreport>
     </target>
-	
-	<!-- Upload to sourceforge last package and README -->
-	<target name="deploy" depends="compile-tests, net.subclient.subsonic-test, net.subclient.subsonic.responses-test, net.subclient.subsonic.util-test, junitreport">
-	    <scp sftp="true" todir="${sftp.user}:${sftp.pass}@${sftp.host}:${sftp.output.dir}" file="deploy/subclient-subconnector-${version}.zip" trust="true" verbose="true">
-	    	<fileset dir="deploy" includes="subclient-subconnector-${version}.zip,README" />
-	    </scp>
-	</target>
-	
+
 </project>

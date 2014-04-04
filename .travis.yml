@@ -1,0 +1,13 @@
+language: java
+
+jdk:
+  - openjdk7
+  - oraclejdk7
+  - oraclejdk8
+
+branches:
+  only:
+    - master
+    - develop
+    
+script: ant build
