@@ -1,5 +1,4 @@
 language: java
-script: ant build
 
 jdk:
   - openjdk7
@@ -10,3 +9,5 @@ branches:
   only:
     - master
     - develop
+    
+script: ant build
