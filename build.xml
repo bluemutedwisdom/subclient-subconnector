@@ -26,9 +26,9 @@
     </path>
 
 	<!-- Main build target -->
-	<target name="build" depends="clean, init, retrieve-dependencies, compile, javadocs, jars, packetize, tests" />
+	<target name="build" depends="clean, init, retrieve-dependencies, compile, javadocs, jars, packetize, test" />
 	<!-- Test target -->
-	<target name="tests" depends="init-tests, compile-tests, net.subclient.subsonic.responses-test, net.subclient.subsonic.util-test, junitreport" />
+	<target name="test" depends="init-tests, compile-tests, net.subclient.subsonic.responses-test, net.subclient.subsonic.util-test, junitreport" />
 	
 	<!-- Delete the old bin directory -->
 	<target name="clean">
