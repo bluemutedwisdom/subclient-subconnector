@@ -1,9 +1,7 @@
 Subconnector
 ======================
 
-Master: [![Build Status](https://travis-ci.org/acelaya/subclient-subconnector.svg?branch=master)](https://travis-ci.org/acelaya/subclient-subconnector)
-
-Develop: [![Build Status](https://travis-ci.org/acelaya/subclient-subconnector.svg?branch=develop)](https://travis-ci.org/acelaya/subclient-subconnector)
+[![Build Status](https://travis-ci.org/acelaya/subclient-subconnector.svg?branch=master)](https://travis-ci.org/acelaya/subclient-subconnector)
 
 Subconnector is a lightweight Java library designed to help you establish connections to [Subsonic](http://www.subsonic.org/pages/index.jsp) servers, by mapping JSON API responses to Java objects.
 
